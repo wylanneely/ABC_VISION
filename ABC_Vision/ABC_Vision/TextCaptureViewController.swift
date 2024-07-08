@@ -101,7 +101,6 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             guard let topCandidate = observation.topCandidates(1).first else { continue }
             recognizedText += topCandidate.string + "\n"
         }
-        
         DispatchQueue.main.async { [weak self] in
             self?.updateRecognizedText(recognizedText)
         }
@@ -110,6 +109,5 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     private func updateRecognizedText(_ text: String) {
         print(text)
         // Update your UI here with the recognized text
-        // e.g., show it on a label or overlay
     }
 }
