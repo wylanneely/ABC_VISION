@@ -14,7 +14,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     private var captureSession: AVCaptureSession!
     private var videoPreviewLayer: AVCaptureVideoPreviewLayer!
     private var textRecognitionRequest: VNRecognizeTextRequest!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -96,15 +96,51 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     private func processTextRecognitionResults(_ results: [Any]?) {
         guard let results = results as? [VNRecognizedTextObservation] else { return }
         
-        var recognizedText = ""
-        for observation in results {
-            guard let topCandidate = observation.topCandidates(1).first else { continue }
-            recognizedText += topCandidate.string + "\n"
-        }
+//        var recognizedText = ""
+//        for observation in results {
+//            guard let topCandidate = observation.topCandidates(1).first else { continue }
+//            recognizedText += topCandidate.string + "\n"
+//        }
+//        DispatchQueue.main.async { [weak self] in
+//            self?.updateRecognizedText(recognizedText)
+//        }
         DispatchQueue.main.async { [weak self] in
-            self?.updateRecognizedText(recognizedText)
-        }
+                   // Remove previous text boxes
+                   self?.textBoxes.forEach { $0.removeFromSuperlayer() }
+                   self?.textBoxes.removeAll()
+                   
+                   // Process recognized text and draw bounding boxes
+                   for observation in results {
+                       guard let topCandidate = observation.topCandidates(1).first else { continue }
+                       print(topCandidate.string)
+                       
+                       // Create a box for the text
+                       let box = self?.createBox(for: observation)
+                       self?.view.layer.addSublayer(box!)
+                       self?.textBoxes.append(box!)
+                   }
+               }
+        
     }
+    
+    //MARK: - Visual Boxes
+    var textBoxes: [CAShapeLayer] = []
+    
+    private func createBox(for observation: VNRecognizedTextObservation) -> CAShapeLayer {
+            let box = CAShapeLayer()
+            box.strokeColor = UIColor.red.cgColor
+            box.lineWidth = 2
+            box.fillColor = UIColor.clear.cgColor
+            
+            let boundingBox = observation.boundingBox
+            let size = CGSize(width: boundingBox.width * view.bounds.width, height: boundingBox.height * view.bounds.height)
+            let origin = CGPoint(x: boundingBox.minX * view.bounds.width, y: (1 - boundingBox.minY) * view.bounds.height - size.height)
+            
+            let path = UIBezierPath(rect: CGRect(origin: origin, size: size))
+            box.path = path.cgPath
+            
+            return box
+        }
     
     private func updateRecognizedText(_ text: String) {
         print(text)
