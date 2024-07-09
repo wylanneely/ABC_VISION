@@ -96,7 +96,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     private func processTextRecognitionResults(_ results: [Any]?) {
         guard let results = results as? [VNRecognizedTextObservation] else { return }
         
-//        var recognizedText = ""
+         var recognizedText = ""
 //        for observation in results {
 //            guard let topCandidate = observation.topCandidates(1).first else { continue }
 //            recognizedText += topCandidate.string + "\n"
@@ -113,7 +113,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
                    for observation in results {
                        guard let topCandidate = observation.topCandidates(1).first else { continue }
                        print(topCandidate.string)
-                       
+                       self?.updateRecognizedText(topCandidate.string)
                        // Create a box for the text
                        let box = self?.createBox(for: observation)
                        self?.view.layer.addSublayer(box!)
@@ -144,6 +144,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     
     private func updateRecognizedText(_ text: String) {
         print(text)
-        // Update your UI here with the recognized text
+        
+        self.performSegue(withIdentifier: "toWordProcessedVC", sender: self)
     }
 }
