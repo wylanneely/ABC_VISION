@@ -23,7 +23,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
         
         // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/Corn2.reality")!
+        let scene = SCNScene(named: "art.scnassets/Gun.scn")!
         
         // Set the scene to the view
         sceneView.scene = scene
