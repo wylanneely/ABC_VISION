@@ -113,11 +113,11 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
                    for observation in results {
                        guard let topCandidate = observation.topCandidates(1).first else { continue }
                        print(topCandidate.string)
-                       self?.updateRecognizedText(topCandidate.string)
                        // Create a box for the text
                        let box = self?.createBox(for: observation)
                        self?.view.layer.addSublayer(box!)
                        self?.textBoxes.append(box!)
+                       self?.updateRecognizedText(topCandidate.string)
                    }
                }
         
@@ -144,7 +144,18 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     
     private func updateRecognizedText(_ text: String) {
         print(text)
-        
+        self.writtenText = text
         self.performSegue(withIdentifier: "toWordProcessedVC", sender: self)
     }
+    
+    var writtenText = ""
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toWordProcessedVC",
+           let destinationVC = segue.destination as? ARSceneViewController {
+               destinationVC.writtenWord = writtenText
+         }
+    }
+    
+        
 }
