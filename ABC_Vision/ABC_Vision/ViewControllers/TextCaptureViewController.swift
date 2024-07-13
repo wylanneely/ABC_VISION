@@ -99,10 +99,14 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     private var recognizedTexts: [String] = []
 
     private func processTextRecognitionResults(_ results: [Any]?) {
-        guard let results = results as? [VNRecognizedTextObservation] else { return }
+        guard let results = results as? [VNRecognizedTextObservation] else {
+            return
+        }
         
         DispatchQueue.main.async { [weak self] in
-            self?.textBoxes.forEach { $0.removeFromSuperlayer() }
+            self?.textBoxes.forEach {
+                $0.removeFromSuperlayer()
+            }
             self?.textBoxes.removeAll()
             self?.recognizedTexts.removeAll()
             
@@ -224,70 +228,37 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         }
     }
     
-//    private func processTextRecognitionResults(
-//        _ results: [Any]?
-//    ) {
-//        guard let results = results as? [VNRecognizedTextObservation] else {
-//            return
-//        }
-//        
-//        //        for observation in results {
-//        //            guard let topCandidate = observation.topCandidates(1).first else { continue }
-//        //            recognizedText += topCandidate.string + "\n"
-//        //        }
-//        //        DispatchQueue.main.async { [weak self] in
-//        //            self?.updateRecognizedText(recognizedText)
-//        //        }
-//        DispatchQueue.main.async { [weak self] in
-//            // Remove previous text boxes
-//            self?.textBoxes.forEach {
-//                $0.removeFromSuperlayer()
-//            }
-//            self?.textBoxes.removeAll()
-//            
-//            // Process recognized text and draw bounding boxes
-//            for observation in results {
-//                guard let topCandidate = observation.topCandidates(
-//                    1
-//                ).first else {
-//                    continue
-//                }
-//                print(
-//                    topCandidate.string
-//                )
-//                // Create a box for the text
-//                let box = self?.createBox(
-//                    for: observation
-//                )
-//                self?.view.layer.addSublayer(
-//                    box!
-//                )
-//                self?.textBoxes.append(
-//                    box!
-//                )
-//                self?.updateRecognizedText(
-//                    topCandidate.string
-//                )
-//                   }
-//               }
-//        
-//    }
-    
     //MARK: - Visual Boxes
+    
+    let CheckerController = WordCheckController()
     var textBoxes: [CAShapeLayer] = []
+    
+
+    
     
     private func createBox(
         for observation: VNRecognizedTextObservation
     ) -> CAShapeLayer {
+        
+        let writtenText = observation.topCandidates(1).first?.string
+        let isWordCorrect = CheckerController.checkWordisCorrect(writtenText)
         let box = CAShapeLayer()
-        box.strokeColor = UIColor.red.cgColor
-        box.lineWidth = 2
+        if isWordCorrect {
+            box.strokeColor = UIColor.abcGreen.cgColor
+        } else {
+            box.strokeColor = UIColor.abcRed.cgColor
+        }
+        box.lineWidth = 2.5
         box.fillColor = UIColor.clear.cgColor
         
         let boundingBox = observation.boundingBox
+        
+        let boxWidth = (boundingBox.width + 0.05) * view.bounds.width
+        let boxHeight = (boundingBox.height + 0.01) * view.bounds.height
+        
         let size = CGSize(
-            width: boundingBox.width * view.bounds.width,
-            height: boundingBox.height * view.bounds.height
+            width: boxWidth ,
+            height: boxHeight
         )
         let origin = CGPoint(
             x: boundingBox.minX * view.bounds.width,
