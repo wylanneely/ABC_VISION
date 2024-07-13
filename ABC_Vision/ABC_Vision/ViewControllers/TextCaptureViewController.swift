@@ -23,12 +23,17 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     }
     
     func pauseResumeVideoCapture(){
-        if isPaused {
-            captureSession.stopRunning()
-        } else {
-            captureSession.startRunning()
+        
+        DispatchQueue.global(qos: .background).async {
+            if self.isPaused {
+                self.captureSession.stopRunning()
+            } else {
+                self.captureSession.startRunning()
+            }
         }
     }
+    
+    //MARK: - App LyfeCycle
     
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -38,6 +43,9 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         
         // Set up Vision text recognition request
             setupVision()
+            
+            // Add tap gesture recognizer
+            addGesture()
         }
     
         override func viewWillDisappear(_ animated: Bool) {
@@ -46,6 +54,11 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             isPaused = true
             // Add your code to stop or pause the video rendering
         }
+        
+        override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        isPaused = true
+        }
 
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
@@ -53,17 +66,73 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             isPaused = false
             // Add your code to resume the video rendering
         }
+    //MARK: - Tap Gestures
+    
+    private func addGesture(){
+        let tapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(handleTap(_: )
+            )
+        )
+        view.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
+        let location = gestureRecognizer.location(in: view)
+        for (index,box) in textBoxes.enumerated() {
+            if box.path!.contains(location) {
+                let recognizedText = recognizedTexts[index]
+                processTappedText(recognizedText)
+                break
+            }
+        }
+    }
+    
+    private func processTappedText(_ text: String) {
+        print("Tapped text: \(text)")
+        // Perform the desired action with the tapped text
+        self.updateRecognizedText(text)
+    }
+    
+    //MARK: - Text Rendering
+    
+    private var recognizedTexts: [String] = []
+
+    private func processTextRecognitionResults(_ results: [Any]?) {
+        guard let results = results as? [VNRecognizedTextObservation] else { return }
+        
+        DispatchQueue.main.async { [weak self] in
+            self?.textBoxes.forEach { $0.removeFromSuperlayer() }
+            self?.textBoxes.removeAll()
+            self?.recognizedTexts.removeAll()
+            
+            for observation in results {
+                guard let topCandidate = observation.topCandidates(1).first else { continue }
+                print(topCandidate.string)
+                
+                let box = self?.createBox(for: observation)
+                self?.view.layer.addSublayer(box!)
+                self?.textBoxes.append(box!)
+                self?.recognizedTexts.append(topCandidate.string)
+            }
+        }
+    }
+    
+    
+    //MARK: - Vision
     
     private func setupCamera() {
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .high
         
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else { return }
+        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
+            return
+        }
         let videoInput: AVCaptureDeviceInput
         
         do {
-            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-        } catch {
+            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)}
+        catch {
             return
         }
         
@@ -74,7 +143,9 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         }
         
         let videoOutput = AVCaptureVideoDataOutput()
-        videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
+        videoOutput.setSampleBufferDelegate(self,
+            queue: DispatchQueue(label: "videoQueue")
+        )
         
         if (captureSession.canAddOutput(videoOutput)) {
             captureSession.addOutput(videoOutput)
@@ -82,103 +153,179 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             return
         }
         
-        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+        videoPreviewLayer = AVCaptureVideoPreviewLayer(
+            session: captureSession
+        )
         videoPreviewLayer.frame = view.layer.bounds
         videoPreviewLayer.videoGravity = .resizeAspectFill
-        view.layer.addSublayer(videoPreviewLayer)
+        view.layer.addSublayer(
+            videoPreviewLayer
+        )
         /* starting capture session */
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(
+            qos: .background
+        ).async {
             self.captureSession.startRunning()
         }
     }
     
     private func setupVision() {
-        textRecognitionRequest = VNRecognizeTextRequest(completionHandler: { [weak self] (request, error) in
+        textRecognitionRequest = VNRecognizeTextRequest(completionHandler: {
+            [weak self] (
+                request,
+                error
+            ) in
             if let error = error {
-                print("Error recognizing text: \(error.localizedDescription)")
+                print(
+                    "Error recognizing text: \(error.localizedDescription)"
+                )
                 return
             }
-            self?.processTextRecognitionResults(request.results)
+            self?.processTextRecognitionResults(
+                request.results
+            )
         })
         textRecognitionRequest.recognitionLevel = .accurate
         textRecognitionRequest.usesLanguageCorrection = true
     }
     
-    func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
+    func captureOutput(
+        _ output: AVCaptureOutput,
+        didOutput sampleBuffer: CMSampleBuffer,
+        from connection: AVCaptureConnection
+    ) {
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(
+            sampleBuffer
+        ) else {
+            return
+        }
         
         var requestOptions: [VNImageOption : Any] = [:]
         
-        if let cameraIntrinsicData = CMGetAttachment(sampleBuffer, key: kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, attachmentModeOut: nil) {
+        if let cameraIntrinsicData = CMGetAttachment(
+            sampleBuffer,
+            key: kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix,
+            attachmentModeOut: nil
+        ) {
             requestOptions = [.cameraIntrinsics: cameraIntrinsicData]
         }
-        
-        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right, options: requestOptions)
+        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer,
+                                                        orientation: .right,
+                                                        options: requestOptions)
         
         do {
-            try imageRequestHandler.perform([textRecognitionRequest])
+            try imageRequestHandler.perform(
+                [textRecognitionRequest]
+            )
         } catch {
-            print(error)
+            print(
+                error
+            )
         }
     }
     
-    private func processTextRecognitionResults(_ results: [Any]?) {
-        guard let results = results as? [VNRecognizedTextObservation] else { return }
-        
-//        for observation in results {
-//            guard let topCandidate = observation.topCandidates(1).first else { continue }
-//            recognizedText += topCandidate.string + "\n"
+//    private func processTextRecognitionResults(
+//        _ results: [Any]?
+//    ) {
+//        guard let results = results as? [VNRecognizedTextObservation] else {
+//            return
 //        }
+//        
+//        //        for observation in results {
+//        //            guard let topCandidate = observation.topCandidates(1).first else { continue }
+//        //            recognizedText += topCandidate.string + "\n"
+//        //        }
+//        //        DispatchQueue.main.async { [weak self] in
+//        //            self?.updateRecognizedText(recognizedText)
+//        //        }
 //        DispatchQueue.main.async { [weak self] in
-//            self?.updateRecognizedText(recognizedText)
-//        }
-        DispatchQueue.main.async { [weak self] in
-                   // Remove previous text boxes
-                   self?.textBoxes.forEach { $0.removeFromSuperlayer() }
-                   self?.textBoxes.removeAll()
-                   
-                   // Process recognized text and draw bounding boxes
-                   for observation in results {
-                       guard let topCandidate = observation.topCandidates(1).first else { continue }
-                       print(topCandidate.string)
-                       // Create a box for the text
-                       let box = self?.createBox(for: observation)
-                       self?.view.layer.addSublayer(box!)
-                       self?.textBoxes.append(box!)
-                       self?.updateRecognizedText(topCandidate.string)
-                   }
-               }
-        
-    }
+//            // Remove previous text boxes
+//            self?.textBoxes.forEach {
+//                $0.removeFromSuperlayer()
+//            }
+//            self?.textBoxes.removeAll()
+//            
+//            // Process recognized text and draw bounding boxes
+//            for observation in results {
+//                guard let topCandidate = observation.topCandidates(
+//                    1
+//                ).first else {
+//                    continue
+//                }
+//                print(
+//                    topCandidate.string
+//                )
+//                // Create a box for the text
+//                let box = self?.createBox(
+//                    for: observation
+//                )
+//                self?.view.layer.addSublayer(
+//                    box!
+//                )
+//                self?.textBoxes.append(
+//                    box!
+//                )
+//                self?.updateRecognizedText(
+//                    topCandidate.string
+//                )
+//                   }
+//               }
+//        
+//    }
     
     //MARK: - Visual Boxes
     var textBoxes: [CAShapeLayer] = []
     
-    private func createBox(for observation: VNRecognizedTextObservation) -> CAShapeLayer {
-            let box = CAShapeLayer()
-            box.strokeColor = UIColor.red.cgColor
-            box.lineWidth = 2
-            box.fillColor = UIColor.clear.cgColor
-            
-            let boundingBox = observation.boundingBox
-            let size = CGSize(width: boundingBox.width * view.bounds.width, height: boundingBox.height * view.bounds.height)
-            let origin = CGPoint(x: boundingBox.minX * view.bounds.width, y: (1 - boundingBox.minY) * view.bounds.height - size.height)
-            
-            let path = UIBezierPath(rect: CGRect(origin: origin, size: size))
+    private func createBox(
+        for observation: VNRecognizedTextObservation
+    ) -> CAShapeLayer {
+        let box = CAShapeLayer()
+        box.strokeColor = UIColor.red.cgColor
+        box.lineWidth = 2
+        box.fillColor = UIColor.clear.cgColor
+        
+        let boundingBox = observation.boundingBox
+        let size = CGSize(
+            width: boundingBox.width * view.bounds.width,
+            height: boundingBox.height * view.bounds.height
+        )
+        let origin = CGPoint(
+            x: boundingBox.minX * view.bounds.width,
+            y: (
+                1 - boundingBox.minY
+            ) * view.bounds.height - size.height
+        )
+        
+        let path = UIBezierPath(
+            rect: CGRect(
+                origin: origin,
+                size: size
+            )
+        )
             box.path = path.cgPath
             
             return box
         }
     
-    private func updateRecognizedText(_ text: String) {
-        print(text)
+    private func updateRecognizedText(
+        _ text: String
+    ) {
+        print(
+            text
+        )
         self.writtenText = text
-        self.performSegue(withIdentifier: "toWordProcessedVC", sender: self)
+        self.performSegue(
+            withIdentifier: "toWordProcessedVC",
+            sender: self
+        )
     }
     
     var writtenText = ""
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(
+        for segue: UIStoryboardSegue,
+        sender: Any?
+    ) {
         if segue.identifier == "toWordProcessedVC",
            let destinationVC = segue.destination as? ARSceneViewController {
                destinationVC.writtenWord = writtenText
