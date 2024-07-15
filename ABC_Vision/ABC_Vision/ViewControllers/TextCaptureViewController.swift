@@ -66,6 +66,36 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             isPaused = false
             // Add your code to resume the video rendering
         }
+    
+        override func viewWillLayoutSubviews() {
+            super.viewWillLayoutSubviews()
+            videoPreviewLayer.frame = view.bounds
+        }
+    
+        override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+            super.viewWillTransition(to: size, with: coordinator)
+            coordinator.animate(alongsideTransition: { _ in
+                self.updateVideoRotationAngle()
+            })
+        }
+
+    private func updateVideoRotationAngle() {
+          guard let connection = videoPreviewLayer.connection else { return }
+          switch UIDevice.current.orientation {
+          case .portrait:
+              connection.videoRotationAngle = 90
+          case .landscapeRight:
+              connection.videoRotationAngle = 180
+          case .landscapeLeft:
+              connection.videoRotationAngle = 0
+          case .portraitUpsideDown:
+              connection.videoRotationAngle = 270
+          default:
+              connection.videoRotationAngle = 90
+          }
+          videoPreviewLayer.frame = view.bounds
+      }
+    
     //MARK: - Tap Gestures
     
     private func addGesture(){
@@ -268,10 +298,10 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         )
         
         let path = UIBezierPath(
-            rect: CGRect(
+            roundedRect: CGRect(
                 origin: origin,
                 size: size
-            )
+            ),cornerRadius: 15
         )
             box.path = path.cgPath
             
@@ -285,6 +315,15 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             text
         )
         self.writtenText = text
+        if CheckerController.checkWordisCorrect(text) {
+            self.performSegue(
+                withIdentifier: "toWordProcessedVC",
+                sender: self
+            )
+        } else {
+           let feedback = UINotificationFeedbackGenerator()
+            feedback.notificationOccurred(.error)
+        }
         self.performSegue(
             withIdentifier: "toWordProcessedVC",
             sender: self

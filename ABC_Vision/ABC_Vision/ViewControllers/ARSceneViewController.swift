@@ -14,6 +14,8 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     @IBOutlet var sceneView: ARSCNView!
     
     var writtenWord = ""
+    var fileName = ""
+    let wordToFileConverter = WrittenWordToFileConverter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,17 +26,14 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
                   sceneView.autoenablesDefaultLighting = true
+        
+        fileName = wordToFileConverter.getFileNameFrom(writtenWord)
 
-//        // Create a new scene
-//        let scene = SCNScene(named: "art.scnassets/Gun.scn")!
-//        
-//        // Set the scene to the view
-//        sceneView.scene = scene
     }
     
     func startSceneWith(word:String){
         
-        let fileLocation = createSceneFileName(word)
+        let fileLocation = createSceneFileName(fileName)
         
         guard let scene = SCNScene(named: fileLocation) else {
             //call spelling error function
