@@ -10,7 +10,7 @@ import Foundation
 
 struct WordCheckController {
     
-    let CorrectWords: [String] = [
+    private let CorrectWords: [String] = [
     "Banana",
     "Camera",
     "Carrot",
@@ -18,6 +18,8 @@ struct WordCheckController {
     "Donut",
     "Earth",
     "Gun",
+    "God",
+    "Jesus",
     "Moon",
     "Orange",
     "Pizza",
@@ -25,7 +27,8 @@ struct WordCheckController {
     "Presidents",
     "Rock",
     "Ship",
-    "Sun"
+    "Sun",
+    "Trump"
     ]
     
     func checkWordisCorrect(_ word:String?)->Bool{
@@ -35,7 +38,6 @@ struct WordCheckController {
                 return true
             }
         }
-        
         return false
     }
     
