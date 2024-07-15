@@ -21,12 +21,15 @@ struct WordCheckController {
     "Moon",
     "Orange",
     "Pizza",
+    "President",
+    "Presidents",
     "Rock",
     "Ship",
     "Sun"
     ]
     
-    func checkWordisCorrect(word:String)->Bool{
+    func checkWordisCorrect(_ word:String?)->Bool{
+        guard let word = word else {return false}
         for w in CorrectWords {
             if word.lowercased() == w.lowercased() {
                 return true
