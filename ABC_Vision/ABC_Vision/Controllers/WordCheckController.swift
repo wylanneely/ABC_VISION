@@ -41,4 +41,9 @@ struct WordCheckController {
         return false
     }
     
+    func checkIfWordIsSentence(_ word:String?)->Bool {
+        guard let word = word as? [String] else {return false}
+        return true
+    }
+    
 }
