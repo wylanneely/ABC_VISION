@@ -9,6 +9,8 @@ import Foundation
 
 struct WrittenWordConverter {
     
+    //MARK: - FileNames
+    
     private let WordToFileDictionary: [String: String] = [
         "Banana":"Banana",
         "Camera":"Camera",
@@ -38,5 +40,11 @@ struct WrittenWordConverter {
        } else {
            return ""
        }
+    }
+    
+    //MARK: - SenteceCreators
+    
+    func stringToSentenceArray(_ word: String) -> [String] {
+        return word.split(separator: " ").map { String($0) }
     }
 }
