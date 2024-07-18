@@ -271,18 +271,16 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     ) -> CAShapeLayer {
         
         let writtenText = observation.topCandidates(1).first?.string
-        let isWordCorrect = CheckerController.checkWordisCorrect(writtenText)
         let box = CAShapeLayer()
-        if isWordCorrect {
+        box.lineWidth = 2.5
+        box.fillColor = UIColor.clear.cgColor
+        if CheckerController.checkWordisCorrect(writtenText) {
             box.strokeColor = UIColor.abcGreen.cgColor
         } else {
             box.strokeColor = UIColor.abcRed.cgColor
         }
-        box.lineWidth = 2.5
-        box.fillColor = UIColor.clear.cgColor
-        
+   
         let boundingBox = observation.boundingBox
-        
         let boxWidth = (boundingBox.width + 0.05) * view.bounds.width
         let boxHeight = (boundingBox.height + 0.01) * view.bounds.height
         
