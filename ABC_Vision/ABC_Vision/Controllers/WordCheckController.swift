@@ -22,13 +22,15 @@ struct WordCheckController {
     "Jesus",
     "Moon",
     "Orange",
+    "Orbits",
     "Pizza",
     "President",
     "Presidents",
     "Rock",
     "Ship",
     "Sun",
-    "Trump"
+    "Trump",
+    "MoonOrbitsEarth",
     ]
     
     func checkWordisCorrect(_ word:String?)->Bool{
@@ -42,8 +44,15 @@ struct WordCheckController {
     }
     
     func checkIfWordIsSentence(_ word:String?)->Bool {
-        guard let word = word as? [String] else {return false}
-        return true
+        if let word = word {
+            let wordsArray = word.split(separator: " ")
+            if wordsArray.count >= 2 {
+                print("True Sentence")
+                return true
+            }
+        }
+        print("False Sentexe")
+        return false
     }
     
 }
