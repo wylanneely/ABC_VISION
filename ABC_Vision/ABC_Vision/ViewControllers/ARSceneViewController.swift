@@ -15,7 +15,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     
     var writtenWord = ""
     var fileName = ""
-    let wordToFileConverter = WrittenWordToFileConverter()
+    let wordConverter = WrittenWordConverter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
                   sceneView.autoenablesDefaultLighting = true
         
-        fileName = wordToFileConverter.getFileNameFrom(writtenWord)
+        fileName = wordConverter.getFileNameFrom(writtenWord)
 
     }
     
