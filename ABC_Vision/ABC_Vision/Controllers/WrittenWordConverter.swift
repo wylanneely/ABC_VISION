@@ -65,7 +65,7 @@ struct WrittenWordConverter {
         "Squirrel": "Squirrel",
         "Stick": "Stick",
         "Sun": "Sun",
-        "Trump": "President"
+        "Trump": "President",
         "Tree":"Tree",
         "Watch":"Watch",
         "Whale":"Whale"
