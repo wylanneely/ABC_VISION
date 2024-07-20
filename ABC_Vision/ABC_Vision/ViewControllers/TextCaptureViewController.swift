@@ -124,10 +124,10 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         self.updateRecognizedText(text)
     }
     
-    //MARK: - Text Rendering
+    //MARK: 1 - Text Rendering
     
     private var recognizedTexts: [String] = []
-
+//3
     private func processTextRecognitionResults(_ results: [Any]?) {
         guard let results = results as? [VNRecognizedTextObservation] else {
             return
@@ -153,8 +153,8 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     }
     
     
-    //MARK: - Vision
-    
+    //MARK: 0 - Vision
+    //0
     private func setupCamera() {
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .high
@@ -202,7 +202,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             self.captureSession.startRunning()
         }
     }
-    
+    //1
     private func setupVision() {
         textRecognitionRequest = VNRecognizeTextRequest(completionHandler: {
             [weak self] (
@@ -222,7 +222,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         textRecognitionRequest.recognitionLevel = .accurate
         textRecognitionRequest.usesLanguageCorrection = true
     }
-    
+    //2
     func captureOutput(
         _ output: AVCaptureOutput,
         didOutput sampleBuffer: CMSampleBuffer,
@@ -258,14 +258,12 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         }
     }
     
-    //MARK: - Visual Boxes
+    //MARK: 2 - Visual Boxes
     
     let CheckerController = WordCheckController()
     var textBoxes: [CAShapeLayer] = []
     
 
-    
-    
     private func createBox(
         for observation: VNRecognizedTextObservation
     ) -> CAShapeLayer {
