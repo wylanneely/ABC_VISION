@@ -18,7 +18,7 @@ struct WordCheckController {
         "Bed",
         "Bird",
         "Book",
-        "Box",
+        "Boy",
         "Camera",
         "Car",
         "Carrot",

@@ -19,7 +19,7 @@ struct WrittenWordConverter {
         "Bed": "Bed",
         "Bird": "Bird",
         "Book": "Book",
-        "Box": "Box",
+        "Boy": "Boy",
         "Camera": "Camera",
         "Car": "Car",
         "Carrot": "Carrot",
@@ -72,7 +72,7 @@ struct WrittenWordConverter {
     ]
     
     func getFileNameFrom(_ word: String) -> String {
-       if let filename = WordToFileDictionary[word] {
+        if let filename = WordToFileDictionary[word.capitalized] {
             return filename
        } else {
            return ""
