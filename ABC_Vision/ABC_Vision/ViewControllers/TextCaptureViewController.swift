@@ -262,7 +262,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     
     let CheckerController = WordCheckController()
     var textBoxes: [CAShapeLayer] = []
-    
+    var writtenText = ""
 
     private func createBox(
         for observation: VNRecognizedTextObservation
@@ -325,9 +325,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             sender: self
         )
     }
-    
-    var writtenText = ""
-    
+        
     override func prepare(
         for segue: UIStoryboardSegue,
         sender: Any?
