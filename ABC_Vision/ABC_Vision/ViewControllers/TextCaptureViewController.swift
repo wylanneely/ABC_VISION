@@ -277,7 +277,6 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         } else {
             box.strokeColor = UIColor.abcRed.cgColor
         }
-   
         let boundingBox = observation.boundingBox
         let boxWidth = (boundingBox.width + 0.05) * view.bounds.width
         let boxHeight = (boundingBox.height + 0.01) * view.bounds.height
@@ -335,6 +334,5 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
                destinationVC.writtenWord = writtenText
          }
     }
-    
         
 }
