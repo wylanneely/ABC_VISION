@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="GlI-3q-pT8">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Scene View Controller-->
+        <scene sceneID="tXr-a1-R10">
+            <objects>
+                <viewController id="BV1-FR-VrT" customClass="ARSceneViewController" customModule="ABC_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="U0K-SW-4ec">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNe-cX-6YO">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                            </arscnView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Img-Cd-fog">
+                                <rect key="frame" x="136.66666666666666" y="682" width="119.99999999999997" height="120"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="0sl-rD-1Wj"/>
+                                    <constraint firstAttribute="width" constant="120" id="up8-xm-dwZ"/>
+                                </constraints>
+                                <color key="tintColor" red="0.1107030379" green="0.95588860539999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="paperplane" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="40"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="launchButton:" destination="BV1-FR-VrT" eventType="touchUpInside" id="4uj-no-dna"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="aNe-cX-6YO" firstAttribute="bottom" secondItem="fQZ-KI-GVf" secondAttribute="bottom" id="HjE-sl-Ans"/>
+                            <constraint firstItem="Img-Cd-fog" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="NfY-c7-pMr"/>
+                            <constraint firstItem="aNe-cX-6YO" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="mFv-zn-T7j"/>
+                            <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="Img-Cd-fog" secondAttribute="bottom" constant="40" id="nil-ZG-s6G"/>
+                            <constraint firstItem="aNe-cX-6YO" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" id="ovF-Uw-7Mb"/>
+                            <constraint firstItem="aNe-cX-6YO" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" id="zES-s2-eLv"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="9SC-PE-lEz"/>
+                    <connections>
+                        <outlet property="sceneView" destination="aNe-cX-6YO" id="cw8-zk-8R0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="130.53435114503816" y="-34.507042253521128"/>
+        </scene>
+        <!--Text Capture View Controller-->
+        <scene sceneID="hSR-bZ-I0X">
+            <objects>
+                <viewController id="GlI-3q-pT8" customClass="TextCaptureViewController" customModule="ABC_Vision" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EPr-2a-hO4">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="hUD-LL-QYk"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <segue destination="BV1-FR-VrT" kind="show" identifier="toWordProcessedVC" id="au2-je-mlU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LkT-Y2-arb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1086" y="-35"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="paperplane" catalog="system" width="128" height="119"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
