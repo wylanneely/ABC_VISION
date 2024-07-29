@@ -48,7 +48,7 @@ struct WordCheckController {
         "Milk",
         "Money",
         "Moon",
-        "MoonOrbitsEarth",
+        //"MoonOrbitsEarth",
         "Orange",
         "Orbits",
         "Pig",
