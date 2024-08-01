@@ -45,12 +45,17 @@ struct WrittenWordConverter {
         "Girl": "Girl",
         "Gun": "Gun",
         "Jesus": "Jesus",
+        "Jupiter":"Jupiter",
+        "Mars":"Mars",
+        "Mercury":"Mercury",
         "Milk": "Milk",
         "Money": "Money",
         "Moon": "Moon",
         "MoonOrbitsEarth": "MoonOrbitsEarth",
+        "Neptune":"Neptune",
         "Orange": "Orange",
         "Orbits": "Orbits",
+        "Pluto":"Pluto",
         "Pig": "Pig",
         "Pizza": "Pizza",
         "President": "President",
@@ -67,6 +72,7 @@ struct WrittenWordConverter {
         "Sun": "Sun",
         "Trump": "President",
         "Tree":"Tree",
+        "Venus":"Venus",
         "Watch":"Watch",
         "Whale":"Whale"
     ]
@@ -79,7 +85,7 @@ struct WrittenWordConverter {
        }
     }
     
-    //MARK: - SenteceCreators
+    //MARK: - "Pluto",Creators
     
     func stringToSentenceArray(_ word: String) -> [String] {
         return word.split(separator: " ").map { String($0) }
