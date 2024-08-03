@@ -203,25 +203,40 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         }
     }
     //1
+//    private func setupVision() {
+//        textRecognitionRequest = VNRecognizeTextRequest(completionHandler: {
+//            [weak self] (
+//                request,
+//                error
+//            ) in
+//            if let error = error {
+//                print(
+//                    "Error recognizing text: \(error.localizedDescription)"
+//                )
+//                return
+//            }
+//            self?.processTextRecognitionResults(
+//                request.results
+//            )
+//        })
+//        textRecognitionRequest.recognitionLevel = .accurate
+//        textRecognitionRequest.usesLanguageCorrection = true
+//    }
     private func setupVision() {
-        textRecognitionRequest = VNRecognizeTextRequest(completionHandler: {
-            [weak self] (
-                request,
-                error
-            ) in
+        textRecognitionRequest = VNRecognizeTextRequest { [weak self] (request, error) in
             if let error = error {
-                print(
-                    "Error recognizing text: \(error.localizedDescription)"
-                )
+                print("Error recognizing text: \(error.localizedDescription)")
                 return
             }
-            self?.processTextRecognitionResults(
-                request.results
-            )
-        })
+            self?.processTextRecognitionResults(request.results)
+        }
+        
         textRecognitionRequest.recognitionLevel = .accurate
         textRecognitionRequest.usesLanguageCorrection = true
+        textRecognitionRequest.recognitionLanguages = ["en-US"] // Set to recognize only English text
     }
+
+    
     //2
     func captureOutput(
         _ output: AVCaptureOutput,
