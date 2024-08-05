@@ -26,9 +26,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
                   sceneView.autoenablesDefaultLighting = true
-        
         fileName = wordConverter.getFileNameFrom(writtenWord)
-
     }
     
     func startSceneWith(word:String){
