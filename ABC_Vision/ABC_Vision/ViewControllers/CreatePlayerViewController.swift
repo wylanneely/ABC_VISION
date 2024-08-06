@@ -9,6 +9,12 @@ import UIKit
 
 class CreatePlayerViewController: UIViewController {
 
+    override func viewDidLoad() {
+           super.viewDidLoad()
+           // Do any additional setup after loading the view.
+       }
+    
+    
     
     
     @IBOutlet weak var textLabel: UILabel!
@@ -41,11 +47,8 @@ class CreatePlayerViewController: UIViewController {
     @IBOutlet weak var yButton: UIButton!
     @IBOutlet weak var zButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var startButton: UIButton!
     
-    override func viewDidLoad() {
-           super.viewDidLoad()
-           // Do any additional setup after loading the view.
-       }
 
        @IBAction func aButtonTapped(_ sender: Any) {
            keyTapped(letter: "A")
@@ -131,6 +134,7 @@ class CreatePlayerViewController: UIViewController {
        }
 
        private func keyTapped(letter: String) {
+           changeButtonStateToReady()
            if self.textLabel.text == "Nick Name"{
                textLabel.text = letter
                return
@@ -147,4 +151,43 @@ class CreatePlayerViewController: UIViewController {
                textLabel.text = text
            }
        }
+    private func changeButtonStateToReady(){
+        if isReady == false {
+            startButton.tintColor = .abcGreen
+            startButton.titleLabel?.textColor = .black
+            isReady = true
+            return
+        }
+    }
+    
+    var isReady: Bool = false
+    
+    @IBAction func startButtonTapped(_ sender: Any) {
+        if isReady {
+            if let name = textLabel?.text {
+                let player = Player(nickname: name, wordStacks: [])
+                transitionToHome(withPlayer: player)
+            }
+        }
+    }
+    
+    
+    func transitionToHome(withPlayer: Player) {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else {
+            return
+        }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let homeViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController {
+            homeViewController.currentPlayer = withPlayer
+            window.rootViewController = homeViewController
+            UIView.transition(with: window,
+                              duration: 0.5,
+                              options: [.transitionFlipFromRight],
+                              animations: nil,
+                              completion: nil)
+        }
+    }
+    
    }

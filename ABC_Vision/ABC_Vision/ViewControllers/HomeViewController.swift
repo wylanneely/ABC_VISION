@@ -9,6 +9,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    var currentPlayer: Player?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

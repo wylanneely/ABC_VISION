@@ -97,6 +97,7 @@ class SelectPlayerViewController: UIViewController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let homeViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController {
+            homeViewController.currentPlayer = withPlayer
             window.rootViewController = homeViewController
             UIView.transition(with: window,
                               duration: 0.5,
