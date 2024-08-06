@@ -20,8 +20,6 @@ class SelectPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpLoadedPlayers()
-        
-        
     }
     
 
@@ -29,8 +27,9 @@ class SelectPlayerViewController: UIViewController {
         if loadedPlayers.isEmpty {
             return
         } else {
+            //fix after
             for player in loadedPlayers {
-                if player1 == nil {
+                if  player1 == nil {
                     player1 = player
                 }
                 if player2 == nil {
@@ -57,26 +56,40 @@ class SelectPlayerViewController: UIViewController {
     
     //MARK: - Actions
     @IBAction func player1ButtonTapped(_ sender: Any) {
-        transitionToHome()
+        if let player1 = player1 {
+            transitionToHome(withPlayer: player1)
+        } else {
+            createPlayerTransistion()
+        }
     }
     
     @IBAction func player2ButtonTapped(_ sender: Any) {
-        transitionToHome()
+        if let player2 = player2 {
+            transitionToHome(withPlayer: player2)
+        } else {
+            createPlayerTransistion()
+        }
     }
     
     @IBAction func player3ButtonTapped(_ sender: Any) {
-        transitionToHome()
+        if let player3 = player3 {
+            transitionToHome(withPlayer: player3)
+        } else {
+            createPlayerTransistion()
+        }
     }
     
     
-    
+    func createPlayerTransistion(){
+        self.performSegue(withIdentifier: "toCreatePlayer", sender: self)
+    }
     
     
     
     
     // MARK: - Navigation
     
-    func transitionToHome() {
+    func transitionToHome(withPlayer: Player) {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let window = windowScene.windows.first else {
             return
