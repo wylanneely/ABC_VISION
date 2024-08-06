@@ -131,9 +131,13 @@ class CreatePlayerViewController: UIViewController {
        }
 
        private func keyTapped(letter: String) {
-           DispatchQueue.main.async {
-               self.textLabel.text = (self.textLabel.text ?? "") + letter
+           if self.textLabel.text == "Nick Name"{
+               textLabel.text = letter
+               return
            }
+           DispatchQueue.main.async {
+                   self.textLabel.text = (self.textLabel.text ?? "") + letter
+               }
        }
 
        private func deleteTapped() {
