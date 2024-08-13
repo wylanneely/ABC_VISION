@@ -16,35 +16,43 @@ class SelectPlayerViewController: UIViewController {
     var player1: Player?
     var player2: Player?
     var player3: Player?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpLoadedPlayers()
+        //setUpLoadedPlayers()
+        loadPlayersIntoButtons()
+        loadPlayers()
     }
     
 
-    func setUpLoadedPlayers(){
-        if loadedPlayers.isEmpty {
-            return
-        } else {
-            //fix after
-            for player in loadedPlayers {
-                if  player1 == nil {
-                    player1 = player
-                }
-                if player2 == nil {
-                    player2 = player
-                }
-                if player3 == nil {
-                    player3 = player
-                }
+    func loadPlayers() {
+        var i = 0
+        
+        for player in loadedPlayers {
+            if i == 0 {
+                player1 = player
             }
+            if i == 1 {
+                player2 = player
+            }
+            if i == 2 {
+                player3 = player
+            }
+                i = i + 1
         }
     }
-    func setButtonStates() {
-        //TODO
+
+    func loadPlayersIntoButtons() {
+        
+        var playerButtons = [playerButton1,playerButton2,playerButton3]
+        
+        for (index, player) in loadedPlayers.enumerated() {
+            guard index < playerButtons.count else { break }
+            let button = playerButtons[index]
+            button?.setTitle(player.nickname, for: .normal) // Set the title to the player's nickname
+            // Optionally, you can set other properties like background color or image
+        }
     }
-    
     
     //MARK: - Outlets
     @IBOutlet weak var playerButton1: UIButton!
@@ -83,9 +91,6 @@ class SelectPlayerViewController: UIViewController {
     func createPlayerTransistion(){
         self.performSegue(withIdentifier: "toCreatePlayer", sender: self)
     }
-    
-    
-    
     
     // MARK: - Navigation
     

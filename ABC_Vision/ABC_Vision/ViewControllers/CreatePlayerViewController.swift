@@ -15,7 +15,8 @@ class CreatePlayerViewController: UIViewController {
        }
     
     
-    
+    private let userDefaultsController = PlayerUserDefaultsController()
+
     
     @IBOutlet weak var textLabel: UILabel!
     
@@ -166,6 +167,7 @@ class CreatePlayerViewController: UIViewController {
         if isReady {
             if let name = textLabel?.text {
                 let player = Player(nickname: name, wordStacks: [])
+                userDefaultsController.savePlayer(player)
                 transitionToHome(withPlayer: player)
             }
         }
