@@ -41,6 +41,11 @@ struct WordStackController {
     }
     //MARK: - Foods
     
+    
+    
+     let animalsCompleteImage = UIImage(named: "animalsComplete")
+     let animalsInCompleteImage = UIImage(named: "animalNcomplete")
+    
     var foods:[Word]
     
     var appleWord = Word(name: "Apple")
@@ -67,6 +72,9 @@ struct WordStackController {
     //MARK: Planets
     
     var planets: [Word]
+    
+    let planetCompleteImage = UIImage(named: "planetsComplete")
+    let planetIncompleteImage = UIImage(named: "planetsINcomplete")
 
     var sunWord = Word(name: "Sun")
     var moonWord = Word(name: "Moon")
