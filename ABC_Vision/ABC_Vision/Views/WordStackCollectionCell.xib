@@ -17,8 +17,8 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FreeStyle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ZS-sr-Ysg">
-                        <rect key="frame" x="6.3333333333333286" y="8" width="172.33333333333337" height="43"/>
-                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="34"/>
+                        <rect key="frame" x="11.333333333333329" y="8" width="162.33333333333337" height="40.666666666666664"/>
+                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="32"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -28,6 +28,7 @@
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" red="0.0" green="0.85600000619888306" blue="0.18582427612376479" alpha="0.25199192880794702" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottomMargin" secondItem="eRX-SI-a8g" secondAttribute="bottom" id="1nQ-tC-dPr"/>
                 <constraint firstAttribute="trailingMargin" secondItem="eRX-SI-a8g" secondAttribute="trailing" id="5Dd-Ol-PWT"/>
@@ -37,6 +38,11 @@
                 <constraint firstItem="7ZS-sr-Ysg" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="ko3-9g-hvr"/>
             </constraints>
             <size key="customSize" width="185" height="265"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="20"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <connections>
                 <outlet property="image" destination="eRX-SI-a8g" id="wHU-RH-Kg1"/>
                 <outlet property="title" destination="7ZS-sr-Ysg" id="erG-fV-wRr"/>
