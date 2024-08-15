@@ -40,12 +40,12 @@
             <size key="customSize" width="185" height="265"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                    <integer key="value" value="20"/>
+                    <integer key="value" value="15"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
             <connections>
-                <outlet property="image" destination="eRX-SI-a8g" id="wHU-RH-Kg1"/>
-                <outlet property="title" destination="7ZS-sr-Ysg" id="erG-fV-wRr"/>
+                <outlet property="imageView" destination="eRX-SI-a8g" id="wHU-RH-Kg1"/>
+                <outlet property="titleLabel" destination="7ZS-sr-Ysg" id="erG-fV-wRr"/>
             </connections>
             <point key="canvasLocation" x="-2.2900763358778624" y="64.436619718309856"/>
         </collectionViewCell>
