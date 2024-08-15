@@ -13,20 +13,6 @@ struct WordStackController {
     var wordListsArray: [[Word]]
     
     init(){
-        foods = [
-            appleWord,
-            bananaWord,
-            carrotWord,
-            carrotsWord,
-            cornWord,
-            cornWord,
-            donutWord,
-            eggWord,
-            milkWord,
-            orangeWord,
-            pizzaWord
-        ]
-        
        planets = [
            sunWord,
            moonWord,
@@ -40,8 +26,39 @@ struct WordStackController {
            plutoWord,
            saturnWord
        ]
-    //replace 2ndplanets with animals when complete
-        wordListsArray = [planets,planets,foods] // animals in middle for now
+        animals = [
+            bearWord,
+            birdWord,
+            catWord,
+            chickenWord,
+            cowWord,
+            dogWord,
+            dolphinWord,
+            duckWord,
+            fishWord,
+            horseWord,
+            pigWord,
+            rabbitWord,
+            roosterWord,
+            sharkWord,
+            sheepWord,
+            squirrelWord,
+            whaleWord
+        ]
+        foods = [
+            appleWord,
+            bananaWord,
+            carrotWord,
+            carrotsWord,
+            cornWord,
+            cornWord,
+            donutWord,
+            eggWord,
+            milkWord,
+            orangeWord,
+            pizzaWord
+        ]
+        wordListsArray = [planets,animals,foods]
     }
     
     //MARK: - Freesyle
@@ -54,7 +71,25 @@ struct WordStackController {
     //automate image with function that checks if each Wordstack is complete and returns correct image
     
     let animalsName = "Animals"
+    var animals: [Word]
     
+    var bearWord = Word(name: "Bear")
+    var birdWord = Word(name: "Bird")
+    var catWord = Word(name: "Cat")
+    var chickenWord = Word(name: "Chicken")
+    var cowWord = Word(name: "Cow")
+    var dogWord = Word(name: "Dog")
+    var dolphinWord = Word(name: "Dolphin")
+    var duckWord = Word(name: "Duck")
+    var fishWord = Word(name: "Fish")
+    var horseWord = Word(name: "Horse")
+    var pigWord = Word(name: "Pig")
+    var rabbitWord = Word(name: "Rabbit")
+    var roosterWord = Word(name: "Rooster")
+    var sharkWord = Word(name: "Shark")
+    var sheepWord = Word(name: "Sheep")
+    var squirrelWord = Word(name: "Squirrel")
+    var whaleWord = Word(name: "Whale")
     
     //MARK: - Foods
     
@@ -84,7 +119,6 @@ struct WordStackController {
         return true
     }
     
-
     //MARK: Planets
     
     var planets: [Word]
@@ -115,7 +149,7 @@ struct WordStackController {
     }
     
     
-    //MARK: - Updates
+    //MARK: - Update
     
     func unlockWordWith(name:String){
         for wor in foods {
