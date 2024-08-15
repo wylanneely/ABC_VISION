@@ -10,6 +10,8 @@ import UIKit
 
 struct WordStackController {
     
+    var wordListsArray: [[Word]]
+    
     init(){
         foods = [
             appleWord,
@@ -38,14 +40,28 @@ struct WordStackController {
            plutoWord,
            saturnWord
        ]
+    //replace 2ndplanets with animals when complete
+        wordListsArray = [planets,planets,foods] // animals in middle for now
     }
+    
+    //MARK: - Freesyle
+    
+    let freeStyleImage = UIImage(named: "FreeStylePencil")
+    
+    //MARK: - Animals
+    let animalsCompleteImage = UIImage(named: "animalsComplete")
+    let animalsInCompleteImage = UIImage(named: "animalNcomplete")
+    //automate image with function that checks if each Wordstack is complete and returns correct image
+    
+    let animalsName = "Animals"
+    
+    
     //MARK: - Foods
     
+    let foodsCompleteImage = UIImage(named: "foodComplete")
+    let foodsInCompleteImage = UIImage(named: "foodsINcomplete")
     
-    
-     let animalsCompleteImage = UIImage(named: "animalsComplete")
-     let animalsInCompleteImage = UIImage(named: "animalNcomplete")
-    
+    let foodsName = "Foods"
     var foods:[Word]
     
     var appleWord = Word(name: "Apple")
@@ -72,6 +88,7 @@ struct WordStackController {
     //MARK: Planets
     
     var planets: [Word]
+    let planetsName = "Planets"
     
     let planetCompleteImage = UIImage(named: "planetsComplete")
     let planetIncompleteImage = UIImage(named: "planetsINcomplete")
