@@ -73,14 +73,17 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         case 0:
             cell.image.image = testWordStackController.planetCompleteImage
             cell.title.text = testWordStackController.planetsName
-                return cell
+            cell.backgroundColor = UIColor.clear
+            return cell
         case 1:
             cell.image.image = testWordStackController.animalsCompleteImage
             cell.title.text = testWordStackController.animalsName
-                return cell
+            cell.backgroundColor = UIColor.clear
+            return cell
         case 2:
             cell.image.image = testWordStackController.foodsCompleteImage
             cell.title.text = testWordStackController.foodsName
+            cell.backgroundColor = UIColor.clear //TODO: - update to make real tap feature with color tmrw
             return cell
         default:
             return cell
