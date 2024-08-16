@@ -9,14 +9,47 @@ import UIKit
 import AVFoundation
 import Vision
 
-class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
-
+class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UITableViewDelegate, UITableViewDataSource {
+       
+    //MARK: - TableView
     
+    var testWords: [Word]? // make real tmrw
     
-    //MARK: - Outlets
+    @IBOutlet weak var wordHintTableView: UITableView!
     
+    func setUpWord() {
+       testWords = WordStackController().foods
+    }
     
-    @IBOutlet weak var wordCollectionView: UICollectionView!
+    func setUpTableView() {
+        wordHintTableView.dataSource = self
+        wordHintTableView.delegate = self
+        
+        let nib = UINib(nibName: "ARWordHintViewCell", bundle: nil)
+        self.wordHintTableView.register(nib, forCellReuseIdentifier: "ARWordHintViewCell")
+        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let testWords = testWords {
+            return testWords.count
+        } else {
+            return 1
+        }
+}
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = wordHintTableView.dequeueReusableCell(withIdentifier: "ARWordHintViewCell", for: indexPath) as? ARWordHintViewCell else {
+            return UITableViewCell()
+        }
+        if let testWords = testWords {
+            let word = testWords[indexPath.row]
+            cell.wordLabel.text = word.name
+            //change to add word into cell and iscomplete functionality
+        }
+        
+        return cell
+    }
     
     
     
@@ -46,7 +79,8 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     
         override func viewDidLoad() {
             super.viewDidLoad()
-        
+        //testing
+            setUpWord()
         // Set up the camera
             setupCamera()
         
@@ -56,7 +90,9 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             // Add tap gesture recognizer
             addGesture()
             
-            view.bringSubviewToFront(wordCollectionView)
+            view.bringSubviewToFront(wordHintTableView)
+            
+            setUpTableView()
         }
     
         override func viewWillDisappear(_ animated: Bool) {
