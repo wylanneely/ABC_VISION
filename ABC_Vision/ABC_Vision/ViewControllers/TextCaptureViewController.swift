@@ -11,6 +11,15 @@ import Vision
 
 class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
 
+    
+    
+    //MARK: - Outlets
+    
+    
+    @IBOutlet weak var wordCollectionView: UICollectionView!
+    
+    
+    
     //MARK: AVCapture Video Sessions
     
     private var captureSession: AVCaptureSession!
@@ -46,6 +55,8 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             
             // Add tap gesture recognizer
             addGesture()
+            
+            view.bringSubviewToFront(wordCollectionView)
         }
     
         override func viewWillDisappear(_ animated: Bool) {
