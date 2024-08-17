@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -169,21 +170,34 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="s5z-wZ-XNB">
-                                <rect key="frame" x="0.0" y="0.0" width="216.66666666666666" height="375"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="336.66666666666669"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qM3-pz-zJJ">
+                                <rect key="frame" x="150.66666666666666" y="336.66666666666669" width="92" height="34.333333333333314"/>
+                                <color key="tintColor" name="ABCBlue"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrowshape.up.fill" catalog="system" title="Close"/>
+                                <connections>
+                                    <action selector="openCloseWordHintTableView:" destination="GlI-3q-pT8" eventType="touchUpInside" id="pIG-no-moA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hUD-LL-QYk"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="s5z-wZ-XNB" firstAttribute="top" secondItem="hUD-LL-QYk" secondAttribute="top" id="AxS-PL-wa0"/>
                             <constraint firstItem="s5z-wZ-XNB" firstAttribute="leading" secondItem="hUD-LL-QYk" secondAttribute="leading" id="CaD-m2-5ZX"/>
-                            <constraint firstItem="s5z-wZ-XNB" firstAttribute="height" secondItem="EPr-2a-hO4" secondAttribute="height" multiplier="0.445368" id="bhK-LR-gWV"/>
-                            <constraint firstItem="s5z-wZ-XNB" firstAttribute="trailing" secondItem="EPr-2a-hO4" secondAttribute="centerX" constant="20" id="yS4-Hn-Xph"/>
+                            <constraint firstItem="qM3-pz-zJJ" firstAttribute="centerX" secondItem="EPr-2a-hO4" secondAttribute="centerX" id="M5f-7l-Lx0"/>
+                            <constraint firstItem="qM3-pz-zJJ" firstAttribute="top" secondItem="s5z-wZ-XNB" secondAttribute="bottom" id="MpT-DW-iP1"/>
+                            <constraint firstItem="s5z-wZ-XNB" firstAttribute="height" secondItem="EPr-2a-hO4" secondAttribute="height" multiplier="0.4" id="bhK-LR-gWV"/>
+                            <constraint firstItem="s5z-wZ-XNB" firstAttribute="trailing" secondItem="hUD-LL-QYk" secondAttribute="trailing" id="fV7-E5-kEl"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="openCloseButton" destination="qM3-pz-zJJ" id="ufa-eI-72R"/>
                         <outlet property="wordHintTableView" destination="s5z-wZ-XNB" id="Jgb-Ne-Scv"/>
+                        <outlet property="wordHintTableViewTopConstraint" destination="MpT-DW-iP1" id="iEr-Sx-3u1"/>
                         <segue destination="BV1-FR-VrT" kind="show" identifier="toWordProcessedVC" id="au2-je-mlU"/>
                     </connections>
                 </viewController>
@@ -742,7 +756,11 @@
         <image name="XButton" width="148" height="155.5"/>
         <image name="YButton" width="148" height="155.5"/>
         <image name="ZButton" width="148" height="155.5"/>
+        <image name="arrowshape.up.fill" catalog="system" width="123" height="128"/>
         <image name="paperplane" catalog="system" width="128" height="119"/>
+        <namedColor name="ABCBlue">
+            <color red="0.0" green="0.65618681907653809" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
