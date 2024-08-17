@@ -14,11 +14,18 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     //MARK: - TableView
     
     var testWords: [Word]? // make real tmrw
+    var testWordCategory: String?
     
     @IBOutlet weak var wordHintTableView: UITableView!
     
     func setUpWord() {
-       testWords = WordStackController().foods
+        
+        switch testWordCategory {
+        case "Animals": testWords = WordStackController().animals
+        case "Foods": testWords = WordStackController().foods
+        case "Planets": testWords = WordStackController().planets
+        default : wordHintTableView.isHidden = true
+        }
     }
     
     func setUpTableView() {
@@ -44,7 +51,8 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         }
         if let testWords = testWords {
             let word = testWords[indexPath.row]
-            cell.wordLabel.text = word.name
+            cell.setUIStates(word: word)
+            return cell
             //change to add word into cell and iscomplete functionality
         }
         
@@ -321,7 +329,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     }
     
     //MARK: 2 - Visual Boxes
-    
+     
     let CheckerController = WordCheckController()
     var textBoxes: [CAShapeLayer] = []
     var writtenText = ""
@@ -391,10 +399,23 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         for segue: UIStoryboardSegue,
         sender: Any?
     ) {
+        wordHintTableView.reloadData()
         if segue.identifier == "toWordProcessedVC",
            let destinationVC = segue.destination as? ARSceneViewController {
+               unlockWrittenWord(written: writtenText)
                destinationVC.writtenWord = writtenText
          }
+    }
+    
+    func unlockWrittenWord(written: String) {
+        if (testWords != nil) {
+            for word in testWords! {
+                let name = word.name
+                if written == name {
+                    word.unlockComplete()
+                }
+            }
+        }
     }
         
 }

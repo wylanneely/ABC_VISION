@@ -26,6 +26,7 @@ struct WordStackController {
            plutoWord,
            saturnWord
        ]
+        
         animals = [
             bearWord,
             birdWord,
@@ -45,6 +46,7 @@ struct WordStackController {
             squirrelWord,
             whaleWord
         ]
+        
         foods = [
             appleWord,
             bananaWord,

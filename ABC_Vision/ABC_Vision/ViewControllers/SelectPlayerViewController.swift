@@ -44,7 +44,7 @@ class SelectPlayerViewController: UIViewController {
 
     func loadPlayersIntoButtons() {
         
-        var playerButtons = [playerButton1,playerButton2,playerButton3]
+        let playerButtons = [playerButton1,playerButton2,playerButton3]
         
         for (index, player) in loadedPlayers.enumerated() {
             guard index < playerButtons.count else { break }

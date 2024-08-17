@@ -33,11 +33,11 @@ class WordStackCollectionCell: UICollectionViewCell {
       private func updateUIForSelectionState() {
           if isSelected {
               // Update the cell's appearance for the selected state
-              self.contentView.backgroundColor = .blue
+              self.contentView.backgroundColor = UIColor.opaqueABCGreen
               titleLabel.textColor = .white
           } else {
               // Update the cell's appearance for the normal state
-              self.contentView.backgroundColor = .white
+              self.contentView.backgroundColor = UIColor.opaqueABCBlue
               titleLabel.textColor = .black
           }
       }

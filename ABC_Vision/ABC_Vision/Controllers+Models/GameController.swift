@@ -6,7 +6,6 @@
 //
 
 import Foundation
-
 class GameController {
     
     static var shared = GameController()
@@ -15,41 +14,40 @@ class GameController {
     
     public var currentPlayer: Player?
     
-       var players: [Player] = [] {
-           didSet {
-               savePlayers()
-           }
-       }
+    var players: [Player] = [] {
+        didSet {
+            savePlayers()
+        }
+    }
 
-       private init() {
-           loadPlayers()
-       }
+    private init() {
+        loadPlayers()
+    }
        
-       private func savePlayers() {
-           userDefaultsController.savePlayers(players)
-       }
+    private func savePlayers() {
+        userDefaultsController.savePlayers(players)
+    }
        
-       private func loadPlayers() {
-           if let savedPlayers = userDefaultsController.getPlayers() {
-               players = savedPlayers
-           } else {
-               players = []
-           }
-       }
+    private func loadPlayers() {
+        if let savedPlayers = userDefaultsController.getPlayers() {
+            players = savedPlayers
+        } else {
+            players = []
+        }
+    }
        
-       func addPlayer(_ player: Player) {
-           players.append(player)
-       }
+    func addPlayer(_ player: Player) {
+        players.append(player)
+        userDefaultsController.savePlayer(player) // Save the single player
+    }
 
-       func removePlayer(withNickname nickname: String) {
-           players.removeAll { $0.nickname == nickname }
-       }
-    
-    
-    
+    func removePlayer(withNickname nickname: String) {
+        players.removeAll { $0.nickname == nickname }
+        savePlayers() // Save the updated players list
+    }
 }
 
-
+//MARK: - Test later
 struct PlayerUserDefaultsController {
     private let userDefaults = UserDefaults.standard
     private let playerKey = "players"
@@ -62,6 +60,12 @@ struct PlayerUserDefaultsController {
         } catch {
             print("Failed to encode players: \(error)")
         }
+    }
+    
+    func savePlayer(_ player: Player) {
+        var players = getPlayers() ?? []
+        players.append(player)
+        savePlayers(players)
     }
 
     func getPlayers() -> [Player]? {

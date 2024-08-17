@@ -99,14 +99,37 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     
     
-    /*
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let selectedCell = collectionView.cellForItem(at: indexPath) as? WordStackCollectionCell {
+            selectedCell.isSelected = true
+            // Additional logic can be handled here if needed
+            wordsCatagory =  selectedCell.titleLabel.text
+        }
+        
+        // Deselect any previously selected cell
+//        if let selectedItems = collectionView.indexPathsForSelectedItems {
+//            for selectedIndexPath in selectedItems where selectedIndexPath != indexPath {
+//                collectionView.deselectItem(at: selectedIndexPath, animated: false)
+//                if let deselectedCell = collectionView.cellForItem(at: selectedIndexPath) as? WordStackCollectionCell {
+//                    deselectedCell.isSelected = false
+//                }
+//            }
+//        }
+    }
+    
+    
+    var wordsCatagory: String?
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toTextRead" {
+               if let destinationVC = segue.destination as? TextCaptureViewController {
+                   destinationVC.testWordCategory = wordsCatagory // Replace with your actual string variable
+               }
+           }
     }
-    */
+    
 
 }
