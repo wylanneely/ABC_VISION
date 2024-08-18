@@ -37,24 +37,38 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fM3-8A-tU8">
-                                <rect key="frame" x="110.66666666666669" y="426" width="172" height="169.66666666666663"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fM3-8A-tU8">
+                                <rect key="frame" x="36.666666666666657" y="426" width="320" height="169.66666666666663"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="169.66999999999999" id="1ye-yO-ZhQ"/>
+                                    <constraint firstAttribute="width" constant="320" id="Eld-Tb-TBU"/>
+                                </constraints>
+                                <color key="tintColor" name="ABCGreen"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="AddButtonGreen"/>
                                 <connections>
                                     <action selector="player2ButtonTapped:" destination="Zas-T7-qEz" eventType="touchUpInside" id="cPF-au-P7p"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chV-gD-Ame">
-                                <rect key="frame" x="110.66666666666669" y="595.66666666666663" width="172" height="169.66666666666663"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chV-gD-Ame">
+                                <rect key="frame" x="36.666666666666657" y="595.66666666666663" width="320" height="169.66666666666663"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="320" id="0fi-th-LEk"/>
+                                    <constraint firstAttribute="height" constant="169.66999999999999" id="W2b-Xc-sWf"/>
+                                </constraints>
+                                <color key="tintColor" name="ABCGreen"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="AddButtonGreen"/>
                                 <connections>
                                     <action selector="player3ButtonTapped:" destination="Zas-T7-qEz" eventType="touchUpInside" id="Jct-Uk-r9h"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THs-cl-c1A">
-                                <rect key="frame" x="110.66666666666669" y="256.33333333333331" width="172" height="169.66666666666669"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THs-cl-c1A">
+                                <rect key="frame" x="36.666666666666657" y="256.33333333333331" width="320" height="169.66666666666669"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="169.66999999999999" id="Xn9-AK-Idc"/>
+                                    <constraint firstAttribute="width" constant="320" id="jFj-bC-gjy"/>
+                                </constraints>
                                 <color key="tintColor" red="0.1107030379" green="0.95588860539999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="AddButtonGreen"/>
@@ -760,6 +774,9 @@
         <image name="paperplane" catalog="system" width="128" height="119"/>
         <namedColor name="ABCBlue">
             <color red="0.0" green="0.65618681907653809" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ABCGreen">
+            <color red="0.012000000104308128" green="0.85900002717971802" blue="0.38600000739097595" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
