@@ -21,14 +21,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="See" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KV0-m5-XMQ">
-                                <rect key="frame" x="98" y="356.66666666666669" width="197" height="139"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="116"/>
+                                <rect key="frame" x="97.666666666666686" y="344" width="198" height="164.33333333333337"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="116"/>
                                 <color key="textColor" name="ABCGreen"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ri-WI-iQO">
-                                <rect key="frame" x="119" y="217.66666666666663" width="155" height="139"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="116"/>
+                                <rect key="frame" x="126" y="179.66666666666663" width="141" height="164.33333333333337"/>
+                                <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="116"/>
                                 <color key="textColor" name="ABCGreen"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -53,9 +53,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CreationBackgroundSmall" width="1000" height="1732"/>
+        <image name="CreationBackgroundSmall" width="500" height="866"/>
         <namedColor name="ABCGreen">
-            <color red="0.012000000104308128" green="0.85900002717971802" blue="0.38600000739097595" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
