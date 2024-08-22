@@ -49,8 +49,17 @@ class SelectPlayerViewController: UIViewController {
         for (index, player) in loadedPlayers.enumerated() {
             guard index < playerButtons.count else { break }
             let button = playerButtons[index]
-            button?.setTitle(player.nickname, for: .normal) // Set the title to the player's nickname
-            // Optionally, you can set other properties like background color or image
+            
+            let attributes: [NSAttributedString.Key: Any] = [
+                .font: UIFont(name: "Chalkboard SE Regular", size: 40) as Any, // Set the font and size
+                .foregroundColor: UIColor.abcGreen // Optional: Set the text color
+            ]
+            
+            let attributedTitle = NSAttributedString(string: player.nickname, attributes: attributes)
+            button?.setAttributedTitle(attributedTitle, for: .normal)
+            
+            button?.imageView?.contentMode = .scaleToFill
+            button?.setImage(UIImage(named: "SignInPencil"), for: .normal)
         }
     }
     
