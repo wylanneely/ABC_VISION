@@ -38,10 +38,9 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fM3-8A-tU8">
-                                <rect key="frame" x="36.666666666666657" y="426" width="320" height="169.66666666666663"/>
+                                <rect key="frame" x="8" y="426" width="377" height="169.66666666666663"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="169.66999999999999" id="1ye-yO-ZhQ"/>
-                                    <constraint firstAttribute="width" constant="320" id="Eld-Tb-TBU"/>
                                 </constraints>
                                 <color key="tintColor" name="ABCGreen"/>
                                 <state key="normal" title="Button"/>
@@ -51,9 +50,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chV-gD-Ame">
-                                <rect key="frame" x="36.666666666666657" y="595.66666666666663" width="320" height="169.66666666666663"/>
+                                <rect key="frame" x="8" y="595.66666666666663" width="377" height="169.66666666666663"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="0fi-th-LEk"/>
                                     <constraint firstAttribute="height" constant="169.66999999999999" id="W2b-Xc-sWf"/>
                                 </constraints>
                                 <color key="tintColor" name="ABCGreen"/>
@@ -64,10 +62,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THs-cl-c1A">
-                                <rect key="frame" x="36.666666666666657" y="256.33333333333331" width="320" height="169.66666666666669"/>
+                                <rect key="frame" x="8" y="256.33333333333331" width="377" height="169.66666666666669"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="169.66999999999999" id="Xn9-AK-Idc"/>
-                                    <constraint firstAttribute="width" constant="320" id="jFj-bC-gjy"/>
                                 </constraints>
                                 <color key="tintColor" red="0.1107030379" green="0.95588860539999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
@@ -80,20 +77,26 @@
                         <viewLayoutGuide key="safeArea" id="4WB-3Z-k7g"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="fM3-8A-tU8" firstAttribute="leading" secondItem="4WB-3Z-k7g" secondAttribute="leading" constant="8" id="1Jm-vm-luK"/>
                             <constraint firstItem="THs-cl-c1A" firstAttribute="centerX" secondItem="OkJ-fI-AZT" secondAttribute="centerX" id="3Ew-w0-tp0"/>
                             <constraint firstItem="chV-gD-Ame" firstAttribute="centerX" secondItem="OkJ-fI-AZT" secondAttribute="centerX" id="5nC-Mu-0OD"/>
                             <constraint firstAttribute="trailing" secondItem="LSI-bD-617" secondAttribute="trailing" id="6Ms-WO-3jh"/>
                             <constraint firstItem="chV-gD-Ame" firstAttribute="top" secondItem="fM3-8A-tU8" secondAttribute="bottom" id="8hy-V0-Qjg"/>
                             <constraint firstItem="u2b-mH-3MY" firstAttribute="centerX" secondItem="OkJ-fI-AZT" secondAttribute="centerX" id="Adz-Ww-Jcy"/>
+                            <constraint firstItem="THs-cl-c1A" firstAttribute="leading" secondItem="4WB-3Z-k7g" secondAttribute="leading" constant="8" id="BVm-Gg-lfh"/>
                             <constraint firstItem="fM3-8A-tU8" firstAttribute="top" secondItem="THs-cl-c1A" secondAttribute="bottom" id="FXe-QM-Rn6"/>
                             <constraint firstItem="fM3-8A-tU8" firstAttribute="centerX" secondItem="OkJ-fI-AZT" secondAttribute="centerX" id="MT7-e9-w3P"/>
                             <constraint firstAttribute="bottom" secondItem="LSI-bD-617" secondAttribute="bottom" id="PLI-lD-jZk"/>
                             <constraint firstItem="LSI-bD-617" firstAttribute="top" secondItem="OkJ-fI-AZT" secondAttribute="top" id="SU9-G7-p7F"/>
                             <constraint firstItem="LSI-bD-617" firstAttribute="leading" secondItem="OkJ-fI-AZT" secondAttribute="leading" id="TbB-Zt-wfF"/>
+                            <constraint firstItem="4WB-3Z-k7g" firstAttribute="trailing" secondItem="fM3-8A-tU8" secondAttribute="trailing" constant="8" id="VJ6-FT-TuP"/>
+                            <constraint firstItem="4WB-3Z-k7g" firstAttribute="trailing" secondItem="THs-cl-c1A" secondAttribute="trailing" constant="8" id="aAk-TC-tQQ"/>
+                            <constraint firstItem="4WB-3Z-k7g" firstAttribute="trailing" secondItem="chV-gD-Ame" secondAttribute="trailing" constant="8" id="c3j-6P-PFx"/>
                             <constraint firstItem="fM3-8A-tU8" firstAttribute="centerX" secondItem="OkJ-fI-AZT" secondAttribute="centerX" id="cp3-0F-9RB"/>
                             <constraint firstItem="fM3-8A-tU8" firstAttribute="top" secondItem="OkJ-fI-AZT" secondAttribute="centerY" id="lmO-ul-o2L"/>
                             <constraint firstItem="u2b-mH-3MY" firstAttribute="leading" secondItem="4WB-3Z-k7g" secondAttribute="leading" constant="8" id="nB7-7K-Om1"/>
                             <constraint firstItem="u2b-mH-3MY" firstAttribute="top" secondItem="4WB-3Z-k7g" secondAttribute="top" constant="8" id="pxG-e3-B22"/>
+                            <constraint firstItem="chV-gD-Ame" firstAttribute="leading" secondItem="4WB-3Z-k7g" secondAttribute="leading" constant="8" id="tSK-mb-Ohk"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -669,7 +672,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nick Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYS-Fb-YNY">
-                                <rect key="frame" x="63" y="60.000000000000007" width="267.33333333333326" height="76.666666666666686"/>
+                                <rect key="frame" x="63" y="60.000000000000007" width="267.33333333333331" height="76.666666666666686"/>
                                 <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="54"/>
                                 <color key="textColor" red="0.1107030379" green="0.95588860539999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -776,7 +779,7 @@
             <color red="0.0" green="0.65600001811981201" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ABCGreen">
-            <color red="0.012000000104308128" green="0.85900002717971802" blue="0.38600000739097595" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
