@@ -28,23 +28,23 @@ struct WordStackController {
        ]
         
         animals = [
-            bearWord,
-            birdWord,
+            bearWord,// no position
+            birdWord,// no anchor position
             catWord,
             chickenWord,
-            cowWord,
+            cowWord, // too Big
             dogWord,
             dolphinWord,
             duckWord,
-            fishWord,
-            horseWord,
-            pigWord,
-            rabbitWord,
-            roosterWord,
-            sharkWord,
-            sheepWord,
-            squirrelWord,
-            whaleWord
+            fishWord, // big
+            horseWord, //big
+            pigWord, //pig
+            rabbitWord,// big
+            roosterWord, //moves and too big
+            sharkWord, // big
+            sheepWord, // big and moves
+            squirrelWord, // big and m,oves
+            whaleWord // big anmd moves
         ]
         
         foods = [
@@ -52,14 +52,13 @@ struct WordStackController {
             bananaWord,
             carrotWord,
             carrotsWord,
-            cornWord,
-            cornWord,
+            cornWord,// big and behind
             donutWord,
             eggWord,
-            milkWord,
+            milkWord,//huge
             orangeWord,
             pizzaWord
-        ]
+        ]               //  order of Array inportant
         wordListsArray = [planets,animals,foods]
     }
     
