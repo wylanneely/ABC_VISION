@@ -38,9 +38,9 @@ struct WordStackController {
             duckWord,
             fishWord,
             horseWord,
-            pigWord, //pig
-            rabbitWord,// big
-            roosterWord, //moves and too big
+            pigWord, // no anchor
+            rabbitWord,
+          //  roosterWord,
             sharkWord, // big
             sheepWord, // big and moves
             squirrelWord, // big and m,oves
@@ -86,7 +86,7 @@ struct WordStackController {
     var horseWord = Word(name: "Horse")
     var pigWord = Word(name: "Pig")
     var rabbitWord = Word(name: "Rabbit")
-    var roosterWord = Word(name: "Rooster")
+   // var roosterWord = Word(name: "Rooster")
     var sharkWord = Word(name: "Shark")
     var sheepWord = Word(name: "Sheep")
     var squirrelWord = Word(name: "Squirrel")
