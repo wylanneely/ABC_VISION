@@ -176,7 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2011" y="-59"/>
+            <point key="canvasLocation" x="1385" y="-59"/>
         </scene>
         <!--Text Capture View Controller-->
         <scene sceneID="hSR-bZ-I0X">
@@ -220,7 +220,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LkT-Y2-arb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="119.84732824427481" y="-45.070422535211272"/>
+            <point key="canvasLocation" x="-367" y="-59"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="rKn-cP-Lls">
@@ -230,7 +230,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CreationBackground" translatesAutoresizingMaskIntoConstraints="NO" id="CdR-Bt-c2z">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CreatePlayerBackground" translatesAutoresizingMaskIntoConstraints="NO" id="CdR-Bt-c2z">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZbS-lT-hb2">
@@ -748,7 +748,6 @@
         <image name="BackButton" width="148" height="155.5"/>
         <image name="CButton" width="148" height="155.5"/>
         <image name="CreatePlayerBackground" width="861" height="1378"/>
-        <image name="CreationBackground" width="1400" height="2425"/>
         <image name="DButton" width="148" height="155.5"/>
         <image name="EButton" width="148" height="155.5"/>
         <image name="FButton" width="148" height="155.5"/>
