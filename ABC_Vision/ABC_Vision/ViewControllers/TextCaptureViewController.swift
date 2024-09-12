@@ -10,23 +10,29 @@ import AVFoundation
 import Vision
 
 class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UITableViewDelegate, UITableViewDataSource {
-       
-    //MARK: - TableView
     
-    var testWords: [Word]? // make real tmrw
+    
+    var testWords: [Word]? // TODO: Make way to save
     var testWordCategory: String?
     
-    @IBOutlet weak var wordHintTableView: UITableView!
     
     func setUpWord() {
-        
         switch testWordCategory {
         case "Animals": testWords = WordStackController().animals
         case "Foods": testWords = WordStackController().foods
         case "Planets": testWords = WordStackController().planets
         default : wordHintTableView.isHidden = true
+            openCloseButton.isHidden = true
         }
     }
+    
+    
+    //MARK: - TableView
+    
+    @IBOutlet weak var wordHintTableView: UITableView!
+    @IBOutlet weak var openCloseButton: UIButton!
+    
+    var isTableViewOpen: Bool = true
     
     func setUpTableView() {
         wordHintTableView.dataSource = self
@@ -43,7 +49,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         } else {
             return 1
         }
-}
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = wordHintTableView.dequeueReusableCell(withIdentifier: "ARWordHintViewCell", for: indexPath) as? ARWordHintViewCell else {
@@ -58,6 +64,68 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         
         return cell
     }
+    
+    @IBOutlet weak var wordHintTableViewTopConstraint: NSLayoutConstraint!
+    
+    
+    @IBAction func openCloseWordHintTableView(_ sender: Any) {
+//        let tableViewHeight = wordHintTableView.frame.height
+//        let newTableViewYPosition: CGFloat = isTableViewOpen ? -tableViewHeight : 0
+//        
+//        // Update the top constraint based on the table view's state
+//        wordHintTableViewTopConstraint.constant = isTableViewOpen ? 0 : -wordHintTableView.frame.height
+//        
+//        // Animate the constraint change
+//        UIView.animate(withDuration: 0.4, animations: {
+//            self.wordHintTableView.transform = CGAffineTransform(translationX: 0, y: newTableViewYPosition)
+//            self.isTableViewOpen.toggle()
+//            self.view.layoutIfNeeded()
+//        }) { _ in
+//            // Optionally, update the button title after the animation
+//            let buttonTitle = self.isTableViewOpen ? "Close" : "Open"
+//            self.openCloseButton.setTitle(buttonTitle, for: .normal)
+//        }
+        let tableViewHeight = wordHintTableView.frame.height
+        let newTableViewYPosition: CGFloat = isTableViewOpen ? -tableViewHeight : 0
+
+        // Update the top constraint based on the table view's state
+        wordHintTableViewTopConstraint.constant = isTableViewOpen ? -tableViewHeight : 0
+
+        // Animate the constraint change
+        UIView.animate(withDuration: 0.4, animations: {
+            self.wordHintTableView.transform = CGAffineTransform(translationX: 0, y: newTableViewYPosition)
+            self.view.layoutIfNeeded()
+        }) { _ in
+            // Toggle the state after the animation completes
+            self.isTableViewOpen.toggle()
+
+            // Update the button title
+            let buttonTitle = self.isTableViewOpen ? "Close" : "Open"
+            let buttonImage = self.isTableViewOpen ? UIImage(systemName: "arrowshape.up.fill") : UIImage(systemName: "arrowshape.down.fill")
+            self.openCloseButton.setTitle(buttonTitle, for: .normal)
+            self.openCloseButton.setImage(buttonImage, for: .normal)
+        }
+    }
+//          let buttonHeight = openCloseButton.frame.height
+//
+//          // Calculate new Y position for the button
+//          let newButtonYPosition: CGFloat = isTableViewOpen ? 0 : tableViewHeight
+//
+//          // Calculate new Y position for the table view (off-screen or original position)
+//
+//          // Update the button title
+//          let newButtonTitle = isTableViewOpen ? "Open" : "Close"
+//
+          // Animate the table view and button to their new positions
+          //UIView.animate(withDuration: 0.4) {
+           //   self.wordHintTableView.transform = CGAffineTransform(translationX: 0, y: newTableViewYPosition)
+             // self.openCloseButton.transform = CGAffineTransform(translationX: 0, y: newButtonYPosition)
+             // self.openCloseButton.setTitle(newButtonTitle, for: .normal)
+          //}
+//
+//          // Toggle the state
+//          isTableViewOpen.toggle()
+//        }
     
     
     
@@ -91,16 +159,14 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             setUpWord()
         // Set up the camera
             setupCamera()
-        
         // Set up Vision text recognition request
             setupVision()
-            
             // Add tap gesture recognizer
             addGesture()
-            
-            view.bringSubviewToFront(wordHintTableView)
-            
             setUpTableView()
+            //bringtableview to front
+            view.bringSubviewToFront(wordHintTableView)
+            view.bringSubviewToFront(openCloseButton)
         }
     
         override func viewWillDisappear(_ animated: Bool) {
@@ -187,22 +253,26 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         guard let results = results as? [VNRecognizedTextObservation] else {
             return
         }
-        
+
         DispatchQueue.main.async { [weak self] in
             self?.textBoxes.forEach {
                 $0.removeFromSuperlayer()
             }
             self?.textBoxes.removeAll()
             self?.recognizedTexts.removeAll()
-            
+
             for observation in results {
                 guard let topCandidate = observation.topCandidates(1).first else { continue }
-                print(topCandidate.string)
-                
-                let box = self?.createBox(for: observation)
-                self?.view.layer.addSublayer(box!)
-                self?.textBoxes.append(box!)
-                self?.recognizedTexts.append(topCandidate.string)
+                let filteredString = topCandidate.string.filter { $0.isASCII && $0.isLetter || $0.isWhitespace }
+
+                if !filteredString.isEmpty {
+                    print(filteredString)
+
+                    let box = self?.createBox(for: observation)
+                    self?.view.layer.addSublayer(box!)
+                    self?.textBoxes.append(box!)
+                    self?.recognizedTexts.append(filteredString)
+                }
             }
         }
     }
@@ -258,25 +328,6 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         }
     }
     //1
-//    private func setupVision() {
-//        textRecognitionRequest = VNRecognizeTextRequest(completionHandler: {
-//            [weak self] (
-//                request,
-//                error
-//            ) in
-//            if let error = error {
-//                print(
-//                    "Error recognizing text: \(error.localizedDescription)"
-//                )
-//                return
-//            }
-//            self?.processTextRecognitionResults(
-//                request.results
-//            )
-//        })
-//        textRecognitionRequest.recognitionLevel = .accurate
-//        textRecognitionRequest.usesLanguageCorrection = true
-//    }
     private func setupVision() {
         textRecognitionRequest = VNRecognizeTextRequest { [weak self] (request, error) in
             if let error = error {
