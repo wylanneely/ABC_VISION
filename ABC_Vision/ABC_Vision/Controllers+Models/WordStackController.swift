@@ -38,13 +38,13 @@ struct WordStackController {
             duckWord,
             fishWord,
             horseWord,
-            pigWord, // no anchor
+            pigWord,
             rabbitWord,
           //  roosterWord,
-            sharkWord, // big
-            sheepWord, // big and moves
-            squirrelWord, // big and m,oves
-            whaleWord // big anmd moves
+            sharkWord, 
+            sheepWord,
+            squirrelWord,
+            whaleWord
         ]
         
         foods = [
@@ -55,7 +55,7 @@ struct WordStackController {
             cornWord,// big and behind
             donutWord,
             eggWord,
-            milkWord,//huge
+            milkWord,
             orangeWord,
             pizzaWord
         ]               //  order of Array important
