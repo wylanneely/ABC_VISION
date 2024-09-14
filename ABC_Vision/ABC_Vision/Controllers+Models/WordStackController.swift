@@ -28,8 +28,8 @@ struct WordStackController {
        ]
         
         animals = [
-            bearWord,// no position
-            birdWord,// no anchor position
+            bearWord,
+            birdWord,
             catWord,
             chickenWord,
             cowWord,
