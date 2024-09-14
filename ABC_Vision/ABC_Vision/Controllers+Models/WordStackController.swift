@@ -52,7 +52,7 @@ struct WordStackController {
             bananaWord,
             carrotWord,
             carrotsWord,
-            cornWord,// big and behind
+            cornWord,
             donutWord,
             eggWord,
             milkWord,
