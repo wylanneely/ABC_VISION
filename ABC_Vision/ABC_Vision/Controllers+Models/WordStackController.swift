@@ -51,10 +51,10 @@ struct WordStackController {
             appleWord,
             bananaWord,
             carrotWord,
-            carrotsWord,
+      //      carrotsWord,
             cornWord,
             donutWord,
-            eggWord,
+          //  eggWord,
             milkWord,
             orangeWord,
             pizzaWord
@@ -103,10 +103,10 @@ struct WordStackController {
     var appleWord = Word(name: "Apple")
     var bananaWord = Word(name: "Banana")
     var carrotWord = Word(name: "Carrot")
-    var carrotsWord = Word(name: "Carrots")
+   // var carrotsWord = Word(name: "Carrots")
     var cornWord = Word(name: "Corn")
     var donutWord = Word(name: "Donut")
-    var eggWord = Word(name: "Egg")
+ //   var eggWord = Word(name: "Egg")
     var milkWord = Word(name: "Milk")
     var orangeWord = Word(name: "Orange")
     var pizzaWord = Word(name: "Pizza")
