@@ -47,7 +47,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         // Calculate item size
         let numberOfItemsPerRow: CGFloat = 2
         let interItemSpacing = layout.minimumInteritemSpacing * (numberOfItemsPerRow - 1)
-        let totalPadding = interItemSpacing + 20 // Assuming 10 points padding on each side
+        let totalPadding = interItemSpacing + 10 // Assuming 10 points padding on each side
         let availableWidth = wordStackCollectionView.frame.width - totalPadding
         let itemWidth = availableWidth / numberOfItemsPerRow
         
