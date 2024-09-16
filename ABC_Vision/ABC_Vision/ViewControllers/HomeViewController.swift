@@ -37,26 +37,30 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         // Register the cell nib
         let nib = UINib(nibName: "WordStackCollectionCell", bundle: nil)
-        self.wordStackCollectionView.register(nib, forCellWithReuseIdentifier: "WordStackCollectionCell")
+        wordStackCollectionView.register(nib, forCellWithReuseIdentifier: "WordStackCollectionCell")
         
         // Customize the layout
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 10 // Space between rows
         layout.minimumInteritemSpacing = 10 // Space between items (cells)
         
-        // Calculate item size
+        // Set number of items per row (each cell will take 2 cells worth of space)
         let numberOfItemsPerRow: CGFloat = 2
-        let interItemSpacing = layout.minimumInteritemSpacing * (numberOfItemsPerRow - 1)
-        let totalPadding = interItemSpacing + 10 // Assuming 10 points padding on each side
+        
+        // Calculate item width by dividing screen width in half (for 2 cells across the width)
+        let totalPadding = layout.minimumInteritemSpacing * (numberOfItemsPerRow - 1)
         let availableWidth = wordStackCollectionView.frame.width - totalPadding
         let itemWidth = availableWidth / numberOfItemsPerRow
         
-        // Set the item height to 1/3 of the screen height
+        // Multiply by 2 to make each cell take 2 columns (the entire width)
+        let fullWidthItemWidth = itemWidth * 2 + layout.minimumInteritemSpacing
+        
+        // Set the item height (you can adjust this as needed)
         let itemHeight = UIScreen.main.bounds.height / 3
         
-        // Set the item size
-        layout.itemSize = CGSize(width: itemWidth, height: itemHeight)
-
+        // Set the item size (full width cell)
+        layout.itemSize = CGSize(width: fullWidthItemWidth, height: itemHeight)
+        
         wordStackCollectionView.collectionViewLayout = layout
     }
     

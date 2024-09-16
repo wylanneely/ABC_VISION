@@ -60,6 +60,7 @@ class SelectPlayerViewController: UIViewController {
             
             button?.imageView?.contentMode = .scaleToFill
             button?.setImage(UIImage(named: "SignInPencil"), for: .normal)
+          //  button?.backgroundColor = .opaqueABCBlue
         }
     }
     
