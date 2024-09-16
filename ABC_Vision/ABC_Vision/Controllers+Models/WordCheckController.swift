@@ -75,6 +75,7 @@ struct WordCheckController {
         "Sun",
         "Tree",
         "Trump",
+        "Uranus",
         "Venus",
         "Watch",
         "Whale"
