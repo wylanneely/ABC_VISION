@@ -11,22 +11,25 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="WordStackCollectionCell" reuseIdentifier="WordStackCollectionCell" id="gTV-IL-0wX" customClass="WordStackCollectionCell" customModule="ABC_Vision" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="185" height="265"/>
+            <rect key="frame" x="0.0" y="0.0" width="185" height="229"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="185" height="265"/>
+                <rect key="frame" x="0.0" y="0.0" width="185" height="229"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FreeStyle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ZS-sr-Ysg">
-                        <rect key="frame" x="10.333333333333329" y="8" width="164.33333333333337" height="41.666666666666664"/>
-                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="32"/>
+                        <rect key="frame" x="-15" y="8" width="215" height="41.666666666666664"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="41.666666666666664" id="Kba-vH-f76"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="42"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                         <color key="shadowColor" systemColor="systemGreenColor"/>
                         <size key="shadowOffset" width="2" height="1"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FreeStylePencil" translatesAutoresizingMaskIntoConstraints="NO" id="eRX-SI-a8g">
-                        <rect key="frame" x="16" y="67" width="153" height="164"/>
+                        <rect key="frame" x="16" y="41.666666666666671" width="153" height="153.33333333333331"/>
                     </imageView>
                 </subviews>
             </view>
@@ -34,12 +37,12 @@
             <constraints>
                 <constraint firstAttribute="bottomMargin" secondItem="eRX-SI-a8g" secondAttribute="bottom" id="1nQ-tC-dPr"/>
                 <constraint firstAttribute="trailingMargin" secondItem="eRX-SI-a8g" secondAttribute="trailing" id="5Dd-Ol-PWT"/>
-                <constraint firstItem="eRX-SI-a8g" firstAttribute="top" secondItem="7ZS-sr-Ysg" secondAttribute="topMargin" id="Agb-Iz-bOF"/>
+                <constraint firstItem="eRX-SI-a8g" firstAttribute="top" secondItem="7ZS-sr-Ysg" secondAttribute="bottomMargin" id="Agb-Iz-bOF"/>
                 <constraint firstItem="7ZS-sr-Ysg" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="Rpq-Za-N1u"/>
                 <constraint firstItem="eRX-SI-a8g" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leadingMargin" id="eXT-2M-353"/>
                 <constraint firstItem="7ZS-sr-Ysg" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="ko3-9g-hvr"/>
             </constraints>
-            <size key="customSize" width="185" height="265"/>
+            <size key="customSize" width="185" height="229"/>
             <userDefinedRuntimeAttributes>
                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                     <integer key="value" value="15"/>
@@ -49,7 +52,7 @@
                 <outlet property="imageView" destination="eRX-SI-a8g" id="wHU-RH-Kg1"/>
                 <outlet property="titleLabel" destination="7ZS-sr-Ysg" id="erG-fV-wRr"/>
             </connections>
-            <point key="canvasLocation" x="-2.2900763358778624" y="64.436619718309856"/>
+            <point key="canvasLocation" x="-11.450381679389313" y="88.380281690140848"/>
         </collectionViewCell>
     </objects>
     <resources>
