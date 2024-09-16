@@ -75,7 +75,7 @@ struct WrittenWordConverter {
         "Sun": "Sun",
         "Trump": "President",
         "Tree":"Tree",
-        "Uranus":"Uranus"
+        "Uranus":"Uranus",
         "Venus":"Venus",
         "Watch":"Watch",
         "Whale":"Whale"
