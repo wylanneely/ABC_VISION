@@ -21,17 +21,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="u2b-mH-3MY">
-                                <rect key="frame" x="8" y="67.000000000000014" width="377" height="143.33333333333337"/>
+                                <rect key="frame" x="8" y="66.999999999999986" width="377" height="185.66666666666663"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AB" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCQ-eT-cEc">
-                                        <rect key="frame" x="0.0" y="0.0" width="377" height="66.666666666666671"/>
-                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="47"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="377" height="88"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="62"/>
                                         <color key="textColor" red="0.1107030379" green="0.95588860539999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="See" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5CD-NV-PmB">
-                                        <rect key="frame" x="0.0" y="66.666666666666657" width="377" height="76.666666666666657"/>
-                                        <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="54"/>
+                                        <rect key="frame" x="0.0" y="88" width="377" height="97.666666666666686"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="69"/>
                                         <color key="textColor" red="0.1107030379" green="0.95588860539999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -44,7 +44,7 @@
                                 </constraints>
                                 <color key="tintColor" name="ABCGreen"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="AddButtonGreen"/>
+                                <buttonConfiguration key="configuration" style="plain" image="AddButton"/>
                                 <connections>
                                     <action selector="player2ButtonTapped:" destination="Zas-T7-qEz" eventType="touchUpInside" id="cPF-au-P7p"/>
                                 </connections>
@@ -56,7 +56,7 @@
                                 </constraints>
                                 <color key="tintColor" name="ABCGreen"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="AddButtonGreen"/>
+                                <buttonConfiguration key="configuration" style="plain" image="AddButton"/>
                                 <connections>
                                     <action selector="player3ButtonTapped:" destination="Zas-T7-qEz" eventType="touchUpInside" id="Jct-Uk-r9h"/>
                                 </connections>
@@ -68,7 +68,7 @@
                                 </constraints>
                                 <color key="tintColor" red="0.1107030379" green="0.95588860539999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="AddButtonGreen"/>
+                                <buttonConfiguration key="configuration" style="plain" image="AddButton"/>
                                 <connections>
                                     <action selector="player1ButtonTapped:" destination="Zas-T7-qEz" eventType="touchUpInside" id="yk8-yq-Fsr"/>
                                 </connections>
@@ -234,13 +234,14 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZbS-lT-hb2">
-                                <rect key="frame" x="91" y="763.66666666666663" width="211" height="34.333333333333371"/>
+                                <rect key="frame" x="91" y="729" width="211" height="69"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="211" id="r3v-h8-ASG"/>
                                 </constraints>
-                                <color key="tintColor" red="0.1107030379" green="0.95588860539999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Start"/>
+                                <buttonConfiguration key="configuration" style="tinted" image="StartButton"/>
                                 <connections>
                                     <segue destination="GlI-3q-pT8" kind="popoverPresentation" identifier="toTextRead" popoverAnchorView="ZbS-lT-hb2" id="fTX-HH-42g">
                                         <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
@@ -248,7 +249,7 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="75N-kQ-Dcx">
-                                <rect key="frame" x="8" y="143.66666666666663" width="377" height="608"/>
+                                <rect key="frame" x="8" y="143.66666666666669" width="377" height="573.33333333333326"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Jag-KG-MaA">
                                     <size key="itemSize" width="194" height="211"/>
@@ -743,7 +744,7 @@
     </scenes>
     <resources>
         <image name="AButton" width="148" height="155.5"/>
-        <image name="AddButtonGreen" width="148" height="155.5"/>
+        <image name="AddButton" width="160" height="62"/>
         <image name="BButton" width="148" height="155.5"/>
         <image name="BackButton" width="148" height="155.5"/>
         <image name="CButton" width="148" height="155.5"/>
@@ -765,6 +766,7 @@
         <image name="QButton" width="148" height="155.5"/>
         <image name="RButton" width="148" height="155.5"/>
         <image name="SButton" width="148" height="155.5"/>
+        <image name="StartButton" width="230" height="55"/>
         <image name="TButton" width="148" height="155.5"/>
         <image name="UButton" width="148" height="155.5"/>
         <image name="VButton" width="148" height="155.5"/>

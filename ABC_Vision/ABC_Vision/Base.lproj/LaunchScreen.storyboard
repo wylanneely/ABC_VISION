@@ -32,6 +32,13 @@
                                 <color key="textColor" name="ABCGreen"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WYlanCorpLettering" translatesAutoresizingMaskIntoConstraints="NO" id="JDr-6L-AYn">
+                                <rect key="frame" x="106.66666666666669" y="728" width="180" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="i6y-we-Pax"/>
+                                    <constraint firstAttribute="height" constant="90" id="yim-m1-mX0"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemYellowColor"/>
@@ -39,7 +46,9 @@
                             <constraint firstItem="7ak-gz-PbU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="182-Th-GZv"/>
                             <constraint firstItem="KV0-m5-XMQ" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="7hd-ug-4N7"/>
                             <constraint firstAttribute="bottom" secondItem="7ak-gz-PbU" secondAttribute="bottom" id="Kud-Ok-wIS"/>
+                            <constraint firstItem="JDr-6L-AYn" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="O5G-TR-g1U"/>
                             <constraint firstItem="3Ri-WI-iQO" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="PPF-GD-bje"/>
+                            <constraint firstItem="JDr-6L-AYn" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="QJb-09-Btl"/>
                             <constraint firstItem="7ak-gz-PbU" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="aCo-DD-B5R"/>
                             <constraint firstItem="KV0-m5-XMQ" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ffx-IH-NAR"/>
                             <constraint firstItem="7ak-gz-PbU" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lzQ-mr-Jpl"/>
@@ -54,6 +63,7 @@
     </scenes>
     <resources>
         <image name="CreationBackgroundSmall" width="500" height="866"/>
+        <image name="WYlanCorpLettering" width="648.5" height="283.5"/>
         <namedColor name="ABCGreen">
             <color red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
