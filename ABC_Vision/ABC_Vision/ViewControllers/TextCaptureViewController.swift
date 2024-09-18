@@ -100,9 +100,9 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             self.isTableViewOpen.toggle()
 
             // Update the button title
-            let buttonTitle = self.isTableViewOpen ? "Close" : "Open"
-            let buttonImage = self.isTableViewOpen ? UIImage(systemName: "arrowshape.up.fill") : UIImage(systemName: "arrowshape.down.fill")
-            self.openCloseButton.setTitle(buttonTitle, for: .normal)
+          //  let buttonTitle = self.isTableViewOpen ? "Close" : "Open"
+            let buttonImage = self.isTableViewOpen ? UIImage(named: "CloseWordsButton") : UIImage(named: "OpenWordsButton")
+        //    self.openCloseButton.setTitle(buttonTitle, for: .normal)
             self.openCloseButton.setImage(buttonImage, for: .normal)
         }
     }
