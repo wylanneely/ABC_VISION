@@ -149,11 +149,11 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qM3-pz-zJJ">
-                                <rect key="frame" x="150.66666666666666" y="336.66666666666669" width="92" height="34.333333333333314"/>
+                                <rect key="frame" x="120.33333333333333" y="336.66666666666669" width="168.66666666666669" height="67"/>
                                 <color key="tintColor" name="ABCBlue"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Close">
-                                    <imageReference key="image" image="arrowshape.up.fill" catalog="system" symbolScale="large"/>
+                                <buttonConfiguration key="configuration" style="plain">
+                                    <imageReference key="image" image="CloseWordsButton" symbolScale="large"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="openCloseWordHintTableView:" destination="GlI-3q-pT8" eventType="touchUpInside" id="pIG-no-moA"/>
@@ -165,7 +165,7 @@
                         <constraints>
                             <constraint firstItem="s5z-wZ-XNB" firstAttribute="top" secondItem="hUD-LL-QYk" secondAttribute="top" id="AxS-PL-wa0"/>
                             <constraint firstItem="s5z-wZ-XNB" firstAttribute="leading" secondItem="hUD-LL-QYk" secondAttribute="leading" id="CaD-m2-5ZX"/>
-                            <constraint firstItem="qM3-pz-zJJ" firstAttribute="centerX" secondItem="EPr-2a-hO4" secondAttribute="centerX" id="M5f-7l-Lx0"/>
+                            <constraint firstItem="qM3-pz-zJJ" firstAttribute="centerX" secondItem="EPr-2a-hO4" secondAttribute="centerX" constant="8" id="M5f-7l-Lx0"/>
                             <constraint firstItem="qM3-pz-zJJ" firstAttribute="top" secondItem="s5z-wZ-XNB" secondAttribute="bottom" id="MpT-DW-iP1"/>
                             <constraint firstItem="s5z-wZ-XNB" firstAttribute="height" secondItem="EPr-2a-hO4" secondAttribute="height" multiplier="0.4" id="bhK-LR-gWV"/>
                             <constraint firstItem="s5z-wZ-XNB" firstAttribute="trailing" secondItem="hUD-LL-QYk" secondAttribute="trailing" id="fV7-E5-kEl"/>
@@ -712,6 +712,7 @@
         <image name="BButton" width="148" height="155.5"/>
         <image name="BackButton" width="148" height="155.5"/>
         <image name="CButton" width="148" height="155.5"/>
+        <image name="CloseWordsButton" width="144.5" height="53"/>
         <image name="CreatePlayerBackground" width="861" height="1378"/>
         <image name="DButton" width="148" height="155.5"/>
         <image name="EButton" width="148" height="155.5"/>
@@ -738,7 +739,6 @@
         <image name="XButton" width="148" height="155.5"/>
         <image name="YButton" width="148" height="155.5"/>
         <image name="ZButton" width="148" height="155.5"/>
-        <image name="arrowshape.up.fill" catalog="system" width="123" height="128"/>
         <image name="paperplane" catalog="system" width="128" height="119"/>
         <image name="purpleGalacy" width="252" height="512"/>
         <namedColor name="ABCBlue">
