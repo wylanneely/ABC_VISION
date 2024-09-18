@@ -24,17 +24,21 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ABSeeLogoOnly" translatesAutoresizingMaskIntoConstraints="NO" id="Mlc-P3-ZZ1">
                                 <rect key="frame" x="16" y="40" width="361" height="350"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="29T-jv-MjW">
-                                <rect key="frame" x="84" y="390" width="225" height="368"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="29T-jv-MjW">
+                                <rect key="frame" x="46.666666666666657" y="350" width="300" height="408"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THs-cl-c1A">
-                                        <rect key="frame" x="0.0" y="0.0" width="225" height="116.66666666666667"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="300" height="122.66666666666667"/>
+                                        <color key="backgroundColor" name="ABCBlueButtonO"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="2R4-v4-UPo"/>
+                                        </constraints>
                                         <color key="tintColor" red="0.1107030379" green="0.95588860539999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="AddButton"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius.layer">
-                                                <integer key="value" value="20"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="12"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
@@ -42,19 +46,37 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fM3-8A-tU8">
-                                        <rect key="frame" x="0.0" y="125.66666666666663" width="225" height="116.66666666666669"/>
+                                        <rect key="frame" x="0.0" y="142.66666666666669" width="300" height="122.66666666666669"/>
+                                        <color key="backgroundColor" name="ABCBlueButtonO"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="FIM-fq-0bA"/>
+                                        </constraints>
                                         <color key="tintColor" name="ABCGreen"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="AddButton"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="player2ButtonTapped:" destination="Zas-T7-qEz" eventType="touchUpInside" id="cPF-au-P7p"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chV-gD-Ame">
-                                        <rect key="frame" x="0.0" y="251.33333333333334" width="225" height="116.66666666666666"/>
+                                        <rect key="frame" x="0.0" y="285.33333333333337" width="300" height="122.66666666666669"/>
+                                        <color key="backgroundColor" name="ABCBlueButtonO"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="300" id="oeW-D4-bva"/>
+                                        </constraints>
                                         <color key="tintColor" name="ABCGreen"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="AddButton"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="12"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="player3ButtonTapped:" destination="Zas-T7-qEz" eventType="touchUpInside" id="Jct-Uk-r9h"/>
                                         </connections>
@@ -75,7 +97,7 @@
                             <constraint firstItem="Mlc-P3-ZZ1" firstAttribute="leading" secondItem="4WB-3Z-k7g" secondAttribute="leading" constant="16" id="Tzk-ff-JsU"/>
                             <constraint firstItem="Mlc-P3-ZZ1" firstAttribute="trailing" secondItem="4WB-3Z-k7g" secondAttribute="trailing" constant="-16" id="aSt-cL-G0R"/>
                             <constraint firstItem="Mlc-P3-ZZ1" firstAttribute="top" secondItem="OkJ-fI-AZT" secondAttribute="top" constant="40" id="l1p-Eb-A77"/>
-                            <constraint firstItem="29T-jv-MjW" firstAttribute="top" secondItem="Mlc-P3-ZZ1" secondAttribute="bottom" id="sVg-72-9H4"/>
+                            <constraint firstItem="29T-jv-MjW" firstAttribute="top" secondItem="Mlc-P3-ZZ1" secondAttribute="bottom" constant="-40" id="sVg-72-9H4"/>
                         </constraints>
                     </view>
                     <connections>
@@ -743,6 +765,9 @@
         <image name="purpleGalacy" width="252" height="512"/>
         <namedColor name="ABCBlue">
             <color red="0.0" green="0.65600001811981201" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ABCBlueButtonO">
+            <color red="0.0" green="0.65600001811981201" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ABCGreen">
             <color red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
