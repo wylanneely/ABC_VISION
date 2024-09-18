@@ -12,18 +12,27 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var currentPlayer: Player?
     
     var testWordStackController = WordStackController()
+    var wordsCatagory: String?
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionView()
         setPlayerProperties()
+        DispatchQueue.main.async {
+            self.selectFirstItem()
+        }
     }
     
     func setPlayerProperties(){
         if let player = currentPlayer {
             playerNameLabel.text = player.nickname
         }
+    }
+    
+    func selectFirstItem() {
+        let firstIndexPath = IndexPath(row: 0, section: 0)
+        wordStackCollectionView.selectItem(at: firstIndexPath, animated: true, scrollPosition: .top)
+        collectionView(wordStackCollectionView, didSelectItemAt: firstIndexPath)
     }
     
     @IBOutlet weak var playerNameLabel: UILabel!
@@ -120,10 +129,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
 //            }
 //        }
     }
-    
-    
-    var wordsCatagory: String?
-    
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
