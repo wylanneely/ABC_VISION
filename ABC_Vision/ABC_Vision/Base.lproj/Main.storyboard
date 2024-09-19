@@ -21,6 +21,9 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purpleGalacy" translatesAutoresizingMaskIntoConstraints="NO" id="LSI-bD-617">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cartoonSpaceCat" translatesAutoresizingMaskIntoConstraints="NO" id="FvP-XK-rmv">
+                                <rect key="frame" x="-120" y="155" width="120" height="120"/>
+                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ABSeeLogoOnly" translatesAutoresizingMaskIntoConstraints="NO" id="Mlc-P3-ZZ1">
                                 <rect key="frame" x="16" y="40" width="361" height="350"/>
                             </imageView>
@@ -29,7 +32,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THs-cl-c1A">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="122.66666666666667"/>
-                                        <color key="backgroundColor" name="ABCBlueButtonO"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="2R4-v4-UPo"/>
                                         </constraints>
@@ -42,12 +45,12 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="player1ButtonTapped:" destination="Zas-T7-qEz" eventType="touchUpInside" id="yk8-yq-Fsr"/>
+                                            <action selector="player3ButtonTapped:" destination="Zas-T7-qEz" eventType="touchUpInside" id="hLO-Zp-NUj"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fM3-8A-tU8">
                                         <rect key="frame" x="0.0" y="142.66666666666669" width="300" height="122.66666666666669"/>
-                                        <color key="backgroundColor" name="ABCBlueButtonO"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="FIM-fq-0bA"/>
                                         </constraints>
@@ -60,12 +63,12 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="player2ButtonTapped:" destination="Zas-T7-qEz" eventType="touchUpInside" id="cPF-au-P7p"/>
+                                            <action selector="player1ButtonTapped:" destination="Zas-T7-qEz" eventType="touchUpInside" id="3sk-Q7-qeP"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="chV-gD-Ame">
                                         <rect key="frame" x="0.0" y="285.33333333333337" width="300" height="122.66666666666669"/>
-                                        <color key="backgroundColor" name="ABCBlueButtonO"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="oeW-D4-bva"/>
                                         </constraints>
@@ -78,7 +81,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="player3ButtonTapped:" destination="Zas-T7-qEz" eventType="touchUpInside" id="Jct-Uk-r9h"/>
+                                            <action selector="player2ButtonTapped:" destination="Zas-T7-qEz" eventType="touchUpInside" id="3Pa-c0-0F4"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -91,6 +94,7 @@
                             <constraint firstItem="4WB-3Z-k7g" firstAttribute="bottom" secondItem="29T-jv-MjW" secondAttribute="bottom" constant="60" id="6at-6o-dWX"/>
                             <constraint firstItem="29T-jv-MjW" firstAttribute="centerX" secondItem="Mlc-P3-ZZ1" secondAttribute="centerX" id="Cj1-2m-Q01"/>
                             <constraint firstItem="Mlc-P3-ZZ1" firstAttribute="height" secondItem="LSI-bD-617" secondAttribute="height" multiplier="0.4107" id="IhG-Ll-lWN"/>
+                            <constraint firstItem="4WB-3Z-k7g" firstAttribute="leading" secondItem="FvP-XK-rmv" secondAttribute="trailing" id="MXy-sX-o3r"/>
                             <constraint firstAttribute="bottom" secondItem="LSI-bD-617" secondAttribute="bottom" id="PLI-lD-jZk"/>
                             <constraint firstItem="LSI-bD-617" firstAttribute="top" secondItem="OkJ-fI-AZT" secondAttribute="top" id="SU9-G7-p7F"/>
                             <constraint firstItem="LSI-bD-617" firstAttribute="leading" secondItem="OkJ-fI-AZT" secondAttribute="leading" id="TbB-Zt-wfF"/>
@@ -98,18 +102,24 @@
                             <constraint firstItem="Mlc-P3-ZZ1" firstAttribute="trailing" secondItem="4WB-3Z-k7g" secondAttribute="trailing" constant="-16" id="aSt-cL-G0R"/>
                             <constraint firstItem="Mlc-P3-ZZ1" firstAttribute="top" secondItem="OkJ-fI-AZT" secondAttribute="top" constant="40" id="l1p-Eb-A77"/>
                             <constraint firstItem="29T-jv-MjW" firstAttribute="top" secondItem="Mlc-P3-ZZ1" secondAttribute="bottom" constant="-40" id="sVg-72-9H4"/>
+                            <constraint firstItem="FvP-XK-rmv" firstAttribute="centerY" secondItem="Mlc-P3-ZZ1" secondAttribute="centerY" id="vBl-Ko-SPM"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="playerButton1" destination="THs-cl-c1A" id="mf2-GI-mre"/>
-                        <outlet property="playerButton2" destination="fM3-8A-tU8" id="59N-5l-4JF"/>
-                        <outlet property="playerButton3" destination="chV-gD-Ame" id="Mgs-kk-vFl"/>
+                        <outlet property="cartoonCatImageView" destination="FvP-XK-rmv" id="mOh-SO-jeC"/>
+                        <outlet property="playerButton1" destination="fM3-8A-tU8" id="Mut-OC-IBh"/>
+                        <outlet property="playerButton2" destination="chV-gD-Ame" id="nKz-s6-UWy"/>
+                        <outlet property="playerButton3" destination="THs-cl-c1A" id="h3R-Iy-ICZ"/>
                         <segue destination="FQn-aD-6im" kind="presentation" identifier="toCreatePlayer" id="09K-ov-abd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dGY-PD-F6W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="xQM-ep-Yh1">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </objects>
-            <point key="canvasLocation" x="-1890.8396946564885" y="-45.070422535211272"/>
+            <point key="canvasLocation" x="-2008.3969465648854" y="-59.154929577464792"/>
         </scene>
         <!--Scene View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -730,7 +740,7 @@
     <resources>
         <image name="ABSeeLogoOnly" width="512" height="440.5"/>
         <image name="AButton" width="148" height="155.5"/>
-        <image name="AddButton" width="201" height="62"/>
+        <image name="AddButton" width="296" height="123"/>
         <image name="BButton" width="148" height="155.5"/>
         <image name="BackButton" width="148" height="155.5"/>
         <image name="CButton" width="148" height="155.5"/>
@@ -761,13 +771,11 @@
         <image name="XButton" width="148" height="155.5"/>
         <image name="YButton" width="148" height="155.5"/>
         <image name="ZButton" width="148" height="155.5"/>
+        <image name="cartoonSpaceCat" width="120" height="120"/>
         <image name="paperplane" catalog="system" width="128" height="119"/>
         <image name="purpleGalacy" width="252" height="512"/>
         <namedColor name="ABCBlue">
             <color red="0.0" green="0.65600001811981201" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="ABCBlueButtonO">
-            <color red="0.0" green="0.65600001811981201" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ABCGreen">
             <color red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
