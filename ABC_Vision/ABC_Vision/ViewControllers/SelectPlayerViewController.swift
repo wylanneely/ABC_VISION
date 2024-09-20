@@ -20,7 +20,7 @@ class SelectPlayerViewController: UIViewController {
         loadPlayers()
         loadPlayersIntoButtons()
         showOrHideButtons()
-        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name:          UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name:UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -138,7 +138,6 @@ class SelectPlayerViewController: UIViewController {
     //MARK: - Animations
     
     @objc func willEnterForeground() {
-        /// Play animation
         animateCartoonCat()
         animateCartoonDog()
         animateCartoonDuck()
@@ -257,8 +256,6 @@ class SelectPlayerViewController: UIViewController {
                 }
             }
         }
-        
-        
     }
     
     // MARK: - Navigation
