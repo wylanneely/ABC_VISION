@@ -19,7 +19,8 @@ class SelectPlayerViewController: UIViewController {
         //setUpLoadedPlayers()
         loadPlayers()
         loadPlayersIntoButtons()
-        showHideButtons()
+        showOrHideButtons()
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name:          UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,7 +74,7 @@ class SelectPlayerViewController: UIViewController {
         }
     }
     
-    func showHideButtons(){
+    func showOrHideButtons(){
         
         let players = [player1,player2,player3]
         var index = 0
@@ -136,8 +137,14 @@ class SelectPlayerViewController: UIViewController {
     
     //MARK: - Animations
     
-    @IBOutlet weak var cartoonCatImageView: UIImageView!
+    @objc func willEnterForeground() {
+        /// Play animation
+        animateCartoonCat()
+        animateCartoonDog()
+        animateCartoonDuck()
+    }
     
+    @IBOutlet weak var cartoonCatImageView: UIImageView!
     
     func animateCartoonCat() {
         let originalPosition = cartoonCatImageView.frame.origin
