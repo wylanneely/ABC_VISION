@@ -22,13 +22,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cartoonSpaceDog" translatesAutoresizingMaskIntoConstraints="NO" id="rDo-w7-ijm">
-                                <rect key="frame" x="0.0" y="-120" width="120" height="120"/>
+                                <rect key="frame" x="0.0" y="59" width="120" height="120"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cartoonSpaceDuck" translatesAutoresizingMaskIntoConstraints="NO" id="KZJ-ez-izZ">
-                                <rect key="frame" x="-120" y="852" width="120" height="120"/>
+                                <rect key="frame" x="0.0" y="698" width="120" height="120"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cartoonSpaceCat" translatesAutoresizingMaskIntoConstraints="NO" id="FvP-XK-rmv">
-                                <rect key="frame" x="-120" y="155" width="120" height="120"/>
+                                <rect key="frame" x="273" y="155" width="120" height="120"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ABSeeLogoOnly" translatesAutoresizingMaskIntoConstraints="NO" id="Mlc-P3-ZZ1">
                                 <rect key="frame" x="16" y="40" width="361" height="350"/>
@@ -100,17 +100,17 @@
                             <constraint firstItem="4WB-3Z-k7g" firstAttribute="bottom" secondItem="29T-jv-MjW" secondAttribute="bottom" constant="60" id="6at-6o-dWX"/>
                             <constraint firstItem="29T-jv-MjW" firstAttribute="centerX" secondItem="Mlc-P3-ZZ1" secondAttribute="centerX" id="Cj1-2m-Q01"/>
                             <constraint firstItem="rDo-w7-ijm" firstAttribute="leading" secondItem="OkJ-fI-AZT" secondAttribute="leading" id="Dzm-nH-LdL"/>
-                            <constraint firstItem="rDo-w7-ijm" firstAttribute="bottom" secondItem="OkJ-fI-AZT" secondAttribute="top" id="E1i-Tp-wvA"/>
-                            <constraint firstItem="KZJ-ez-izZ" firstAttribute="top" secondItem="OkJ-fI-AZT" secondAttribute="bottom" id="F2q-JV-ZdW"/>
+                            <constraint firstItem="rDo-w7-ijm" firstAttribute="top" secondItem="4WB-3Z-k7g" secondAttribute="top" id="E1i-Tp-wvA"/>
+                            <constraint firstItem="KZJ-ez-izZ" firstAttribute="bottom" secondItem="4WB-3Z-k7g" secondAttribute="bottom" id="F2q-JV-ZdW"/>
                             <constraint firstItem="Mlc-P3-ZZ1" firstAttribute="height" secondItem="LSI-bD-617" secondAttribute="height" multiplier="0.4107" id="IhG-Ll-lWN"/>
-                            <constraint firstItem="4WB-3Z-k7g" firstAttribute="leading" secondItem="FvP-XK-rmv" secondAttribute="trailing" id="MXy-sX-o3r"/>
+                            <constraint firstItem="4WB-3Z-k7g" firstAttribute="trailing" secondItem="FvP-XK-rmv" secondAttribute="trailing" id="MXy-sX-o3r"/>
                             <constraint firstAttribute="bottom" secondItem="LSI-bD-617" secondAttribute="bottom" id="PLI-lD-jZk"/>
                             <constraint firstItem="LSI-bD-617" firstAttribute="top" secondItem="OkJ-fI-AZT" secondAttribute="top" id="SU9-G7-p7F"/>
                             <constraint firstItem="LSI-bD-617" firstAttribute="leading" secondItem="OkJ-fI-AZT" secondAttribute="leading" id="TbB-Zt-wfF"/>
                             <constraint firstItem="Mlc-P3-ZZ1" firstAttribute="leading" secondItem="4WB-3Z-k7g" secondAttribute="leading" constant="16" id="Tzk-ff-JsU"/>
                             <constraint firstItem="Mlc-P3-ZZ1" firstAttribute="trailing" secondItem="4WB-3Z-k7g" secondAttribute="trailing" constant="-16" id="aSt-cL-G0R"/>
                             <constraint firstItem="Mlc-P3-ZZ1" firstAttribute="top" secondItem="OkJ-fI-AZT" secondAttribute="top" constant="40" id="l1p-Eb-A77"/>
-                            <constraint firstItem="KZJ-ez-izZ" firstAttribute="trailing" secondItem="OkJ-fI-AZT" secondAttribute="leading" id="lWw-bv-zt3"/>
+                            <constraint firstItem="KZJ-ez-izZ" firstAttribute="leading" secondItem="OkJ-fI-AZT" secondAttribute="leading" id="lWw-bv-zt3"/>
                             <constraint firstItem="29T-jv-MjW" firstAttribute="top" secondItem="Mlc-P3-ZZ1" secondAttribute="bottom" constant="-40" id="sVg-72-9H4"/>
                             <constraint firstItem="FvP-XK-rmv" firstAttribute="centerY" secondItem="Mlc-P3-ZZ1" secondAttribute="centerY" id="vBl-Ko-SPM"/>
                         </constraints>
