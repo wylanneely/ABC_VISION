@@ -237,6 +237,12 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HalfBackground" translatesAutoresizingMaskIntoConstraints="NO" id="CdR-Bt-c2z">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cartoonSpaceDuck" translatesAutoresizingMaskIntoConstraints="NO" id="35R-lN-QZd">
+                                <rect key="frame" x="0.0" y="426" width="120" height="120"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cartoonSpaceDog" translatesAutoresizingMaskIntoConstraints="NO" id="6rv-jo-YUM">
+                                <rect key="frame" x="273" y="59" width="120" height="120"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZbS-lT-hb2">
                                 <rect key="frame" x="91" y="729" width="211" height="69"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -282,25 +288,37 @@
                                 <color key="textColor" red="0.1107030379" green="0.95588860539999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cartoonSpaceCat" translatesAutoresizingMaskIntoConstraints="NO" id="jWE-DX-5f5">
+                                <rect key="frame" x="273" y="698" width="120" height="120"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aAP-1h-3VV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="CdR-Bt-c2z" firstAttribute="top" secondItem="8W9-Ig-mi3" secondAttribute="top" id="1Ix-pr-RY1"/>
+                            <constraint firstItem="aAP-1h-3VV" firstAttribute="trailing" secondItem="jWE-DX-5f5" secondAttribute="trailing" id="2Ki-XG-rhL"/>
+                            <constraint firstItem="6rv-jo-YUM" firstAttribute="top" secondItem="aAP-1h-3VV" secondAttribute="top" id="8c2-w8-soV"/>
                             <constraint firstItem="ZbS-lT-hb2" firstAttribute="centerX" secondItem="8W9-Ig-mi3" secondAttribute="centerX" id="Aa9-Rd-R9z"/>
                             <constraint firstItem="ZbS-lT-hb2" firstAttribute="top" secondItem="75N-kQ-Dcx" secondAttribute="bottom" constant="12" id="Ftp-gk-CEx"/>
                             <constraint firstItem="iSq-u7-UKe" firstAttribute="top" secondItem="aAP-1h-3VV" secondAttribute="top" id="JgO-ey-1UX"/>
                             <constraint firstAttribute="bottom" secondItem="CdR-Bt-c2z" secondAttribute="bottom" id="NmU-GK-qQI"/>
                             <constraint firstItem="75N-kQ-Dcx" firstAttribute="leading" secondItem="aAP-1h-3VV" secondAttribute="leading" constant="8" id="Phf-el-mmW"/>
                             <constraint firstItem="iSq-u7-UKe" firstAttribute="centerX" secondItem="8W9-Ig-mi3" secondAttribute="centerX" id="bfP-8M-qfx"/>
+                            <constraint firstItem="aAP-1h-3VV" firstAttribute="trailing" secondItem="6rv-jo-YUM" secondAttribute="trailing" id="cS9-bK-PPw"/>
                             <constraint firstAttribute="trailing" secondItem="CdR-Bt-c2z" secondAttribute="trailing" id="cTg-jP-0Pn"/>
+                            <constraint firstItem="35R-lN-QZd" firstAttribute="leading" secondItem="aAP-1h-3VV" secondAttribute="leading" id="dqp-uU-cWK"/>
                             <constraint firstItem="75N-kQ-Dcx" firstAttribute="top" secondItem="iSq-u7-UKe" secondAttribute="bottom" constant="8" id="haD-wo-e0f"/>
                             <constraint firstItem="aAP-1h-3VV" firstAttribute="bottom" secondItem="ZbS-lT-hb2" secondAttribute="bottom" constant="20" id="n8p-4L-Fyk"/>
+                            <constraint firstItem="35R-lN-QZd" firstAttribute="top" secondItem="8W9-Ig-mi3" secondAttribute="centerY" id="nCN-xX-DKX"/>
                             <constraint firstItem="75N-kQ-Dcx" firstAttribute="trailing" secondItem="aAP-1h-3VV" secondAttribute="trailing" constant="-8" id="qDc-bR-QYt"/>
                             <constraint firstItem="CdR-Bt-c2z" firstAttribute="leading" secondItem="8W9-Ig-mi3" secondAttribute="leading" id="rVS-fr-pI0"/>
+                            <constraint firstItem="aAP-1h-3VV" firstAttribute="bottom" secondItem="jWE-DX-5f5" secondAttribute="bottom" id="v8f-3c-VK4"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cartoonCatImageView" destination="jWE-DX-5f5" id="kdN-uN-dbY"/>
+                        <outlet property="cartoonDogImageView" destination="6rv-jo-YUM" id="iKW-yU-CeJ"/>
+                        <outlet property="cartoonDuckImageView" destination="35R-lN-QZd" id="eFr-aK-Irv"/>
                         <outlet property="playerNameLabel" destination="iSq-u7-UKe" id="okF-Ya-ocd"/>
                         <outlet property="wordStackCollectionView" destination="75N-kQ-Dcx" id="Avb-hm-nky"/>
                     </connections>
