@@ -25,6 +25,8 @@ class SelectPlayerViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         animateCartoonCat()
+        animateCartoonDuck()
+        animateCartoonDog()
     }
     
     var player1: Player?
@@ -172,7 +174,85 @@ class SelectPlayerViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var cartoonDuckImageView: UIImageView!
     
+    func animateCartoonDuck(){
+        let originalPosition = cartoonDuckImageView.frame.origin
+         
+        let viewWidth = self.view.frame.width
+        let viewHeight = self.view.frame.height
+        
+        let topLeft = CGPoint(x: 0, y: 0)
+        let topRight = CGPoint(x: viewWidth - cartoonDuckImageView.frame.width, y: 0)
+        let bottomLeft = CGPoint(x: 0, y: viewHeight - cartoonDuckImageView.frame.height)
+        let middleRight = CGPoint(x: viewWidth - cartoonDuckImageView.frame.width, y: viewHeight / 2 - cartoonDuckImageView.frame.height / 2)
+        let bottomRight = CGPoint(x: viewWidth - cartoonDuckImageView.frame.width, y: viewHeight - cartoonDuckImageView.frame.height)
+        
+        let duration = 11.0
+        
+        // Step 1: Move to top right
+        UIView.animate(withDuration: duration, animations: {
+            self.cartoonDuckImageView.frame.origin = middleRight
+        }) { _ in
+            // Step 2: Move to bottom left
+            UIView.animate(withDuration: duration, animations: {
+                self.cartoonDuckImageView.frame.origin = topLeft
+            }) { _ in
+                // Step 3: Move to middle right
+                UIView.animate(withDuration: duration, animations: {
+                    self.cartoonDuckImageView.frame.origin = bottomRight
+                }) { _ in
+                    // Step 4: Move back to original position
+                    UIView.animate(withDuration: duration, animations: {
+                        self.cartoonDuckImageView.frame.origin = originalPosition
+                    }) { _ in
+                        self.animateCartoonDuck()
+                    }
+                }
+            }
+        }
+    }
+    
+    @IBOutlet weak var cartoonDogImageView: UIImageView!
+    
+    func animateCartoonDog(){
+        let originalPosition = cartoonDogImageView.frame.origin
+        
+        let viewWidth = self.view.frame.width
+        let viewHeight = self.view.frame.height
+        
+        let topLeft = CGPoint(x: 0, y: 0)
+        let topRight = CGPoint(x: viewWidth - cartoonDogImageView.frame.width, y: 0)
+        let bottomLeft = CGPoint(x: 0, y: viewHeight - cartoonDogImageView.frame.height)
+        let middleLeft = CGPoint(x: 0, y: viewHeight / 2 - cartoonDogImageView.frame.height / 2)
+        let bottomRight = CGPoint(x: viewWidth - cartoonDogImageView.frame.width, y: viewHeight - cartoonDogImageView.frame.height)
+        
+        let duration = 13.0
+        
+        UIView.animate(withDuration: duration, animations: {
+            self.cartoonDogImageView.frame.origin = bottomRight
+        }) { _ in
+            UIView.animate(withDuration: duration, animations: {
+                self.cartoonDogImageView.frame.origin = middleLeft
+            }) { _ in
+                UIView.animate(withDuration: duration, animations: {
+                    self.cartoonDogImageView.frame.origin = topRight
+                }) { _ in
+                    UIView.animate(withDuration: duration, animations: {
+                        self.cartoonDogImageView.frame.origin = bottomLeft
+                    }) { _ in
+                        UIView.animate(withDuration: duration, animations: {
+                            self.cartoonDogImageView.frame.origin = originalPosition
+                        }) { _ in
+                            self.animateCartoonDog()
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+    }
     
     // MARK: - Navigation
     
