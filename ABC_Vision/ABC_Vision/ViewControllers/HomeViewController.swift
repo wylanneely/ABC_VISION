@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
@@ -18,7 +19,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         super.viewDidLoad()
         setUpCollectionView()
         setPlayerProperties()
-        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name:UIApplication.willEnterForegroundNotification, object: nil)
         DispatchQueue.main.async {
             self.selectFirstItem()
         }
@@ -127,12 +127,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     //MARK: - Animcations
-    
-    @objc func willEnterForeground() {
-        animateCartoonCat()
-        animateCartoonDog()
-        animateCartoonDuck()
-    }
     
     @IBOutlet weak var cartoonDogImageView: UIImageView!
     @IBOutlet weak var cartoonCatImageView: UIImageView!
@@ -249,6 +243,46 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
 
     // MARK: - Navigation
+    
+    @IBAction func startButtonTapped(_ sender: Any) {
+        checkCameraAccess { hasAccess in
+                if hasAccess {
+                    // Camera access is granted, perform the segue
+                    self.performSegue(withIdentifier: "toTextRead", sender: self)
+                } else {
+                    // Show an alert or handle the case where the camera is not accessible
+                    let alert = UIAlertController(title: "Camera Access Needed", message: "This app requires camera access to proceed. Please allow camera access in Settings.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+    }
+    
+    func checkCameraAccess(completion: @escaping (Bool) -> Void) {
+        let cameraAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
+        
+        switch cameraAuthorizationStatus {
+        case .authorized:
+            // Camera access is already authorized
+            completion(true)
+            
+        case .notDetermined:
+            // Camera access has not been requested yet, ask for permission
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                DispatchQueue.main.async {
+                    completion(granted)
+                }
+            }
+            
+        case .restricted, .denied:
+            // Camera access is restricted or denied
+            completion(false)
+            
+        @unknown default:
+            completion(false)
+        }
+    }
+    
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

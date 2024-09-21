@@ -20,7 +20,7 @@ class SelectPlayerViewController: UIViewController {
         loadPlayers()
         loadPlayersIntoButtons()
         showOrHideButtons()
-        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name:UIApplication.willEnterForegroundNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name:UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -61,8 +61,8 @@ class SelectPlayerViewController: UIViewController {
             let button = playerButtons[index]
             
             let attributes: [NSAttributedString.Key: Any] = [
-                .font: UIFont(name: "Chalkboard SE Bold", size: 40) as Any, // Set the font and size
-                .foregroundColor: UIColor.abcGreen // Optional: Set the text color
+                .font: UIFont(name: "Chalkboard SE Bold", size: 40) as Any,
+                .foregroundColor: UIColor.abcGreen
             ]
             
             let attributedTitle = NSAttributedString(string: player.nickname, attributes: attributes)
@@ -70,7 +70,9 @@ class SelectPlayerViewController: UIViewController {
             
             button?.imageView?.contentMode = .scaleToFill
             button?.setImage(UIImage(named: "SignInPencil"), for: .normal)
-          //  button?.backgroundColor = .opaqueABCBlue
+            button?.backgroundColor = UIColor.opaqueABCBlue
+            button?.translatesAutoresizingMaskIntoConstraints = false
+            button?.heightAnchor.constraint(equalToConstant: 120).isActive = true
         }
     }
     
