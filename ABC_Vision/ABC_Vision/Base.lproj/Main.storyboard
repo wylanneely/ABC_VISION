@@ -131,7 +131,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </objects>
-            <point key="canvasLocation" x="-2008.3969465648854" y="-59.154929577464792"/>
+            <point key="canvasLocation" x="-2143" y="-159"/>
         </scene>
         <!--Scene View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -215,6 +215,7 @@
                             <constraint firstItem="s5z-wZ-XNB" firstAttribute="trailing" secondItem="hUD-LL-QYk" secondAttribute="trailing" id="fV7-E5-kEl"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="GoN-sW-ykS"/>
                     <connections>
                         <outlet property="openCloseButton" destination="qM3-pz-zJJ" id="ufa-eI-72R"/>
                         <outlet property="wordHintTableView" destination="s5z-wZ-XNB" id="Jgb-Ne-Scv"/>
@@ -256,9 +257,7 @@
                                     <color key="baseBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="GlI-3q-pT8" kind="popoverPresentation" identifier="toTextRead" popoverAnchorView="ZbS-lT-hb2" id="fTX-HH-42g">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
+                                    <action selector="startButtonTapped:" destination="Dum-Kl-SSq" eventType="touchUpInside" id="AYO-HQ-Z1Y"/>
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="75N-kQ-Dcx">
@@ -321,6 +320,9 @@
                         <outlet property="cartoonDuckImageView" destination="35R-lN-QZd" id="eFr-aK-Irv"/>
                         <outlet property="playerNameLabel" destination="iSq-u7-UKe" id="okF-Ya-ocd"/>
                         <outlet property="wordStackCollectionView" destination="75N-kQ-Dcx" id="Avb-hm-nky"/>
+                        <segue destination="GlI-3q-pT8" kind="popoverPresentation" identifier="toTextRead" popoverAnchorView="ZbS-lT-hb2" id="jJq-n7-jbH">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RC4-W0-r9p" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -764,7 +766,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Thi-x1-nVm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1353.4351145038167" y="624.64788732394368"/>
+            <point key="canvasLocation" x="-2144" y="604"/>
         </scene>
     </scenes>
     <resources>
