@@ -133,34 +133,34 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var cartoonDuckImageView: UIImageView!
     
     func animateCartoonDuck(){
-        let originalPosition = cartoonDuckImageView.frame.origin
+        let duckOriginalPosition = cartoonDuckImageView.frame.origin
          
         let viewWidth = self.view.frame.width
         let viewHeight = self.view.frame.height
         
-        let topLeft = CGPoint(x: 0, y: 0)
-        let topRight = CGPoint(x: viewWidth - cartoonDuckImageView.frame.width, y: 0)
-        let bottomLeft = CGPoint(x: 0, y: viewHeight - cartoonDuckImageView.frame.height)
-        let middleRight = CGPoint(x: viewWidth - cartoonDuckImageView.frame.width, y: viewHeight / 2 - cartoonDuckImageView.frame.height / 2)
-        let bottomRight = CGPoint(x: viewWidth - cartoonDuckImageView.frame.width, y: viewHeight - cartoonDuckImageView.frame.height)
+        let duckTopLeft = CGPoint(x: 0, y: 0)
+        let duckTopRight = CGPoint(x: viewWidth - cartoonDuckImageView.frame.width, y: 0)
+        let duckBottomLeft = CGPoint(x: 0, y: viewHeight - cartoonDuckImageView.frame.height)
+        let duckMiddleRight = CGPoint(x: viewWidth - cartoonDuckImageView.frame.width, y: viewHeight / 2 - cartoonDuckImageView.frame.height / 2)
+        let duckBottomRight = CGPoint(x: viewWidth - cartoonDuckImageView.frame.width, y: viewHeight - cartoonDuckImageView.frame.height)
         
         let duration = 11.0
         
         // Step 1: Move to top right
         UIView.animate(withDuration: duration, animations: {
-            self.cartoonDuckImageView.frame.origin = middleRight
+            self.cartoonDuckImageView.frame.origin = duckMiddleRight
         }) { _ in
             // Step 2: Move to bottom left
             UIView.animate(withDuration: duration, animations: {
-                self.cartoonDuckImageView.frame.origin = topLeft
+                self.cartoonDuckImageView.frame.origin = duckTopLeft
             }) { _ in
                 // Step 3: Move to middle right
                 UIView.animate(withDuration: duration, animations: {
-                    self.cartoonDuckImageView.frame.origin = bottomRight
+                    self.cartoonDuckImageView.frame.origin = duckBottomRight
                 }) { _ in
                     // Step 4: Move back to original position
                     UIView.animate(withDuration: duration, animations: {
-                        self.cartoonDuckImageView.frame.origin = originalPosition
+                        self.cartoonDuckImageView.frame.origin = duckOriginalPosition
                     }) { _ in
                         self.animateCartoonDuck()
                     }
@@ -170,33 +170,32 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func animateCartoonDog(){
-        let originalPosition = cartoonDogImageView.frame.origin
+        let dogOriginalPosition = cartoonDogImageView.frame.origin
         
         let viewWidth = self.view.frame.width
         let viewHeight = self.view.frame.height
         
-        let topLeft = CGPoint(x: 0, y: 0)
-        let topRight = CGPoint(x: viewWidth - cartoonDogImageView.frame.width, y: 0)
-        let bottomLeft = CGPoint(x: 0, y: viewHeight - cartoonDogImageView.frame.height)
-        let middleLeft = CGPoint(x: 0, y: viewHeight / 2 - cartoonDogImageView.frame.height / 2)
-        let bottomRight = CGPoint(x: viewWidth - cartoonDogImageView.frame.width, y: viewHeight - cartoonDogImageView.frame.height)
+        let dogTopRight = CGPoint(x: viewWidth - cartoonDogImageView.frame.width, y: 0)
+        let dogBottomLeft = CGPoint(x: 0, y: viewHeight - cartoonDogImageView.frame.height)
+        let dogMiddleLeft = CGPoint(x: 0, y: viewHeight / 2 - cartoonDogImageView.frame.height / 2)
+        let dogBottomRight = CGPoint(x: viewWidth - cartoonDogImageView.frame.width, y: viewHeight - cartoonDogImageView.frame.height)
         
         let duration = 13.0
         
         UIView.animate(withDuration: duration, animations: {
-            self.cartoonDogImageView.frame.origin = bottomRight
+            self.cartoonDogImageView.frame.origin = dogBottomRight
         }) { _ in
             UIView.animate(withDuration: duration, animations: {
-                self.cartoonDogImageView.frame.origin = middleLeft
+                self.cartoonDogImageView.frame.origin = dogMiddleLeft
             }) { _ in
                 UIView.animate(withDuration: duration, animations: {
-                    self.cartoonDogImageView.frame.origin = topRight
+                    self.cartoonDogImageView.frame.origin = dogTopRight
                 }) { _ in
                     UIView.animate(withDuration: duration, animations: {
-                        self.cartoonDogImageView.frame.origin = bottomLeft
+                        self.cartoonDogImageView.frame.origin = dogBottomLeft
                     }) { _ in
                         UIView.animate(withDuration: duration, animations: {
-                            self.cartoonDogImageView.frame.origin = originalPosition
+                            self.cartoonDogImageView.frame.origin = dogOriginalPosition
                         }) { _ in
                             self.animateCartoonDog()
                         }
@@ -208,32 +207,32 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     
     func animateCartoonCat() {
-        let originalPosition = cartoonCatImageView.frame.origin
+        let catOriginalPosition = cartoonCatImageView.frame.origin
         
         let viewWidth = self.view.frame.width
         let viewHeight = self.view.frame.height
         
-        let topRight = CGPoint(x: viewWidth - cartoonCatImageView.frame.width, y: 0)
-        let bottomLeft = CGPoint(x: 0, y: viewHeight - cartoonCatImageView.frame.height)
-        let middleRight = CGPoint(x: viewWidth - cartoonCatImageView.frame.width, y: viewHeight / 2 - cartoonCatImageView.frame.height / 2)
+        let catTopRight = CGPoint(x: viewWidth - cartoonCatImageView.frame.width, y: 0)
+        let catBottomLeft = CGPoint(x: 0, y: viewHeight - cartoonCatImageView.frame.height)
+        let catMiddleRight = CGPoint(x: viewWidth - cartoonCatImageView.frame.width, y: viewHeight / 2 - cartoonCatImageView.frame.height / 2)
         
         let duration = 10.0
         
         // Step 1: Move to top right
         UIView.animate(withDuration: duration, animations: {
-            self.cartoonCatImageView.frame.origin = topRight
+            self.cartoonCatImageView.frame.origin = catTopRight
         }) { _ in
             // Step 2: Move to bottom left
             UIView.animate(withDuration: duration, animations: {
-                self.cartoonCatImageView.frame.origin = bottomLeft
+                self.cartoonCatImageView.frame.origin = catBottomLeft
             }) { _ in
                 // Step 3: Move to middle right
                 UIView.animate(withDuration: duration, animations: {
-                    self.cartoonCatImageView.frame.origin = middleRight
+                    self.cartoonCatImageView.frame.origin = catMiddleRight
                 }) { _ in
                     // Step 4: Move back to original position
                     UIView.animate(withDuration: duration, animations: {
-                        self.cartoonCatImageView.frame.origin = originalPosition
+                        self.cartoonCatImageView.frame.origin = catOriginalPosition
                     }) { _ in
                         self.animateCartoonCat()
                     }
