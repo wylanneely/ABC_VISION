@@ -153,11 +153,16 @@ class CreatePlayerViewController: UIViewController {
            }
        }
     private func changeButtonStateToReady(){
+        
         if isReady == false {
-            startButton.tintColor = .abcGreen
-            startButton.titleLabel?.textColor = .black
-            isReady = true
-            return
+            DispatchQueue.main.async {
+                self.startButton.tintColor = .clear
+                self.startButton.setImage(UIImage(named: "StartButton"), for: .normal)
+                self.startButton.setTitle("", for: .normal)
+                self.startButton.titleLabel?.textColor = .black
+                self.isReady = true
+                return
+            }
         }
     }
     
