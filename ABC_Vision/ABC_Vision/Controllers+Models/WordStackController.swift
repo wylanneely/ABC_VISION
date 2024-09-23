@@ -12,6 +12,10 @@ struct WordStackController {
     
     var wordListsArray: [[Word]]
     
+    lazy var planetStack: WordStack = WordStack(name: "Planets", words: planets)
+    lazy var animalStack: WordStack = WordStack(name: "Animals", words: animals)
+    lazy var foodsStack: WordStack = WordStack(name: "Foods", words: foods)
+    
     init(){
        planets = [
            sunWord,
@@ -26,7 +30,6 @@ struct WordStackController {
            plutoWord,
            saturnWord
        ]
-        
         animals = [
             bearWord,
             birdWord,
@@ -46,18 +49,19 @@ struct WordStackController {
             squirrelWord,
             whaleWord
         ]
-        
         foods = [
             appleWord,
             bananaWord,
             carrotWord,
       //      carrotsWord,
+            cheeseWord,
             cornWord,
             donutWord,
-          //  eggWord,
+            eggWord,
             milkWord,
             orangeWord,
-            pizzaWord
+            pizzaWord,
+            //riceWord
         ]               //  order of Array important
         wordListsArray = [planets,animals,foods]
     }
@@ -106,9 +110,11 @@ struct WordStackController {
    // var carrotsWord = Word(name: "Carrots")
     var cornWord = Word(name: "Corn")
     var donutWord = Word(name: "Donut")
- //   var eggWord = Word(name: "Egg")
+    var eggWord = Word(name: "Egg")
     var milkWord = Word(name: "Milk")
     var orangeWord = Word(name: "Orange")
+  //  var riceWord = Word(name: "Rice")
+    var cheeseWord = Word(name: "Cheese")
     var pizzaWord = Word(name: "Pizza")
     
     var isFoodsComplete: Bool {

@@ -11,6 +11,7 @@ class GameController {
     static var shared = GameController()
   
     private let userDefaultsController = PlayerUserDefaultsController()
+    private var wordStackController = WordStackController()
     
     public var currentPlayer: Player?
     
@@ -20,10 +21,16 @@ class GameController {
         }
     }
 
+    var wordStacks: [WordStack] = []
+    
     private init() {
         loadPlayers()
+        loadWordStacks()
     }
-       
+    private func loadWordStacks() {
+            wordStacks = [wordStackController.planetStack, wordStackController.animalStack, wordStackController.foodsStack]
+    }
+    
     private func savePlayers() {
         userDefaultsController.savePlayers(players)
     }
@@ -37,8 +44,9 @@ class GameController {
     }
        
     func addPlayer(_ player: Player) {
-        players.append(player)
-        userDefaultsController.savePlayer(player) // Save the single player
+        var newPlayer = Player(nickname: player.nickname, wordStacks: wordStacks)
+        players.append(newPlayer)
+        userDefaultsController.savePlayer(newPlayer) // Save the single player
     }
 
     func removePlayer(withNickname nickname: String) {
@@ -85,5 +93,20 @@ struct PlayerUserDefaultsController {
 
     func deletePlayers() {
         userDefaults.removeObject(forKey: playerKey)
+    }
+}
+
+extension GameController {
+    
+    // Update a specific word's completion status for a player
+    func markWordComplete(forPlayer playerNickname: String, inStack stackName: String, wordName: String) {
+        if let playerIndex = players.firstIndex(where: { $0.nickname == playerNickname }),
+           let stackIndex = players[playerIndex].wordStacks.firstIndex(where: { $0.name == stackName }),
+           let wordIndex = players[playerIndex].wordStacks[stackIndex].words.firstIndex(where: { $0.name == wordName }) {
+            
+            players[playerIndex].wordStacks[stackIndex].words[wordIndex].isComplete = true
+            
+            savePlayers() // Persist the updated players
+        }
     }
 }

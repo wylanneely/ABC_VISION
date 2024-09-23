@@ -15,5 +15,11 @@ struct Player: Codable {
     var playerImageNameString: String?
    // let id:  UUID
     
+    init(nickname: String, wordStacks: [WordStack], playerImageNameString: String? = nil) {
+          self.nickname = nickname
+          self.wordStacks = wordStacks
+          self.playerImageNameString = playerImageNameString
+      }
+    
 }
 
