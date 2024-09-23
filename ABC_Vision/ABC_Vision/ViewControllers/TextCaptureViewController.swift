@@ -205,6 +205,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(false)
         view.bringSubviewToFront(magnifyingGlassImageView)
+        magnifyingGlassImageView.isHidden = false
         openCloseWordHintTableView(self)
     }
 
