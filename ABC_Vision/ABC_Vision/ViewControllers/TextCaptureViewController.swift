@@ -12,16 +12,22 @@ import Vision
 class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UITableViewDelegate, UITableViewDataSource {
     
     
-    var testWords: [Word]? // TODO: Make way to save
+    var testWords: [Word]? {
+      return GameController.shared.getWords(forPlayer: currentPlayer?.nickname ?? "", inStack: testWordCategory ?? "")
+    }
+    
     var testWordCategory: String?
     var currentPlayer: Player?
     
     
     func setUpWord() {
         switch testWordCategory {
-        case "Animals": testWords = WordStackController().animals
-        case "Foods": testWords = WordStackController().foods
-        case "Planets": testWords = WordStackController().planets
+        case "Animals":wordHintTableView.isHidden = false
+            openCloseButton.isHidden = false
+        case "Foods": wordHintTableView.isHidden = false
+            openCloseButton.isHidden = false
+        case "Planets": wordHintTableView.isHidden = false
+            openCloseButton.isHidden = false
         default : wordHintTableView.isHidden = true
             openCloseButton.isHidden = true
         }
@@ -64,6 +70,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         
         return cell
     }
+    
     
     @IBOutlet weak var wordHintTableViewTopConstraint: NSLayoutConstraint!
     
