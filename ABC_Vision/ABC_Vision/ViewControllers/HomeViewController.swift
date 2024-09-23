@@ -13,7 +13,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var currentPlayer: Player?
     
     var testWordStackController = WordStackController()
-    var wordsCatagory: String?
+    var wordsCatagory: String? = "Planets"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +26,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        animateCartoonCat()
-        animateCartoonDog()
-        animateCartoonDuck()
+        animateAnimalImages()
     }
     
     func setPlayerProperties(){
@@ -95,33 +93,54 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         case 0:
             cell.imageView.image = testWordStackController.planetCompleteImage
             cell.titleLabel.text = testWordStackController.planetsName
-            cell.contentView.backgroundColor = UIColor.opaqueABCBlue
+            if checkIfWordCategorySelected(fromTitle: "Planets") {
+                cell.contentView.backgroundColor = UIColor.opaqueABCGreen
+            } else {
+                cell.contentView.backgroundColor = UIColor.opaqueABCBlue
+            }
             return cell
         case 1:
             //animals
             cell.imageView.image = testWordStackController.animalsCompleteImage
             cell.titleLabel.text = testWordStackController.animalsName
-            cell.contentView.backgroundColor = UIColor.opaqueABCBlue
-
+            if checkIfWordCategorySelected(fromTitle: "Animals") {
+                cell.contentView.backgroundColor = UIColor.opaqueABCGreen
+            } else {
+                cell.contentView.backgroundColor = UIColor.opaqueABCBlue
+            }
             return cell
         case 2:
             //foods
             cell.imageView.image = testWordStackController.foodsCompleteImage
             cell.titleLabel.text = testWordStackController.foodsName
-           cell.contentView.backgroundColor = UIColor.opaqueABCBlue
- //TODO: - update to make real tap feature with color tmrw
+            if checkIfWordCategorySelected(fromTitle: "Foods") {
+                cell.contentView.backgroundColor = UIColor.opaqueABCGreen
+            } else {
+                cell.contentView.backgroundColor = UIColor.opaqueABCBlue
+            }
             return cell
         default:
-            cell.contentView.backgroundColor = UIColor.opaqueABCBlue
+            if checkIfWordCategorySelected(fromTitle: "Freestyle") {
+                cell.contentView.backgroundColor = UIColor.opaqueABCGreen
+            } else {
+                cell.contentView.backgroundColor = UIColor.opaqueABCBlue
+            }
             return cell
         }
         
     }
     
+    func checkIfWordCategorySelected(fromTitle:String)->Bool{
+        if wordsCatagory == fromTitle {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let selectedCell = collectionView.cellForItem(at: indexPath) as? WordStackCollectionCell {
             selectedCell.isSelected = true
-            // Additional logic can be handled here if needed
             wordsCatagory =  selectedCell.titleLabel.text
         }
     }
@@ -240,6 +259,70 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
         }
     }
+    
+    func animateAnimalImages(){
+        
+        let viewWidth = self.view.frame.width
+        let viewHeight = self.view.frame.height
+        
+        let catOriginalPosition = cartoonCatImageView.frame.origin
+            
+        let catTopRight = CGPoint(x: viewWidth - cartoonCatImageView.frame.width, y: 0)
+        let catBottomLeft = CGPoint(x: 0, y: viewHeight - cartoonCatImageView.frame.height)
+        let catMiddleRight = CGPoint(x: viewWidth - cartoonCatImageView.frame.width, y: viewHeight / 2 - cartoonCatImageView.frame.height / 2)
+        
+        let dogOriginalPosition = cartoonDogImageView.frame.origin
+            
+        let dogTopRight = CGPoint(x: viewWidth - cartoonDogImageView.frame.width, y: 0)
+        let dogBottomLeft = CGPoint(x: 0, y: viewHeight - cartoonDogImageView.frame.height)
+        let dogMiddleLeft = CGPoint(x: 0, y: viewHeight / 2 - cartoonDogImageView.frame.height / 2)
+        let dogBottomRight = CGPoint(x: viewWidth - cartoonDogImageView.frame.width, y: viewHeight - cartoonDogImageView.frame.height)
+        
+        let duckOriginalPosition = cartoonDuckImageView.frame.origin
+    
+        let duckTopLeft = CGPoint(x: 0, y: 0)
+        let duckTopRight = CGPoint(x: viewWidth - cartoonDuckImageView.frame.width, y: 0)
+        let duckBottomLeft = CGPoint(x: 0, y: viewHeight - cartoonDuckImageView.frame.height)
+        let duckMiddleRight = CGPoint(x: viewWidth - cartoonDuckImageView.frame.width, y: viewHeight / 2 - cartoonDuckImageView.frame.height / 2)
+        let duckBottomRight = CGPoint(x: viewWidth - cartoonDuckImageView.frame.width, y: viewHeight - cartoonDuckImageView.frame.height)
+        
+        let duration = 13.0
+        
+        UIView.animate(withDuration: duration, animations: {
+            self.cartoonDogImageView.frame.origin = dogBottomRight
+            self.cartoonCatImageView.frame.origin = catTopRight
+            self.cartoonDuckImageView.frame.origin = duckMiddleRight
+
+        }) { _ in
+            UIView.animate(withDuration: duration, animations: {
+                self.cartoonDogImageView.frame.origin = dogMiddleLeft
+                self.cartoonCatImageView.frame.origin = catBottomLeft
+                self.cartoonDuckImageView.frame.origin = duckTopLeft
+            }) { _ in
+                UIView.animate(withDuration: duration, animations: {
+                    self.cartoonDogImageView.frame.origin = dogTopRight
+                    self.cartoonCatImageView.frame.origin = catMiddleRight
+                    self.cartoonDuckImageView.frame.origin = duckBottomRight
+                }) { _ in
+                    UIView.animate(withDuration: duration, animations: {
+                        self.cartoonDogImageView.frame.origin = dogBottomLeft
+                        self.cartoonCatImageView.frame.origin = catTopRight
+                        self.cartoonDuckImageView.frame.origin = duckMiddleRight
+                    }) { _ in
+                        UIView.animate(withDuration: duration, animations: {
+                            self.cartoonDogImageView.frame.origin = dogOriginalPosition
+                            self.cartoonCatImageView.frame.origin = catOriginalPosition
+                            self.cartoonDuckImageView.frame.origin = duckOriginalPosition
+                        }) { _ in
+                            self.animateAnimalImages()
+                        }
+                    }
+                }
+            }
+        }
+            
+        
+    }
 
     // MARK: - Navigation
     
@@ -288,6 +371,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if segue.identifier == "toTextRead" {
                if let destinationVC = segue.destination as? TextCaptureViewController {
                    destinationVC.testWordCategory = wordsCatagory // Replace with your actual string variable
+                   destinationVC.currentPlayer = currentPlayer
                }
            }
     }

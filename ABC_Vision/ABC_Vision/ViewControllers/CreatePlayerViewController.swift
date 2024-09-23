@@ -172,7 +172,7 @@ class CreatePlayerViewController: UIViewController {
         if isReady {
             if let name = textLabel?.text {
                 let player = Player(nickname: name, wordStacks: [])
-                userDefaultsController.savePlayer(player)
+                GameController.shared.addPlayer(player)
                 transitionToHome(withPlayer: player)
             }
         }

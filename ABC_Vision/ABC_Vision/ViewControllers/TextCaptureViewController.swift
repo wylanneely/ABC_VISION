@@ -14,6 +14,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     
     var testWords: [Word]? // TODO: Make way to save
     var testWordCategory: String?
+    var currentPlayer: Player?
     
     
     func setUpWord() {
@@ -59,7 +60,6 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             let word = testWords[indexPath.row]
             cell.setUIStates(word: word)
             return cell
-            //change to add word into cell and iscomplete functionality
         }
         
         return cell
@@ -69,63 +69,21 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     
     
     @IBAction func openCloseWordHintTableView(_ sender: Any) {
-//        let tableViewHeight = wordHintTableView.frame.height
-//        let newTableViewYPosition: CGFloat = isTableViewOpen ? -tableViewHeight : 0
-//        
-//        // Update the top constraint based on the table view's state
-//        wordHintTableViewTopConstraint.constant = isTableViewOpen ? 0 : -wordHintTableView.frame.height
-//        
-//        // Animate the constraint change
-//        UIView.animate(withDuration: 0.4, animations: {
-//            self.wordHintTableView.transform = CGAffineTransform(translationX: 0, y: newTableViewYPosition)
-//            self.isTableViewOpen.toggle()
-//            self.view.layoutIfNeeded()
-//        }) { _ in
-//            // Optionally, update the button title after the animation
-//            let buttonTitle = self.isTableViewOpen ? "Close" : "Open"
-//            self.openCloseButton.setTitle(buttonTitle, for: .normal)
-//        }
+
         let tableViewHeight = wordHintTableView.frame.height
         let newTableViewYPosition: CGFloat = isTableViewOpen ? -tableViewHeight : 0
 
-        // Update the top constraint based on the table view's state
         wordHintTableViewTopConstraint.constant = isTableViewOpen ? -tableViewHeight : 0
 
-        // Animate the constraint change
         UIView.animate(withDuration: 0.4, animations: {
             self.wordHintTableView.transform = CGAffineTransform(translationX: 0, y: newTableViewYPosition)
             self.view.layoutIfNeeded()
         }) { _ in
-            // Toggle the state after the animation completes
             self.isTableViewOpen.toggle()
-
-            // Update the button title
-          //  let buttonTitle = self.isTableViewOpen ? "Close" : "Open"
             let buttonImage = self.isTableViewOpen ? UIImage(named: "CloseWordsButton") : UIImage(named: "OpenWordsButton")
-        //    self.openCloseButton.setTitle(buttonTitle, for: .normal)
             self.openCloseButton.setImage(buttonImage, for: .normal)
         }
     }
-//          let buttonHeight = openCloseButton.frame.height
-//
-//          // Calculate new Y position for the button
-//          let newButtonYPosition: CGFloat = isTableViewOpen ? 0 : tableViewHeight
-//
-//          // Calculate new Y position for the table view (off-screen or original position)
-//
-//          // Update the button title
-//          let newButtonTitle = isTableViewOpen ? "Open" : "Close"
-//
-          // Animate the table view and button to their new positions
-          //UIView.animate(withDuration: 0.4) {
-           //   self.wordHintTableView.transform = CGAffineTransform(translationX: 0, y: newTableViewYPosition)
-             // self.openCloseButton.transform = CGAffineTransform(translationX: 0, y: newButtonYPosition)
-             // self.openCloseButton.setTitle(newButtonTitle, for: .normal)
-          //}
-//
-//          // Toggle the state
-//          isTableViewOpen.toggle()
-//        }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -525,6 +483,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
                 let name = word.name
                 if written == name {
                     word.unlockComplete()
+                    GameController.shared.markWordComplete(forPlayer: currentPlayer?.nickname ?? "", inStack: testWordCategory ?? "" , wordName: word.name)
                 }
             }
         }
