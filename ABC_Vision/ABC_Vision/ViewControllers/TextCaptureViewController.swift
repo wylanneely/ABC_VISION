@@ -258,11 +258,13 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         }
 
         DispatchQueue.main.async { [weak self] in
-            self?.textBoxes.forEach {
-                $0.removeFromSuperlayer()
-            }
+            self?.textBoxes.forEach { $0.removeFromSuperlayer() }
             self?.textBoxes.removeAll()
             self?.recognizedTexts.removeAll()
+
+            var closestObservation: VNRecognizedTextObservation?
+            var minDistance: CGFloat = CGFloat.greatestFiniteMagnitude
+            let centerPoint = CGPoint(x: self?.view.bounds.midX ?? 0, y: self?.view.bounds.midY ?? 0)
 
             for observation in results {
                 guard let topCandidate = observation.topCandidates(1).first else { continue }
@@ -271,7 +273,26 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
                 if !filteredString.isEmpty {
                     print(filteredString)
 
-                    let box = self?.createBox(for: observation)
+                    // Calculate the bounding box center
+                    let boundingBox = observation.boundingBox
+                    let boxCenter = CGPoint(x: boundingBox.midX * (self?.view.bounds.width ?? 1),
+                                            y: (1 - boundingBox.midY) * (self?.view.bounds.height ?? 1))
+
+                    // Calculate the distance from the center of the view
+                    let distance = hypot(centerPoint.x - boxCenter.x, centerPoint.y - boxCenter.y)
+
+                    // Find the observation closest to the center of the view
+                    if distance < minDistance {
+                        minDistance = distance
+                        closestObservation = observation
+                    }
+                }
+            }
+
+            if let closestObservation = closestObservation, let topCandidate = closestObservation.topCandidates(1).first {
+                let filteredString = topCandidate.string.filter { $0.isASCII && $0.isLetter || $0.isWhitespace }
+                if !filteredString.isEmpty {
+                    let box = self?.createBox(for: closestObservation)
                     self?.view.layer.addSublayer(box!)
                     self?.textBoxes.append(box!)
                     self?.recognizedTexts.append(filteredString)
@@ -279,6 +300,34 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             }
         }
     }
+
+//    private func processTextRecognitionResults(_ results: [Any]?) {
+//        guard let results = results as? [VNRecognizedTextObservation] else {
+//            return
+//        }
+//
+//        DispatchQueue.main.async { [weak self] in
+//            self?.textBoxes.forEach {
+//                $0.removeFromSuperlayer()
+//            }
+//            self?.textBoxes.removeAll()
+//            self?.recognizedTexts.removeAll()
+//
+//            for observation in results {
+//                guard let topCandidate = observation.topCandidates(1).first else { continue }
+//                let filteredString = topCandidate.string.filter { $0.isASCII && $0.isLetter || $0.isWhitespace }
+//
+//                if !filteredString.isEmpty {
+//                    print(filteredString)
+//
+//                    let box = self?.createBox(for: observation)
+//                    self?.view.layer.addSublayer(box!)
+//                    self?.textBoxes.append(box!)
+//                    self?.recognizedTexts.append(filteredString)
+//                }
+//            }
+//        }
+//    }
     
     
     //MARK: 0 - Vision
