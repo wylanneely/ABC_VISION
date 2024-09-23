@@ -188,12 +188,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass1" translatesAutoresizingMaskIntoConstraints="NO" id="ocS-fg-5q9">
+                                <rect key="frame" x="6.6666666666666572" y="291" width="380" height="380"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="s5z-wZ-XNB">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="336.66666666666669"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="219"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qM3-pz-zJJ">
-                                <rect key="frame" x="120.33333333333333" y="336.66666666666669" width="168.66666666666669" height="67"/>
+                                <rect key="frame" x="120.33333333333333" y="219" width="168.66666666666669" height="67"/>
                                 <color key="tintColor" name="ABCBlue"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
@@ -209,14 +212,17 @@
                         <constraints>
                             <constraint firstItem="s5z-wZ-XNB" firstAttribute="top" secondItem="hUD-LL-QYk" secondAttribute="top" id="AxS-PL-wa0"/>
                             <constraint firstItem="s5z-wZ-XNB" firstAttribute="leading" secondItem="hUD-LL-QYk" secondAttribute="leading" id="CaD-m2-5ZX"/>
+                            <constraint firstItem="ocS-fg-5q9" firstAttribute="centerX" secondItem="EPr-2a-hO4" secondAttribute="centerX" id="FWM-sm-dgr"/>
                             <constraint firstItem="qM3-pz-zJJ" firstAttribute="centerX" secondItem="EPr-2a-hO4" secondAttribute="centerX" constant="8" id="M5f-7l-Lx0"/>
                             <constraint firstItem="qM3-pz-zJJ" firstAttribute="top" secondItem="s5z-wZ-XNB" secondAttribute="bottom" id="MpT-DW-iP1"/>
-                            <constraint firstItem="s5z-wZ-XNB" firstAttribute="height" secondItem="EPr-2a-hO4" secondAttribute="height" multiplier="0.4" id="bhK-LR-gWV"/>
+                            <constraint firstItem="s5z-wZ-XNB" firstAttribute="height" secondItem="EPr-2a-hO4" secondAttribute="height" multiplier="0.26" id="bhK-LR-gWV"/>
                             <constraint firstItem="s5z-wZ-XNB" firstAttribute="trailing" secondItem="hUD-LL-QYk" secondAttribute="trailing" id="fV7-E5-kEl"/>
+                            <constraint firstItem="ocS-fg-5q9" firstAttribute="centerY" secondItem="EPr-2a-hO4" secondAttribute="centerY" constant="60" id="lmS-Dc-axv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GoN-sW-ykS"/>
                     <connections>
+                        <outlet property="magnifyingGlassImageView" destination="ocS-fg-5q9" id="kB9-qH-aNw"/>
                         <outlet property="openCloseButton" destination="qM3-pz-zJJ" id="ufa-eI-72R"/>
                         <outlet property="wordHintTableView" destination="s5z-wZ-XNB" id="Jgb-Ne-Scv"/>
                         <outlet property="wordHintTableViewTopConstraint" destination="MpT-DW-iP1" id="iEr-Sx-3u1"/>
@@ -806,6 +812,7 @@
         <image name="cartoonSpaceDog" width="120" height="120"/>
         <image name="cartoonSpaceDuck" width="120" height="120"/>
         <image name="cometBackground" width="320.5" height="569"/>
+        <image name="magnifyingglass1" width="380" height="380"/>
         <image name="paperplane" catalog="system" width="128" height="119"/>
         <image name="purpleGalacy" width="252" height="512"/>
         <namedColor name="ABCBlue">
