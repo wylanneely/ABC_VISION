@@ -98,6 +98,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             } else {
                 cell.contentView.backgroundColor = UIColor.opaqueABCBlue
             }
+            if checkIfWordPackIsComplete(wordStackName: "Planets") {
+                cell.imageView.image = UIImage(named: "planetsComplete")
+            } else {
+                cell.imageView.image = UIImage(named: "planetsINcomplete")
+            }
             return cell
         case 1:
             //animals
@@ -108,6 +113,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
             } else {
                 cell.contentView.backgroundColor = UIColor.opaqueABCBlue
             }
+            if checkIfWordPackIsComplete(wordStackName: "Animals") {
+                cell.imageView.image = UIImage(named: "animalsComplete")
+            } else {
+                cell.imageView.image = UIImage(named: "animalNcomplete")
+            }
             return cell
         case 2:
             //foods
@@ -117,6 +127,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 cell.contentView.backgroundColor = UIColor.opaqueABCGreen
             } else {
                 cell.contentView.backgroundColor = UIColor.opaqueABCBlue
+            }
+            if checkIfWordPackIsComplete(wordStackName: "Foods") {
+                cell.imageView.image = UIImage(named: "foodComplete")
+            } else {
+                cell.imageView.image = UIImage(named: "foodsINcomplete")
             }
             return cell
         default:
@@ -136,6 +151,17 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         } else {
             return false
         }
+    }
+    
+    func checkIfWordPackIsComplete(wordStackName: String)-> Bool {
+        if let player = currentPlayer {
+            if GameController.shared.areAllWordsComplete(forPlayer: player, inStack: wordStackName) ?? false {
+                return true
+            } else {
+                return false
+            }
+        }
+        return false
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
