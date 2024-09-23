@@ -53,6 +53,20 @@ class GameController {
         players.removeAll { $0.nickname == nickname }
         savePlayers() // Save the updated players list
     }
+    
+    func getWords(forPlayer playerNickname: String, inStack stackName: String) -> [Word]? {
+          // Find the player by nickname
+          guard let player = players.first(where: { $0.nickname == playerNickname }) else {
+              return nil // Return nil if player is not found
+          }
+          
+          // Find the word stack by name within the player's word stacks
+          if let wordStack = player.wordStacks.first(where: { $0.name == stackName }) {
+              return wordStack.words // Return the list of words if found
+          } else {
+              return nil // Return nil if the word stack is not found
+          }
+      }
 }
 
 //MARK: - Test later
@@ -94,6 +108,7 @@ struct PlayerUserDefaultsController {
     func deletePlayers() {
         userDefaults.removeObject(forKey: playerKey)
     }
+
 }
 
 extension GameController {
@@ -109,4 +124,28 @@ extension GameController {
             savePlayers() // Persist the updated players
         }
     }
+    
+    func areAllWordsComplete(forPlayer player: Player, inStack stackName: String) -> Bool? {
+        // Find the specific word stack within the player's word stacks
+        if let wordStack = player.wordStacks.first(where: { $0.name == stackName }) {
+            // Check if all words in the word stack are complete
+            for word in wordStack.words {
+                if !word.isComplete {
+                    return false // If any word is incomplete, return false
+                }
+            }
+            return true // All words are complete
+        } else {
+            return nil // Return nil if the word stack is not found
+        }
+    }
+    
+    func isWordComplete(forPlayer playerNickname: String, inStack stackName: String, wordName: String) -> Bool? {
+           guard let player = players.first(where: { $0.nickname == playerNickname }),
+                 let wordStack = player.wordStacks.first(where: { $0.name == stackName }),
+                 let word = wordStack.words.first(where: { $0.name == wordName }) else {
+               return nil // Return nil if player, stack, or word is not found
+           }
+           return word.isComplete // Return the completion status of the word
+       }
 }
