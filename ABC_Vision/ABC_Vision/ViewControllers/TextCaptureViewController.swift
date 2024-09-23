@@ -202,6 +202,11 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
                 self.updateVideoRotationAngle()
             })
         }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(false)
+        view.bringSubviewToFront(magnifyingGlassImageView)
+        openCloseWordHintTableView(self)
+    }
 
     private func updateVideoRotationAngle() {
           guard let connection = videoPreviewLayer.connection else { return }
@@ -430,6 +435,9 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             )
         }
     }
+    //MARK: - Images
+    
+    @IBOutlet weak var magnifyingGlassImageView: UIImageView!
     
     //MARK: 2 - Visual Boxes
      
