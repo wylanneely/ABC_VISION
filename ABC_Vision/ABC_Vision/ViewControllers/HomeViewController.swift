@@ -352,6 +352,31 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     // MARK: - Navigation
     
+    @IBAction func cancelOutButtonTapped(_ sender: Any) {
+        
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else {
+            return
+        }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let SelectPlayerVC = storyboard.instantiateViewController(withIdentifier: "SelectPlayerVC") as? SelectPlayerViewController {
+            window.rootViewController = SelectPlayerVC
+            UIView.transition(with: window,
+                              duration: 0.5,
+                              options: [.transitionFlipFromRight],
+                              animations: nil,
+                              completion: nil)
+        }
+    }
+    
+    @IBAction func editSettingButtonTapped(_ sender: Any) {
+        let editPlayerVC = EditPlayerView(nibName: "EditPlayerView", bundle: nil)
+           
+           // Present the view controller modally
+           present(editPlayerVC, animated: true, completion: nil)
+    }
+    
     @IBAction func startButtonTapped(_ sender: Any) {
         checkCameraAccess { hasAccess in
                 if hasAccess {
