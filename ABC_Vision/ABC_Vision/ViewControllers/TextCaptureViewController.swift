@@ -271,35 +271,6 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             }
         }
     }
-
-//    private func processTextRecognitionResults(_ results: [Any]?) {
-//        guard let results = results as? [VNRecognizedTextObservation] else {
-//            return
-//        }
-//
-//        DispatchQueue.main.async { [weak self] in
-//            self?.textBoxes.forEach {
-//                $0.removeFromSuperlayer()
-//            }
-//            self?.textBoxes.removeAll()
-//            self?.recognizedTexts.removeAll()
-//
-//            for observation in results {
-//                guard let topCandidate = observation.topCandidates(1).first else { continue }
-//                let filteredString = topCandidate.string.filter { $0.isASCII && $0.isLetter || $0.isWhitespace }
-//
-//                if !filteredString.isEmpty {
-//                    print(filteredString)
-//
-//                    let box = self?.createBox(for: observation)
-//                    self?.view.layer.addSublayer(box!)
-//                    self?.textBoxes.append(box!)
-//                    self?.recognizedTexts.append(filteredString)
-//                }
-//            }
-//        }
-//    }
-    
     
     //MARK: 0 - Vision
     //0
@@ -466,10 +437,10 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
            let feedback = UINotificationFeedbackGenerator()
             feedback.notificationOccurred(.error)
         }
-        self.performSegue(
-            withIdentifier: "toWordProcessedVC",
-            sender: self
-        )
+//        self.performSegue(
+//            withIdentifier: "toWordProcessedVC",
+//            sender: self
+//        )
     }
         
     override func prepare(
