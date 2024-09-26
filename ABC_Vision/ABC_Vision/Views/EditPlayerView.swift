@@ -9,16 +9,24 @@ import UIKit
 
 class EditPlayerView: UIViewController {
     
+    var currentPlayer: Player?
+    
     @IBOutlet weak var playerNameLabel: UILabel!
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        playerNickNameLabel.text = currentPlayer?.nickname
         // Do any additional setup after loading the view.
     }
 
-
+    @IBOutlet weak var playerNickNameLabel: UILabel!
+    
+    
+    @IBAction func deleteButtonTapped(_ sender: Any) {
+    }
+    @IBAction func helpButtonTapped(_ sender: Any) {
+    }
     
     // MARK: - Navigation
      
