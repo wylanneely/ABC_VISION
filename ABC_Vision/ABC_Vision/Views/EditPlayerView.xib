@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EditPlayerView" customModule="ABC_Vision" customModuleProvider="target">
             <connections>
                 <outlet property="playerNameLabel" destination="CNK-aD-3yQ" id="Ah9-By-nTe"/>
+                <outlet property="playerNickNameLabel" destination="CNK-aD-3yQ" id="ekC-M4-FZd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -37,6 +38,9 @@
                             <color key="tintColor" name="ABCRed"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="filled" image="trash.fill" catalog="system" title=" Delete"/>
+                            <connections>
+                                <action selector="deleteButtonTapped:" destination="-1" eventType="touchUpInside" id="1BI-zd-hdx"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNK-aD-3yQ">
                             <rect key="frame" x="59.333333333333329" y="55" width="120.99999999999999" height="71"/>
@@ -52,6 +56,9 @@
                             <buttonConfiguration key="configuration" style="filled" image="hand.raised" catalog="system" title="  Help">
                                 <color key="baseForegroundColor" systemColor="labelColor"/>
                             </buttonConfiguration>
+                            <connections>
+                                <action selector="helpButtonTapped:" destination="-1" eventType="touchUpInside" id="cjF-mQ-AO3"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" name="ABCPurple"/>
