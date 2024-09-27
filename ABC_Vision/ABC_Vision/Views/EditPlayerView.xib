@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -42,9 +41,15 @@
                                 <action selector="deleteButtonTapped:" destination="-1" eventType="touchUpInside" id="1BI-zd-hdx"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNK-aD-3yQ">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNK-aD-3yQ">
                             <rect key="frame" x="59.333333333333329" y="55" width="120.99999999999999" height="71"/>
                             <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="50"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gKu-wj-0Ju">
+                            <rect key="frame" x="105.33333333333333" y="7" width="29.333333333333329" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -54,7 +59,7 @@
                             <color key="tintColor" name="ABCGreen"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="filled" image="hand.raised" catalog="system" title="  Help">
-                                <color key="baseForegroundColor" systemColor="labelColor"/>
+                                <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </buttonConfiguration>
                             <connections>
                                 <action selector="helpButtonTapped:" destination="-1" eventType="touchUpInside" id="cjF-mQ-AO3"/>
@@ -66,10 +71,12 @@
                         <constraint firstItem="CNK-aD-3yQ" firstAttribute="centerX" secondItem="QF3-SI-VPy" secondAttribute="centerX" id="2wC-gc-cgQ"/>
                         <constraint firstItem="CNK-aD-3yQ" firstAttribute="centerY" secondItem="QF3-SI-VPy" secondAttribute="centerY" constant="-16" id="DVV-al-SMD"/>
                         <constraint firstAttribute="bottom" secondItem="GZZ-aR-qRH" secondAttribute="bottom" constant="8" id="Jhe-mV-tn9"/>
+                        <constraint firstItem="gKu-wj-0Ju" firstAttribute="top" secondItem="QF3-SI-VPy" secondAttribute="top" constant="7" id="KIg-m1-yas"/>
                         <constraint firstItem="GZZ-aR-qRH" firstAttribute="leading" secondItem="QF3-SI-VPy" secondAttribute="leading" constant="8" id="TvA-w1-beC"/>
                         <constraint firstAttribute="trailing" secondItem="VoU-wP-uky" secondAttribute="trailing" constant="8" id="U4y-bA-aUK"/>
                         <constraint firstItem="ojF-uw-I10" firstAttribute="top" secondItem="QF3-SI-VPy" secondAttribute="top" id="WOb-cP-JEL"/>
                         <constraint firstItem="ojF-uw-I10" firstAttribute="leading" secondItem="QF3-SI-VPy" secondAttribute="leading" id="dRR-dM-F93"/>
+                        <constraint firstItem="gKu-wj-0Ju" firstAttribute="centerX" secondItem="QF3-SI-VPy" secondAttribute="centerX" id="x2D-pi-eI5"/>
                         <constraint firstAttribute="bottom" secondItem="VoU-wP-uky" secondAttribute="bottom" constant="8" id="znV-TR-Ef2"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
@@ -103,8 +110,5 @@
         <namedColor name="ABCRed">
             <color red="0.98600000143051147" green="0.15000000596046448" blue="0.25299999117851257" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

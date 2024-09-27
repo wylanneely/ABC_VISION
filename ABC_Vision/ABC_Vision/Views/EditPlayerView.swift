@@ -44,6 +44,10 @@ class EditPlayerView: UIViewController {
             style: .destructive
         ) { _ in
             // Handle delete action
+            if let player = self.currentPlayer {
+                GameController.shared.removePlayer(withNickname: player.nickname)
+                self.returnToSelectPlayerVC()
+            }
         }
         
         let cancelAction = UIAlertAction(
@@ -60,7 +64,23 @@ class EditPlayerView: UIViewController {
     }
     
     // MARK: - Navigation
-     
+   
+    func returnToSelectPlayerVC(){
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else {
+            return
+        }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let SelectPlayerVC = storyboard.instantiateViewController(withIdentifier: "SelectPlayerVC") as? SelectPlayerViewController {
+            window.rootViewController = SelectPlayerVC
+            UIView.transition(with: window,
+                              duration: 0.5,
+                              options: [.transitionFlipFromRight],
+                              animations: nil,
+                              completion: nil)
+        }
+    }
      
     @IBAction func dismissButtonTapped(_ sender: Any) {
         self.dismiss(animated: true)
