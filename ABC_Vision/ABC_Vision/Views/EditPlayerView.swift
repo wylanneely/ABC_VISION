@@ -24,8 +24,39 @@ class EditPlayerView: UIViewController {
     
     
     @IBAction func deleteButtonTapped(_ sender: Any) {
+        presentDeleteConfirmationAlert()
     }
     @IBAction func helpButtonTapped(_ sender: Any) {
+    }
+    
+    //MARK: - Alert
+    
+    func presentDeleteConfirmationAlert() {
+        // Create the alert controller
+        let alertController = UIAlertController(
+            title: "Are you sure?",
+            message: "Are you sure you would like to delete?",
+            preferredStyle: .alert
+        )
+        
+        let deleteAction = UIAlertAction(
+            title: "Delete",
+            style: .destructive
+        ) { _ in
+            // Handle delete action
+        }
+        
+        let cancelAction = UIAlertAction(
+            title: "Cancel",
+            style: .cancel
+        ) { _ in
+            // Handle cancel action
+        }
+        
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     // MARK: - Navigation
