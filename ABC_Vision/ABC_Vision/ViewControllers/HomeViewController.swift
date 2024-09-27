@@ -372,7 +372,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     @IBAction func editSettingButtonTapped(_ sender: Any) {
         let editPlayerVC = EditPlayerView(nibName: "EditPlayerView", bundle: nil)
-           
+        editPlayerVC.currentPlayer = currentPlayer
            // Present the view controller modally
            present(editPlayerVC, animated: true, completion: nil)
     }
