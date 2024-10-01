@@ -116,8 +116,8 @@ extension GameController {
     // Update a specific word's completion status for a player
     func markWordComplete(forPlayer playerNickname: String, inStack stackName: String, wordName: String) {
         if let playerIndex = players.firstIndex(where: { $0.nickname == playerNickname }),
-           let stackIndex = players[playerIndex].wordStacks.firstIndex(where: { $0.name == stackName }),
-           let wordIndex = players[playerIndex].wordStacks[stackIndex].words.firstIndex(where: { $0.name == wordName }) {
+           let stackIndex = players[playerIndex].wordStacks.firstIndex(where: { $0.name == stackName }),  // for capital/lowecased letters
+           let wordIndex = players[playerIndex].wordStacks[stackIndex].words.firstIndex(where: { $0.name.lowercased() == wordName.lowercased() }) {
             
             players[playerIndex].wordStacks[stackIndex].words[wordIndex].isComplete = true
             
