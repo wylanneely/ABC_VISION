@@ -380,10 +380,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBAction func startButtonTapped(_ sender: Any) {
         checkCameraAccess { hasAccess in
                 if hasAccess {
-                    // Camera access is granted, perform the segue
                     self.performSegue(withIdentifier: "toTextRead", sender: self)
                 } else {
-                    // Show an alert or handle the case where the camera is not accessible
                     let alert = UIAlertController(title: "Camera Access Needed", message: "This app requires camera access to proceed. Please allow camera access in Settings.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
@@ -417,7 +415,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    //MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toTextRead" {
                if let destinationVC = segue.destination as? TextCaptureViewController {
