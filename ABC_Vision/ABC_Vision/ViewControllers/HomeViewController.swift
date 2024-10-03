@@ -171,6 +171,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let selectedCell = collectionView.cellForItem(at: indexPath) as? WordStackCollectionCell {
+            //add is unlocked State
+            mediumImpact.impactOccurred()
             selectedCell.isSelected = true
             wordsCatagory =  selectedCell.titleLabel.text
         }
