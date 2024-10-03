@@ -61,7 +61,7 @@ class SelectPlayerViewController: UIViewController {
             let button = playerButtons[index]
             
             let attributes: [NSAttributedString.Key: Any] = [
-                .font: UIFont(name: "Chalkboard SE Bold", size: 40) as Any,
+                .font: UIFont(name: "Chalkboard SE Bold", size: 38) as Any,
                 .foregroundColor: UIColor.abcGreen
             ]
             
