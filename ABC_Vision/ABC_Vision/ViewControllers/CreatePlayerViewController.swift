@@ -14,9 +14,7 @@ class CreatePlayerViewController: UIViewController {
            // Do any additional setup after loading the view.
        }
     
-    
     private let userDefaultsController = PlayerUserDefaultsController()
-
     
     @IBOutlet weak var textLabel: UILabel!
     
@@ -134,7 +132,13 @@ class CreatePlayerViewController: UIViewController {
            deleteTapped()
        }
 
+        //Haptic
+    let mediumImpact = UIImpactFeedbackGenerator(style: .medium)
+    let heavyImpact = UIImpactFeedbackGenerator(style: .heavy)
+    let successFeedback = UINotificationFeedbackGenerator()
+
        private func keyTapped(letter: String) {
+           mediumImpact.impactOccurred()
            changeButtonStateToReady()
            if self.textLabel.text == "Nick Name"{
                textLabel.text = letter
@@ -146,12 +150,19 @@ class CreatePlayerViewController: UIViewController {
        }
 
        private func deleteTapped() {
+           heavyImpact.impactOccurred()
            guard var text = textLabel.text else { return }
            if !text.isEmpty {
                text.removeLast()
                textLabel.text = text
+               if text.isEmpty {
+                   changeButtonStateToNotReady()
+               }
+           } else {
+               changeButtonStateToNotReady()
            }
        }
+    
     private func changeButtonStateToReady(){
         
         if isReady == false {
@@ -166,9 +177,21 @@ class CreatePlayerViewController: UIViewController {
         }
     }
     
+    private func changeButtonStateToNotReady(){
+        isReady = false
+            DispatchQueue.main.async {
+                self.startButton.tintColor = .clear
+                self.startButton.setImage(UIImage(named: "StartLockedButton"), for: .normal)
+                self.startButton.setTitle("", for: .normal)
+                self.startButton.titleLabel?.textColor = .black
+                return
+        }
+    }
+    
     var isReady: Bool = false
     
     @IBAction func startButtonTapped(_ sender: Any) {
+        successFeedback.notificationOccurred(.success)
         if isReady {
             if let name = textLabel?.text {
                 let player = Player(nickname: name, wordStacks: [])
