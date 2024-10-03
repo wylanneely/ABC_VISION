@@ -298,7 +298,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cj8-pz-u7D">
                                 <rect key="frame" x="0.0" y="59" width="47" height="35"/>
-                                <color key="tintColor" name="ABCGreen"/>
+                                <color key="tintColor" name="ABCWhiteIce"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="xmark" catalog="system"/>
                                 <connections>
@@ -307,7 +307,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Mh-xQ-fW4">
                                 <rect key="frame" x="342.66666666666669" y="59" width="50.333333333333314" height="35"/>
-                                <color key="tintColor" name="ABCGreen"/>
+                                <color key="tintColor" name="ABCWhiteIce"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="gearshape.fill" catalog="system"/>
                                 <connections>
@@ -316,7 +316,7 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aAP-1h-3VV"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="CdR-Bt-c2z" firstAttribute="top" secondItem="8W9-Ig-mi3" secondAttribute="top" id="1Ix-pr-RY1"/>
                             <constraint firstItem="aAP-1h-3VV" firstAttribute="trailing" secondItem="jWE-DX-5f5" secondAttribute="trailing" id="2Ki-XG-rhL"/>
@@ -734,10 +734,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwx-XI-LD7">
-                                <rect key="frame" x="166" y="647.33333333333337" width="61.333333333333343" height="34.333333333333371"/>
-                                <color key="tintColor" red="1" green="0.0" blue="0.0187217119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="69.666666666666686" y="612.66666666666663" width="254" height="69"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Start"/>
+                                <buttonConfiguration key="configuration" style="filled" image="StartLockedButton"/>
                                 <connections>
                                     <action selector="startButtonTapped:" destination="FQn-aD-6im" eventType="touchUpInside" id="Z2y-yw-e1N"/>
                                 </connections>
@@ -823,6 +823,7 @@
         <image name="RButton" width="148" height="155.5"/>
         <image name="SButton" width="148" height="155.5"/>
         <image name="StartButton" width="230" height="55"/>
+        <image name="StartLockedButton" width="230" height="55"/>
         <image name="TButton" width="148" height="155.5"/>
         <image name="UButton" width="148" height="155.5"/>
         <image name="VButton" width="148" height="155.5"/>
@@ -833,7 +834,7 @@
         <image name="cartoonSpaceCat" width="120" height="120"/>
         <image name="cartoonSpaceDog" width="120" height="120"/>
         <image name="cartoonSpaceDuck" width="120" height="120"/>
-        <image name="cometBackground" width="320.5" height="569"/>
+        <image name="cometBackground" width="320.5" height="568.5"/>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <image name="magnifyingglass1" width="380" height="380"/>
         <image name="paperplane" catalog="system" width="128" height="119"/>
@@ -844,6 +845,9 @@
         </namedColor>
         <namedColor name="ABCGreen">
             <color red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="ABCWhiteIce">
+            <color red="0.8970000147819519" green="0.9179999828338623" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
