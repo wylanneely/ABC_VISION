@@ -105,10 +105,12 @@ class SelectPlayerViewController: UIViewController {
     @IBOutlet weak var playerButton3: UIButton!
     
     
-    
+    //MARK: - Haptic
+    let successFeedback = UINotificationFeedbackGenerator()
     
     //MARK: - Actions
     @IBAction func player1ButtonTapped(_ sender: Any) {
+        successFeedback.notificationOccurred(.success)
         if let player1 = player1 {
             transitionToHome(withPlayer: player1)
         } else {
@@ -117,6 +119,7 @@ class SelectPlayerViewController: UIViewController {
     }
     
     @IBAction func player2ButtonTapped(_ sender: Any) {
+        successFeedback.notificationOccurred(.success)
         if let player2 = player2 {
             transitionToHome(withPlayer: player2)
         } else {
@@ -125,6 +128,7 @@ class SelectPlayerViewController: UIViewController {
     }
     
     @IBAction func player3ButtonTapped(_ sender: Any) {
+        successFeedback.notificationOccurred(.success)
         if let player3 = player3 {
             transitionToHome(withPlayer: player3)
         } else {
