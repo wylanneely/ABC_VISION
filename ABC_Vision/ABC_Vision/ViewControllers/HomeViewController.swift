@@ -15,6 +15,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var testWordStackController = WordStackController()
     var wordsCatagory: String? = "Planets"
 
+    //haptics
+    let mediumImpact = UIImpactFeedbackGenerator(style: .medium)
+    let heavyImpact = UIImpactFeedbackGenerator(style: .heavy)
+    let successFeedback = UINotificationFeedbackGenerator()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionView()
@@ -353,7 +358,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // MARK: - Navigation
     
     @IBAction func cancelOutButtonTapped(_ sender: Any) {
-        
+        heavyImpact.impactOccurred()
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let window = windowScene.windows.first else {
             return
@@ -371,6 +376,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     @IBAction func editSettingButtonTapped(_ sender: Any) {
+        mediumImpact.impactOccurred()
         let editPlayerVC = EditPlayerView(nibName: "EditPlayerView", bundle: nil)
         editPlayerVC.currentPlayer = currentPlayer
            // Present the view controller modally
@@ -378,6 +384,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     @IBAction func startButtonTapped(_ sender: Any) {
+        successFeedback.notificationOccurred(.success)
         checkCameraAccess { hasAccess in
                 if hasAccess {
                     self.performSegue(withIdentifier: "toTextRead", sender: self)
