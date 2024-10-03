@@ -140,6 +140,9 @@ class CreatePlayerViewController: UIViewController {
        private func keyTapped(letter: String) {
            mediumImpact.impactOccurred()
            changeButtonStateToReady()
+           if textLabel.text?.count == 7 {
+               return
+           }
            if self.textLabel.text == "Nick Name"{
                textLabel.text = letter
                return
