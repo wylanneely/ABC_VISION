@@ -222,6 +222,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     //MARK: 1 - Text Rendering
     
     private var recognizedTexts: [String] = []
+    
 //3
     private func processTextRecognitionResults(_ results: [Any]?) {
         guard let results = results as? [VNRecognizedTextObservation] else {
@@ -376,50 +377,72 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     
     @IBOutlet weak var magnifyingGlassImageView: UIImageView!
     
+    
+    //MARK: PRogress Bar
+    
+    var greenBoxTimer: Timer?
+    let detectionDuration: TimeInterval = 1.6
+    var progressBar: UIProgressView!
+    
     //MARK: 2 - Visual Boxes
      
+    
     let CheckerController = WordCheckController()
     var textBoxes: [CAShapeLayer] = []
     var writtenText = ""
 
-    private func createBox(
-        for observation: VNRecognizedTextObservation
-    ) -> CAShapeLayer {
-        
-        let writtenText = observation.topCandidates(1).first?.string
-        let box = CAShapeLayer()
-        box.lineWidth = 2.5
-        box.fillColor = UIColor.clear.cgColor
-        if CheckerController.checkWordisCorrect(writtenText) {
-            box.strokeColor = UIColor.abcGreen.cgColor
-        } else {
-            box.strokeColor = UIColor.abcRed.cgColor
-        }
-        let boundingBox = observation.boundingBox
-        let boxWidth = (boundingBox.width + 0.05) * view.bounds.width
-        let boxHeight = (boundingBox.height + 0.01) * view.bounds.height
-        
-        let size = CGSize(
-            width: boxWidth ,
-            height: boxHeight
-        )
-        let origin = CGPoint(
-            x: boundingBox.minX * view.bounds.width,
-            y: (
-                1 - boundingBox.minY
-            ) * view.bounds.height - size.height
-        )
-        
-        let path = UIBezierPath(
-            roundedRect: CGRect(
-                origin: origin,
-                size: size
-            ),cornerRadius: 15
-        )
-            box.path = path.cgPath
-            
-            return box
-        }
+    private func createBox(for observation: VNRecognizedTextObservation) -> CAShapeLayer {
+           
+           let writtenText = observation.topCandidates(1).first?.string
+           let box = CAShapeLayer()
+           box.lineWidth = 2.5
+           box.fillColor = UIColor.clear.cgColor
+           
+           if CheckerController.checkWordisCorrect(writtenText) {
+               box.strokeColor = UIColor.abcGreen.cgColor
+               startGreenBoxTimer() // Start the timer when the correct word is detected
+           } else {
+               box.strokeColor = UIColor.abcRed.cgColor
+               resetGreenBoxTimer() // Reset the timer if it's not correct
+           }
+           
+           let boundingBox = observation.boundingBox
+           let boxWidth = (boundingBox.width + 0.05) * view.bounds.width
+           let boxHeight = (boundingBox.height + 0.01) * view.bounds.height
+           
+           let size = CGSize(width: boxWidth, height: boxHeight)
+           let origin = CGPoint(
+               x: boundingBox.minX * view.bounds.width,
+               y: (1 - boundingBox.minY) * view.bounds.height - size.height
+           )
+           
+           let path = UIBezierPath(
+               roundedRect: CGRect(origin: origin, size: size),
+               cornerRadius: 15
+           )
+           box.path = path.cgPath
+           return box
+       }
+       
+       // Timer Logic for Green Box Detection
+       func startGreenBoxTimer() {
+           resetGreenBoxTimer() // Ensure the timer is reset before starting a new one
+           greenBoxTimer = Timer.scheduledTimer(withTimeInterval: detectionDuration, repeats: false) { [weak self] _ in
+               self?.triggerSegueForCorrectWord()
+           }
+       }
+       
+       func resetGreenBoxTimer() {
+           greenBoxTimer?.invalidate()
+           greenBoxTimer = nil
+       }
+       
+       // This method will be called when the green box is detected for 1.4 seconds
+       func triggerSegueForCorrectWord() {
+           if let currentText = recognizedTexts.first, CheckerController.checkWordisCorrect(currentText) {
+               self.performSegue(withIdentifier: "toWordProcessedVC", sender: self)
+           }
+       }
     
     private func updateRecognizedText(
         _ text: String
@@ -459,7 +482,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         if (testWords != nil) {
             for word in testWords! {
                 let name = word.name
-                if written == name {
+                if written.lowercased() == name.lowercased() {
                     word.unlockComplete()
                     GameController.shared.markWordComplete(forPlayer: currentPlayer?.nickname ?? "", inStack: testWordCategory ?? "" , wordName: word.name)
                 }
