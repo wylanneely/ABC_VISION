@@ -222,7 +222,6 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     //MARK: 1 - Text Rendering
     
     private var recognizedTexts: [String] = []
-    
 //3
     private func processTextRecognitionResults(_ results: [Any]?) {
         guard let results = results as? [VNRecognizedTextObservation] else {
@@ -339,18 +338,31 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
 
     
     //2
+    
+    var lastProcessedTime: TimeInterval = 0
+    let frameProcessingInterval: TimeInterval = 0.3 // 0.1 = every 200 ms
+    
     func captureOutput(
         _ output: AVCaptureOutput,
         didOutput sampleBuffer: CMSampleBuffer,
         from connection: AVCaptureConnection
     ) {
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(
-            sampleBuffer
-        ) else {
+        // Get current time
+        let currentTime = CACurrentMediaTime()
+        
+        // Only process frames every 'frameProcessingInterval' seconds
+        if currentTime - lastProcessedTime < frameProcessingInterval {
             return
         }
         
-        var requestOptions: [VNImageOption : Any] = [:]
+        // Update the last processed time
+        lastProcessedTime = currentTime
+
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+            return
+        }
+        
+        var requestOptions: [VNImageOption: Any] = [:]
         
         if let cameraIntrinsicData = CMGetAttachment(
             sampleBuffer,
@@ -359,20 +371,16 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         ) {
             requestOptions = [.cameraIntrinsics: cameraIntrinsicData]
         }
-        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer,
-                                                        orientation: .right,
-                                                        options: requestOptions)
+        
+        let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: .right, options: requestOptions)
         
         do {
-            try imageRequestHandler.perform(
-                [textRecognitionRequest]
-            )
+            try imageRequestHandler.perform([textRecognitionRequest])
         } catch {
-            print(
-                error
-            )
+            print(error)
         }
     }
+
     //MARK: - Images
     
     @IBOutlet weak var magnifyingGlassImageView: UIImageView!
@@ -381,7 +389,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     //MARK: PRogress Bar
     
     var greenBoxTimer: Timer?
-    let detectionDuration: TimeInterval = 1.6
+    let detectionDuration: TimeInterval = 0.6
     var progressBar: UIProgressView!
     
     //MARK: 2 - Visual Boxes
@@ -400,10 +408,10 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
            
            if CheckerController.checkWordisCorrect(writtenText) {
                box.strokeColor = UIColor.abcGreen.cgColor
-               startGreenBoxTimer() // Start the timer when the correct word is detected
+             //  startGreenBoxTimer() // Start the timer when the correct word is detected
            } else {
                box.strokeColor = UIColor.abcRed.cgColor
-               resetGreenBoxTimer() // Reset the timer if it's not correct
+             //  resetGreenBoxTimer() // Reset the timer if it's not correct
            }
            
            let boundingBox = observation.boundingBox
@@ -424,25 +432,26 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
            return box
        }
        
-       // Timer Logic for Green Box Detection
-       func startGreenBoxTimer() {
-           resetGreenBoxTimer() // Ensure the timer is reset before starting a new one
-           greenBoxTimer = Timer.scheduledTimer(withTimeInterval: detectionDuration, repeats: false) { [weak self] _ in
-               self?.triggerSegueForCorrectWord()
-           }
-       }
-       
-       func resetGreenBoxTimer() {
-           greenBoxTimer?.invalidate()
-           greenBoxTimer = nil
-       }
-       
-       // This method will be called when the green box is detected for 1.4 seconds
-       func triggerSegueForCorrectWord() {
-           if let currentText = recognizedTexts.first, CheckerController.checkWordisCorrect(currentText) {
-               self.performSegue(withIdentifier: "toWordProcessedVC", sender: self)
-           }
-       }
+    //This will be implemented in future for
+//       // Timer Logic for Green Box Detection
+//       func startGreenBoxTimer() {
+//           resetGreenBoxTimer() // Ensure the timer is reset before starting a new one
+//           greenBoxTimer = Timer.scheduledTimer(withTimeInterval: detectionDuration, repeats: false) { [weak self] _ in
+//               self?.triggerSegueForCorrectWord()
+//           }
+//       }
+//       
+//       func resetGreenBoxTimer() {
+//           greenBoxTimer?.invalidate()
+//           greenBoxTimer = nil
+//       }
+//       
+//       // This method will be called when the green box is detected for 1.4 seconds
+//       func triggerSegueForCorrectWord() {
+//           if let currentText = recognizedTexts.first, CheckerController.checkWordisCorrect(currentText) {
+//               self.performSegue(withIdentifier: "toWordProcessedVC", sender: self)
+//           }
+//       }
     
     private func updateRecognizedText(
         _ text: String
