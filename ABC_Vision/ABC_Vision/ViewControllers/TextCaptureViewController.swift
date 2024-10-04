@@ -9,7 +9,7 @@ import UIKit
 import AVFoundation
 import Vision
 
-class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UITableViewDelegate, UITableViewDataSource {
+class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
     
     
     var testWords: [Word]? {
@@ -45,6 +45,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     func setUpTableView() {
         wordHintTableView.dataSource = self
         wordHintTableView.delegate = self
+        wordHintTableView.allowsSelection = true
         
         let nib = UINib(nibName: "ARWordHintViewCell", bundle: nil)
         self.wordHintTableView.register(nib, forCellReuseIdentifier: "ARWordHintViewCell")
@@ -65,15 +66,30 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         }
         if let testWords = testWords {
             let word = testWords[indexPath.row]
+          //  cell.WordHintLabelDelegate = self
             cell.setUIStates(word: word)
             return cell
         }
         
         return cell
     }
+      
     
-    func setWordAssistLabel(word: String, isCompleted: Bool){
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let testWords = testWords else { return }
         
+        let selectedWord = testWords[indexPath.row]
+        
+        setWordAssistLabel(word: selectedWord.name,isComplete: selectedWord.isComplete)
+    }
+    
+    func setWordAssistLabel(word: String, isComplete: Bool){
+        wordAssistLabel.text = word
+        if isComplete {
+            wordAssistLabel.textColor = UIColor.abcGreen
+        } else {
+            wordAssistLabel.textColor = UIColor.abcRed
+        }
     }
     
     
@@ -134,32 +150,28 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             setupCamera()
         // Set up Vision text recognition request
             setupVision()
-            // Add tap gesture recognizer
+        // Add tap gesture recognizer
             addGesture()
             setUpTableView()
-            //bringtableview to front
-            view.bringSubviewToFront(wordHintTableView)
+        //bringtableview to front
             view.bringSubviewToFront(openCloseButton)
             view.bringSubviewToFront(wordAssistLabel)
+            view.bringSubviewToFront(wordHintTableView)
         }
     
         override func viewWillDisappear(_ animated: Bool) {
             super.viewWillDisappear(animated)
-            // Pause video rendering
             isPaused = true
-            // Add your code to stop or pause the video rendering
         }
         
         override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        isPaused = true
+            super.viewDidDisappear(animated)
+            isPaused = true
         }
 
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
-            // Resume video rendering
             isPaused = false
-            // Add your code to resume the video rendering
         }
     
         override func viewWillLayoutSubviews() {
@@ -173,12 +185,13 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
                 self.updateVideoRotationAngle()
             })
         }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(false)
-        view.bringSubviewToFront(magnifyingGlassImageView)
-        magnifyingGlassImageView.isHidden = false
-        openCloseWordHintTableView(self)
-    }
+    
+        override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(false)
+            view.bringSubviewToFront(magnifyingGlassImageView)
+            magnifyingGlassImageView.isHidden = false
+            openCloseWordHintTableView(self)
+        }
 
     private func updateVideoRotationAngle() {
           guard let connection = videoPreviewLayer.connection else { return }
@@ -199,14 +212,30 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     
     //MARK: - Tap Gestures
     
-    private func addGesture(){
+    private func addGesture() {
         let tapGestureRecognizer = UITapGestureRecognizer(
             target: self,
-            action: #selector(handleTap(_: )
-            )
+            action: #selector(handleTap(_:))
         )
+        tapGestureRecognizer.delegate = self // Set the delegate
+        tapGestureRecognizer.cancelsTouchesInView = false
+
         view.addGestureRecognizer(tapGestureRecognizer)
     }
+
+    // Allow the gesture recognizer to work simultaneously with other gestures (like the table view selection)
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+//    private func addGesture(){
+//        let tapGestureRecognizer = UITapGestureRecognizer(
+//            target: self,
+//            action: #selector(handleTap(_: )
+//            )
+//        )
+//        view.addGestureRecognizer(tapGestureRecognizer)
+//    }
     
     @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
         let location = gestureRecognizer.location(in: view)
@@ -327,6 +356,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             self.captureSession.startRunning()
         }
     }
+    
     //1
     private func setupVision() {
         textRecognitionRequest = VNRecognizeTextRequest { [weak self] (request, error) in
@@ -342,7 +372,6 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         textRecognitionRequest.recognitionLanguages = ["en-US"] // Set to recognize only English text
     }
 
-    
     //2
     
     var lastProcessedTime: TimeInterval = 0
@@ -360,16 +389,12 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         if currentTime - lastProcessedTime < frameProcessingInterval {
             return
         }
-        
         // Update the last processed time
         lastProcessedTime = currentTime
-
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return
         }
-        
         var requestOptions: [VNImageOption: Any] = [:]
-        
         if let cameraIntrinsicData = CMGetAttachment(
             sampleBuffer,
             key: kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix,
@@ -399,7 +424,6 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     var progressBar: UIProgressView!
     
     //MARK: 2 - Visual Boxes
-     
     
     let CheckerController = WordCheckController()
     var textBoxes: [CAShapeLayer] = []
