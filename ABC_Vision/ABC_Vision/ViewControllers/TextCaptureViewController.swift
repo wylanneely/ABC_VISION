@@ -38,6 +38,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     
     @IBOutlet weak var wordHintTableView: UITableView!
     @IBOutlet weak var openCloseButton: UIButton!
+    @IBOutlet weak var wordAssistLabel: UILabel!
     
     var isTableViewOpen: Bool = true
     
@@ -71,6 +72,10 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         return cell
     }
     
+    func setWordAssistLabel(word: String, isCompleted: Bool){
+        
+    }
+    
     
     @IBOutlet weak var wordHintTableViewTopConstraint: NSLayoutConstraint!
     
@@ -94,7 +99,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 70
     }
     
     //MARK: AVCapture Video Sessions
@@ -135,6 +140,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             //bringtableview to front
             view.bringSubviewToFront(wordHintTableView)
             view.bringSubviewToFront(openCloseButton)
+            view.bringSubviewToFront(wordAssistLabel)
         }
     
         override func viewWillDisappear(_ animated: Bool) {
