@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class SelectPlayerViewController: UIViewController {
     
@@ -108,9 +109,35 @@ class SelectPlayerViewController: UIViewController {
     //MARK: - Haptic
     let successFeedback = UINotificationFeedbackGenerator()
     
+    //MARK: - Sounds Effects
+    
+    var audioPlayer: AVAudioPlayer?
+    
+    func playSuccessSound() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Failed to set audio session category:", error)
+        }
+        if let soundURL = Bundle.main.url(forResource: "Sounds_Success_ABSEE", withExtension: "wav") {
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+                audioPlayer?.prepareToPlay()
+                audioPlayer?.play()
+            } catch {
+                print("Error: Could not load sound file.")
+            }
+        } else {
+            print("Error: Sound file not found.")
+        }
+    }
+
+    
     //MARK: - Actions
     @IBAction func player1ButtonTapped(_ sender: Any) {
         successFeedback.notificationOccurred(.success)
+        playSuccessSound()
         if let player1 = player1 {
             transitionToHome(withPlayer: player1)
         } else {
@@ -120,6 +147,7 @@ class SelectPlayerViewController: UIViewController {
     
     @IBAction func player2ButtonTapped(_ sender: Any) {
         successFeedback.notificationOccurred(.success)
+        playSuccessSound()
         if let player2 = player2 {
             transitionToHome(withPlayer: player2)
         } else {
@@ -129,6 +157,7 @@ class SelectPlayerViewController: UIViewController {
     
     @IBAction func player3ButtonTapped(_ sender: Any) {
         successFeedback.notificationOccurred(.success)
+        playSuccessSound()
         if let player3 = player3 {
             transitionToHome(withPlayer: player3)
         } else {
