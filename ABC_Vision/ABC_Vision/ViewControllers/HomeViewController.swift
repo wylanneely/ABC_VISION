@@ -622,6 +622,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     @IBAction func startButtonTapped(_ sender: Any) {
         successFeedback.notificationOccurred(.success)
+        MusicPlayerManager.shared.playSoundFileNamed(name: "Start")
         checkCameraAccess { hasAccess in
                 if hasAccess {
                     self.performSegue(withIdentifier: "toTextRead", sender: self)
