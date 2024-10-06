@@ -513,6 +513,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         if segue.identifier == "toWordProcessedVC",
            let destinationVC = segue.destination as? ARSceneViewController {
                unlockWrittenWord(written: writtenText)
+            MusicPlayerManager.shared.playSoundFileNamed(name: "GoodJob")
                destinationVC.writtenWord = writtenText
          }
     }
