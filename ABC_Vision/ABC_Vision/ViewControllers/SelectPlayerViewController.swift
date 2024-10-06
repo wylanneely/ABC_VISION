@@ -18,6 +18,7 @@ class SelectPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //setUpLoadedPlayers()
+        startBackgroundMusic()
         loadPlayers()
         loadPlayersIntoButtons()
         showOrHideButtons()
@@ -132,7 +133,10 @@ class SelectPlayerViewController: UIViewController {
             print("Error: Sound file not found.")
         }
     }
-
+    
+    func startBackgroundMusic(){
+        MusicPlayerManager.shared.startBackgroundMusic()
+    }
     
     //MARK: - Actions
     @IBAction func player1ButtonTapped(_ sender: Any) {
