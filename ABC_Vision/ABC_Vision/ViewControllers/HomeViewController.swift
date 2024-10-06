@@ -13,12 +13,38 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var currentPlayer: Player?
     
     var testWordStackController = WordStackController()
-    var wordsCatagory: String? = "Planets"
+    var wordsCatagory: String? = "Animals"
+    
+    var isPlanetsUnlocked: Bool {
+        if checkIfWordPackIsComplete(wordStackName: "Animals") {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    var isFoodsUnlocked: Bool {
+        if checkIfWordPackIsComplete(wordStackName: "Planets") {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    var isFreestyleUnlocked: Bool {
+        if checkIfWordPackIsComplete(wordStackName: "Foods") {
+            return true
+        } else {
+            return false
+        }
+    }
 
     //haptics
     let mediumImpact = UIImpactFeedbackGenerator(style: .medium)
     let heavyImpact = UIImpactFeedbackGenerator(style: .heavy)
     let successFeedback = UINotificationFeedbackGenerator()
+    
+    //MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +58,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         animateAnimalImages()
+        MusicPlayerManager.shared.startBackgroundMusic()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        MusicPlayerManager.shared.stopBackgroundMusic()
     }
     
     func setPlayerProperties(){
@@ -96,54 +128,97 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         switch indexPath.row {
             //Planets
         case 0:
-            cell.imageView.image = testWordStackController.planetCompleteImage
-            cell.titleLabel.text = testWordStackController.planetsName
-            if checkIfWordCategorySelected(fromTitle: "Planets") {
-                cell.contentView.backgroundColor = UIColor.opaqueABCGreen
-            } else {
-                cell.contentView.backgroundColor = UIColor.opaqueABCBlue
-            }
-            if checkIfWordPackIsComplete(wordStackName: "Planets") {
-                cell.imageView.image = UIImage(named: "planetsComplete")
-            } else {
-                cell.imageView.image = UIImage(named: "planetsINcomplete")
-            }
-            return cell
-        case 1:
             //animals
+            cell.isUnlocked = true
             cell.imageView.image = testWordStackController.animalsCompleteImage
             cell.titleLabel.text = testWordStackController.animalsName
             if checkIfWordCategorySelected(fromTitle: "Animals") {
                 cell.contentView.backgroundColor = UIColor.opaqueABCGreen
+                
             } else {
                 cell.contentView.backgroundColor = UIColor.opaqueABCBlue
             }
-            if checkIfWordPackIsComplete(wordStackName: "Animals") {
-                cell.imageView.image = UIImage(named: "animalsComplete")
+//            if checkIfWordPackIsComplete(wordStackName: "Animals") {
+//                cell.imageView.image = UIImage(named: "animalsComplete")
+//            } else {
+//                cell.imageView.image = UIImage(named: "animalNcomplete")
+//            }
+            return cell
+        case 1:
+            cell.imageView.image = testWordStackController.planetCompleteImage
+            cell.titleLabel.text = testWordStackController.planetsName
+            if checkIfWordCategorySelected(fromTitle: "Planets") {
+                if isPlanetsUnlocked {
+                    cell.contentView.backgroundColor = UIColor.opaqueABCGreen
+                    cell.isUnlocked = true
+                } else {
+                    cell.contentView.backgroundColor = UIColor.opaqueABCRed
+                    cell.isUnlocked = false
+                }
             } else {
-                cell.imageView.image = UIImage(named: "animalNcomplete")
+                if isPlanetsUnlocked {
+                    cell.isUnlocked = true
+                    cell.contentView.backgroundColor = UIColor.opaqueABCBlue
+                } else {
+                    cell.contentView.backgroundColor = UIColor.opaqueABCRed
+                    cell.isUnlocked = false
+                }
             }
+            
+//            if checkIfWordPackIsComplete(wordStackName: "Planets") {
+//                cell.imageView.image = UIImage(named: "planetsComplete")
+//            } else {
+//                cell.imageView.image = UIImage(named: "planetsINcomplete")
+//            }
             return cell
         case 2:
             //foods
             cell.imageView.image = testWordStackController.foodsCompleteImage
             cell.titleLabel.text = testWordStackController.foodsName
             if checkIfWordCategorySelected(fromTitle: "Foods") {
-                cell.contentView.backgroundColor = UIColor.opaqueABCGreen
+                if isFoodsUnlocked {
+                    cell.contentView.backgroundColor = UIColor.opaqueABCGreen
+                } else {
+                    cell.contentView.backgroundColor = UIColor.opaqueABCRed
+                    cell.isUnlocked = false
+                }
             } else {
-                cell.contentView.backgroundColor = UIColor.opaqueABCBlue
+                if isFoodsUnlocked {
+                    cell.contentView.backgroundColor = UIColor.opaqueABCBlue
+                    cell.isUnlocked = true
+                } else {
+                    cell.contentView.backgroundColor = UIColor.opaqueABCRed
+                    cell.isUnlocked = false
+                }
             }
-            if checkIfWordPackIsComplete(wordStackName: "Foods") {
-                cell.imageView.image = UIImage(named: "foodComplete")
-            } else {
-                cell.imageView.image = UIImage(named: "foodsINcomplete")
-            }
+            
+//            if checkIfWordPackIsComplete(wordStackName: "Foods") {
+//                cell.imageView.image = UIImage(named: "foodComplete")
+//                cell.contentView.backgroundColor = UIColor.opaqueABCBlue
+//                cell.isUnlocked = true
+//            } else {
+//                cell.imageView.image = UIImage(named: "foodsINcomplete")
+//                cell.contentView.backgroundColor = UIColor.opaqueABCRed
+//                cell.isUnlocked = false
+//            }
             return cell
         default:
             if checkIfWordCategorySelected(fromTitle: "Freestyle") {
-                cell.contentView.backgroundColor = UIColor.opaqueABCGreen
+                if isFreestyleUnlocked {
+                    cell.contentView.backgroundColor = UIColor.opaqueABCGreen
+                    cell.isUnlocked = true
+                }else {
+                    cell.contentView.backgroundColor = UIColor.opaqueABCRed
+                    cell.isUnlocked = false
+                }
             } else {
-                cell.contentView.backgroundColor = UIColor.opaqueABCBlue
+                if isFreestyleUnlocked {
+                    cell.contentView.backgroundColor = UIColor.opaqueABCBlue
+                    cell.isUnlocked = true
+                } else {
+                    cell.contentView.backgroundColor = UIColor.opaqueABCRed
+                    cell.isUnlocked = false
+                }
             }
             return cell
         }
@@ -169,12 +244,172 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return false
     }
     
+    var isComingFromLocked: Bool = false
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let selectedCell = collectionView.cellForItem(at: indexPath) as? WordStackCollectionCell {
             //add is unlocked State
-            mediumImpact.impactOccurred()
-            selectedCell.isSelected = true
-            wordsCatagory =  selectedCell.titleLabel.text
+            
+            let row = indexPath.row
+            
+            switch row {
+            case 0:
+                if !isComingFromLocked {
+                    playAnimalsSound()
+                }
+                mediumImpact.impactOccurred()
+                selectedCell.isSelected = true
+                self.isComingFromLocked = false
+                wordsCatagory =  selectedCell.titleLabel.text
+            case 1:
+                if isPlanetsUnlocked {
+                    playPlanetsSound()
+                    mediumImpact.impactOccurred()
+                    selectedCell.isSelected = true
+                    self.isComingFromLocked = false
+                    wordsCatagory =  selectedCell.titleLabel.text
+                } else {
+                    playLockedSound()
+                    successFeedback.notificationOccurred(.error)
+                    self.isComingFromLocked = true
+                    DispatchQueue.main.async {
+                        self.selectFirstItem()
+                    }
+                }
+            case 2:
+                if isFoodsUnlocked {
+                    playFoodsSound()
+                    mediumImpact.impactOccurred()
+                    selectedCell.isSelected = true
+                    self.isComingFromLocked = false
+                    wordsCatagory =  selectedCell.titleLabel.text
+                } else {
+                    playLockedSound()
+                    self.isComingFromLocked = true
+                    successFeedback.notificationOccurred(.error)
+                    DispatchQueue.main.async {
+                        self.selectFirstItem()
+                    }
+                }
+            default:
+                if isFreestyleUnlocked {
+                    playFreestyleSound()
+                    mediumImpact.impactOccurred()
+                    selectedCell.isSelected = true   
+                    self.isComingFromLocked = false
+                    wordsCatagory =  selectedCell.titleLabel.text
+                } else {
+                    playLockedSound()
+                    self.isComingFromLocked = true
+                    successFeedback.notificationOccurred(.error)
+                    DispatchQueue.main.async {
+                        self.selectFirstItem()
+                    }
+                }
+            }
+        }
+    }
+    
+    //MARK: - Sound effects
+    var audioPlayer: AVAudioPlayer?
+    
+    func playAnimalsSound() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Failed to set audio session category:", error)
+        }
+        if let soundURL = Bundle.main.url(forResource: "Animals", withExtension: "mp3") {
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+                audioPlayer?.prepareToPlay()
+                audioPlayer?.play()
+            } catch {
+                print("Error: Could not load sound file.")
+            }
+        } else {
+            print("Error: Sound file not found.")
+        }
+    }
+    
+    func playFoodsSound() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Failed to set audio session category:", error)
+        }
+        if let soundURL = Bundle.main.url(forResource: "Foods", withExtension: "mp3") {
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+                audioPlayer?.prepareToPlay()
+                audioPlayer?.play()
+            } catch {
+                print("Error: Could not load sound file.")
+            }
+        } else {
+            print("Error: Sound file not found.")
+        }
+    }
+    
+    func playPlanetsSound() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Failed to set audio session category:", error)
+        }
+        if let soundURL = Bundle.main.url(forResource: "Planets", withExtension: "mp3") {
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+                audioPlayer?.prepareToPlay()
+                audioPlayer?.play()
+            } catch {
+                print("Error: Could not load sound file.")
+            }
+        } else {
+            print("Error: Sound file not found.")
+        }
+    }
+    
+    func playFreestyleSound() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Failed to set audio session category:", error)
+        }
+        if let soundURL = Bundle.main.url(forResource: "FreeStyle", withExtension: "mp3") {
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+                audioPlayer?.prepareToPlay()
+                audioPlayer?.play()
+            } catch {
+                print("Error: Could not load sound file.")
+            }
+        } else {
+            print("Error: Sound file not found.")
+        }
+    }
+    
+    func playLockedSound() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Failed to set audio session category:", error)
+        }
+        if let soundURL = Bundle.main.url(forResource: "Locked", withExtension: "mp3") {
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+                audioPlayer?.prepareToPlay()
+                audioPlayer?.play()
+            } catch {
+                print("Error: Could not load sound file.")
+            }
+        } else {
+            print("Error: Sound file not found.")
         }
     }
     
