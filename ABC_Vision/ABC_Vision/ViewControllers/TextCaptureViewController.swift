@@ -79,7 +79,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         guard let testWords = testWords else { return }
         
         let selectedWord = testWords[indexPath.row]
-        
+        MusicPlayerManager.shared.playSoundFileNamed(name: selectedWord.name)
         setWordAssistLabel(word: selectedWord.name,isComplete: selectedWord.isComplete)
     }
     
