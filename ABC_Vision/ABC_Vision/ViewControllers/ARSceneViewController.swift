@@ -34,7 +34,6 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
         let fileLocation = createSceneFileName(fileName)
         
         guard let scene = SCNScene(named: fileLocation) else {
-            //call spelling error function
             return
         }
           sceneView.scene = scene
@@ -48,23 +47,21 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
 
-        // Run the view's session
         sceneView.session.run(configuration)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // Pause the view's session
         sceneView.session.pause()
     }
     
     //MARK: - Outlets
     
     @IBAction func launchButton(_ sender: Any) {
+        MusicPlayerManager.shared.playSoundFileNamed(name: "Whoosh")
         startSceneWith(word: self.writtenWord)
         
     }
