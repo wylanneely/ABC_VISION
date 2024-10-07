@@ -212,6 +212,15 @@
                                 <color key="textColor" name="ABCBlue"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JIT-76-UFf">
+                                <rect key="frame" x="23" y="783" width="62" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Back"/>
+                                <connections>
+                                    <action selector="backButtonTapped:" destination="GlI-3q-pT8" eventType="touchUpInside" id="m1v-pa-lva"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hUD-LL-QYk"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -230,6 +239,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="GoN-sW-ykS"/>
                     <connections>
+                        <outlet property="backButton" destination="JIT-76-UFf" id="dXc-9O-7fQ"/>
                         <outlet property="magnifyingGlassImageView" destination="ocS-fg-5q9" id="kB9-qH-aNw"/>
                         <outlet property="openCloseButton" destination="qM3-pz-zJJ" id="ufa-eI-72R"/>
                         <outlet property="wordAssistLabel" destination="pDI-dH-hYD" id="nr3-5O-Xfa"/>
