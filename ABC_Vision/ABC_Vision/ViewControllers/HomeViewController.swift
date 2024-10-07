@@ -620,12 +620,33 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
            present(editPlayerVC, animated: true, completion: nil)
     }
     
+    //MARK: StartGamePlay
+    
+    func transitionToGamePlay() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else {
+            return
+        }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let textCaptureController = storyboard.instantiateViewController(withIdentifier: "TextCaptureVC") as? TextCaptureViewController {
+             textCaptureController.currentPlayer = currentPlayer
+            textCaptureController.testWordCategory = wordsCatagory
+            window.rootViewController = textCaptureController
+            UIView.transition(with: window,
+                              duration: 0.5,
+                              options: [.transitionFlipFromRight],
+                              animations: nil,
+                              completion: nil)
+        }
+    }
+    
     @IBAction func startButtonTapped(_ sender: Any) {
         successFeedback.notificationOccurred(.success)
-        MusicPlayerManager.shared.playSoundFileNamed(name: "Start")
         checkCameraAccess { hasAccess in
                 if hasAccess {
-                    self.performSegue(withIdentifier: "toTextRead", sender: self)
+                    self.transitionToGamePlay()
+                    MusicPlayerManager.shared.playSoundFileNamed(name: "Start")
                 } else {
                     let alert = UIAlertController(title: "Camera Access Needed", message: "This app requires camera access to proceed. Please allow camera access in Settings.", preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
