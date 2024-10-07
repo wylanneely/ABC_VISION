@@ -154,10 +154,15 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             addGesture()
             setUpTableView()
         //bringtableview to front
-            view.bringSubviewToFront(openCloseButton)
-            view.bringSubviewToFront(wordAssistLabel)
-            view.bringSubviewToFront(wordHintTableView)
+            bringSubviewsToFront()
         }
+    
+    func bringSubviewsToFront(){
+        view.bringSubviewToFront(openCloseButton)
+        view.bringSubviewToFront(wordAssistLabel)
+        view.bringSubviewToFront(wordHintTableView)
+        view.bringSubviewToFront(backButton)
+    }
     
         override func viewWillDisappear(_ animated: Bool) {
             super.viewWillDisappear(animated)
@@ -505,6 +510,35 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
 //        )
     }
         
+    //MARK: Navigation
+    //to home
+    @IBOutlet weak var backButton: UIButton!
+    
+    @IBAction func backButtonTapped(_ sender: Any) {
+        transitionToHome()
+    }
+    
+    
+    func transitionToHome() {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+              let window = windowScene.windows.first else {
+            return
+        }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let homeViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewController") as? HomeViewController {
+            homeViewController.currentPlayer = currentPlayer
+            window.rootViewController = homeViewController
+            UIView.transition(with: window,
+                              duration: 0.5,
+                              options: [.transitionFlipFromRight],
+                              animations: nil,
+                              completion: nil)
+        }
+    }
+    
+    
+    //To word unlock
     override func prepare(
         for segue: UIStoryboardSegue,
         sender: Any?
@@ -529,5 +563,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             }
         }
     }
+    
+    
         
 }
