@@ -16,7 +16,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
       return GameController.shared.getWords(forPlayer: currentPlayer?.nickname ?? "", inStack: testWordCategory ?? "")
     }
     
-    var testWordCategory: String?
+    var testWordCategory: String? 
     var currentPlayer: Player?
     
     
@@ -81,6 +81,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         let selectedWord = testWords[indexPath.row]
         MusicPlayerManager.shared.playSoundFileNamed(name: selectedWord.name)
         setWordAssistLabel(word: selectedWord.name,isComplete: selectedWord.isComplete)
+        openCloseWordHintTableView(self)
     }
     
     func setWordAssistLabel(word: String, isComplete: Bool){
@@ -158,10 +159,12 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         }
     
     func bringSubviewsToFront(){
-        view.bringSubviewToFront(openCloseButton)
         view.bringSubviewToFront(wordAssistLabel)
+        view.bringSubviewToFront(magnifyingGlassImageView)
         view.bringSubviewToFront(wordHintTableView)
         view.bringSubviewToFront(backButton)
+        view.bringSubviewToFront(openCloseButton)
+
     }
     
         override func viewWillDisappear(_ animated: Bool) {
@@ -197,6 +200,10 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             magnifyingGlassImageView.isHidden = false
             openCloseWordHintTableView(self)
         }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     private func updateVideoRotationAngle() {
           guard let connection = videoPreviewLayer.connection else { return }
@@ -544,6 +551,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         sender: Any?
     ) {
         wordHintTableView.reloadData()
+        wordAssistLabel.textColor = UIColor.abcGreen
         if segue.identifier == "toWordProcessedVC",
            let destinationVC = segue.destination as? ARSceneViewController {
                unlockWrittenWord(written: writtenText)
@@ -557,6 +565,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             for word in testWords! {
                 let name = word.name
                 if written.lowercased() == name.lowercased() {
+                    
                     word.unlockComplete()
                     GameController.shared.markWordComplete(forPlayer: currentPlayer?.nickname ?? "", inStack: testWordCategory ?? "" , wordName: word.name)
                 }
