@@ -7,6 +7,7 @@
 
 import UIKit
 import AVFoundation
+import AVKit
 
 class HomeViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
@@ -44,6 +45,38 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     let heavyImpact = UIImpactFeedbackGenerator(style: .heavy)
     let successFeedback = UINotificationFeedbackGenerator()
     
+    //MARK: Video
+    
+    func launchHowTOVideo(){
+        
+        
+        let hasSeenVideo = UserDefaults.standard.bool(forKey: "hasSeenIntroVideo")
+        
+        if hasSeenVideo != true {
+            // Play the video
+            playIntroVideo()
+            
+            // Mark the video as seen
+            UserDefaults.standard.set(true, forKey: "hasSeenIntroVideo")
+        }
+    }
+    
+    func playIntroVideo() {
+          // Get the video file URL from the app bundle
+          if let videoPath = Bundle.main.path(forResource: "ABSeeHowTo", ofType: "mp4") {
+              let videoURL = URL(fileURLWithPath: videoPath)
+              
+              let player = AVPlayer(url: videoURL)
+              let playerViewController = AVPlayerViewController()
+              playerViewController.player = player
+              playerViewController.videoGravity = .resizeAspectFill
+              // Present the video player
+              self.present(playerViewController, animated: true) {
+                  playerViewController.player?.play()
+              }
+          }
+      }
+    
     //MARK: Lifecycle
     
     override func viewDidLoad() {
@@ -57,6 +90,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        launchHowTOVideo()
         animateAnimalImages()
         MusicPlayerManager.shared.startBackgroundMusic()
     }
