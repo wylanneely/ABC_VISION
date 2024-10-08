@@ -163,7 +163,7 @@
                         <viewLayoutGuide key="safeArea" id="fQZ-KI-GVf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="aNe-cX-6YO" firstAttribute="bottom" secondItem="fQZ-KI-GVf" secondAttribute="bottom" id="HjE-sl-Ans"/>
+                            <constraint firstItem="aNe-cX-6YO" firstAttribute="bottom" secondItem="U0K-SW-4ec" secondAttribute="bottom" id="HjE-sl-Ans"/>
                             <constraint firstItem="Img-Cd-fog" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="NfY-c7-pMr"/>
                             <constraint firstItem="aNe-cX-6YO" firstAttribute="trailing" secondItem="fQZ-KI-GVf" secondAttribute="trailing" id="mFv-zn-T7j"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="Img-Cd-fog" secondAttribute="bottom" constant="40" id="nil-ZG-s6G"/>
@@ -178,7 +178,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1385" y="-59"/>
+            <point key="canvasLocation" x="654" y="-59"/>
         </scene>
         <!--Text Capture View Controller-->
         <scene sceneID="hSR-bZ-I0X">
@@ -189,14 +189,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass1" translatesAutoresizingMaskIntoConstraints="NO" id="ocS-fg-5q9">
-                                <rect key="frame" x="6.6666666666666572" y="296" width="380" height="380"/>
+                                <rect key="frame" x="6.6666666666666572" y="306" width="380" height="380"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="s5z-wZ-XNB">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="247"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="230"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qM3-pz-zJJ">
-                                <rect key="frame" x="168.66666666666666" y="247" width="71.666666666666657" height="67"/>
+                                <rect key="frame" x="168.66666666666666" y="255" width="71.666666666666657" height="67"/>
                                 <color key="tintColor" name="ABCBlue"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
@@ -213,10 +213,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JIT-76-UFf">
-                                <rect key="frame" x="23" y="783" width="62" height="35"/>
+                                <rect key="frame" x="18" y="769" width="73" height="64"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Back"/>
+                                <buttonConfiguration key="configuration" style="plain" image="backHomeButton"/>
                                 <connections>
                                     <action selector="backButtonTapped:" destination="GlI-3q-pT8" eventType="touchUpInside" id="m1v-pa-lva"/>
                                 </connections>
@@ -229,11 +229,11 @@
                             <constraint firstItem="s5z-wZ-XNB" firstAttribute="leading" secondItem="hUD-LL-QYk" secondAttribute="leading" id="CaD-m2-5ZX"/>
                             <constraint firstItem="ocS-fg-5q9" firstAttribute="centerX" secondItem="EPr-2a-hO4" secondAttribute="centerX" id="FWM-sm-dgr"/>
                             <constraint firstItem="qM3-pz-zJJ" firstAttribute="centerX" secondItem="EPr-2a-hO4" secondAttribute="centerX" constant="8" id="M5f-7l-Lx0"/>
-                            <constraint firstItem="qM3-pz-zJJ" firstAttribute="top" secondItem="s5z-wZ-XNB" secondAttribute="bottom" id="MpT-DW-iP1"/>
-                            <constraint firstItem="s5z-wZ-XNB" firstAttribute="height" secondItem="EPr-2a-hO4" secondAttribute="height" multiplier="0.29" id="bhK-LR-gWV"/>
+                            <constraint firstItem="qM3-pz-zJJ" firstAttribute="top" secondItem="s5z-wZ-XNB" secondAttribute="bottom" constant="25" id="MpT-DW-iP1"/>
+                            <constraint firstItem="s5z-wZ-XNB" firstAttribute="height" secondItem="EPr-2a-hO4" secondAttribute="height" multiplier="0.27" id="bhK-LR-gWV"/>
                             <constraint firstItem="s5z-wZ-XNB" firstAttribute="trailing" secondItem="hUD-LL-QYk" secondAttribute="trailing" id="fV7-E5-kEl"/>
                             <constraint firstItem="pDI-dH-hYD" firstAttribute="centerX" secondItem="EPr-2a-hO4" secondAttribute="centerX" id="gSu-kI-Mbv"/>
-                            <constraint firstItem="ocS-fg-5q9" firstAttribute="centerY" secondItem="EPr-2a-hO4" secondAttribute="centerY" constant="60" id="lmS-Dc-axv"/>
+                            <constraint firstItem="ocS-fg-5q9" firstAttribute="centerY" secondItem="EPr-2a-hO4" secondAttribute="centerY" constant="70" id="lmS-Dc-axv"/>
                             <constraint firstItem="hUD-LL-QYk" firstAttribute="bottom" secondItem="pDI-dH-hYD" secondAttribute="bottom" id="ubm-0o-p70"/>
                         </constraints>
                     </view>
@@ -847,6 +847,7 @@
         <image name="XButton" width="148" height="155.5"/>
         <image name="YButton" width="148" height="155.5"/>
         <image name="ZButton" width="148" height="155.5"/>
+        <image name="backHomeButton" width="49" height="50"/>
         <image name="cartoonSpaceCat" width="120" height="120"/>
         <image name="cartoonSpaceDog" width="120" height="120"/>
         <image name="cartoonSpaceDuck" width="120" height="120"/>
