@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVKit
 
 class EditPlayerView: UIViewController {
     
@@ -27,8 +28,24 @@ class EditPlayerView: UIViewController {
         presentDeleteConfirmationAlert()
     }
     @IBAction func helpButtonTapped(_ sender: Any) {
+        playIntroVideo()
     }
     
+    func playIntroVideo() {
+          // Get the video file URL from the app bundle
+          if let videoPath = Bundle.main.path(forResource: "ABSeeHowTo", ofType: "mp4") {
+              let videoURL = URL(fileURLWithPath: videoPath)
+              
+              let player = AVPlayer(url: videoURL)
+              let playerViewController = AVPlayerViewController()
+              playerViewController.player = player
+              playerViewController.videoGravity = .resizeAspectFill
+              // Present the video player
+              self.present(playerViewController, animated: true) {
+                  playerViewController.player?.play()
+              }
+          }
+      }
     //MARK: - Alert
     
     func presentDeleteConfirmationAlert() {
