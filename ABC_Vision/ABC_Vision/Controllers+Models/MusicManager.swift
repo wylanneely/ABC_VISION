@@ -13,8 +13,8 @@ class MusicPlayerManager {
     
     var audioPlayer: AVAudioPlayer?
     
-    private init() {} // This prevents others from creating an instance of this class
-
+    private init() {}
+    
     func startBackgroundMusic() {
         let audioSession = AVAudioSession.sharedInstance()
         
@@ -26,7 +26,7 @@ class MusicPlayerManager {
             print("Failed to set audio session category or activate it.")
         }
         
-        if let path = Bundle.main.path(forResource: "SpaceSong1", ofType: "wav") {
+        if let path = Bundle.main.path(forResource: "SpaceSong2", ofType: "wav") {
             let url = URL(fileURLWithPath: path)
             
             do {
@@ -45,5 +45,29 @@ class MusicPlayerManager {
     
     func isPlaying() -> Bool {
         return audioPlayer?.isPlaying ?? false
+    }
+    
+    func playSoundFileNamed(name: String) {
+        playSoundWith(name: name)
+    }
+    
+    private func playSoundWith(name: String) {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Failed to set audio session category:", error)
+        }
+        if let soundURL = Bundle.main.url(forResource: name, withExtension: "mp3") {
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+                audioPlayer?.prepareToPlay()
+                audioPlayer?.play()
+            } catch {
+                print("Error: Could not load sound file.")
+            }
+        } else {
+            print("Error: Sound file not found.")
+        }
     }
 }
