@@ -21,7 +21,7 @@ class SelectPlayerViewController: UIViewController {
         startBackgroundMusic()
         loadPlayers()
         loadPlayersIntoButtons()
-        showOrHideButtons()
+       // showOrHideButtons()
 //        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground), name:UIApplication.willEnterForegroundNotification, object: nil)
     }
     
@@ -56,7 +56,7 @@ class SelectPlayerViewController: UIViewController {
 
     func loadPlayersIntoButtons() {
         
-        let playerButtons = [playerButton1,playerButton2,playerButton3]
+        let playerButtons = [playerButton1]
         
         for (index, player) in loadedPlayers.enumerated() {
             guard index < playerButtons.count else { break }
@@ -78,34 +78,34 @@ class SelectPlayerViewController: UIViewController {
         }
     }
     
-    func showOrHideButtons(){
-        
-        let players = [player1,player2,player3]
-        var index = 0
-        for player in players {
-            if let p = player {
-                index = index + 1
-            }
-        }
-        switch index {
-        case 0:
-            playerButton2.isHidden = true
-            playerButton3.isHidden = true
-        case 1:
-            playerButton3.isHidden = true
-        default:
-            return
-        }
-        
-        
-    }
+//    func showOrHideButtons(){
+//        
+//        let players = [player1,player2,player3]
+//        var index = 0
+//        for player in players {
+//            if let p = player {
+//                index = index + 1
+//            }
+//        }
+//        switch index {
+//        case 0:
+//            playerButton2.isHidden = true
+//            playerButton3.isHidden = true
+//        case 1:
+//            playerButton3.isHidden = true
+//        default:
+//            return
+//        }
+//        
+//        
+//    }
 
     
     //MARK: - Outlets
     @IBOutlet weak var playerButton1: UIButton!
-    @IBOutlet weak var playerButton2: UIButton!
-    @IBOutlet weak var playerButton3: UIButton!
-    
+//    @IBOutlet weak var playerButton2: UIButton!
+//    @IBOutlet weak var playerButton3: UIButton!
+//    
     
     //MARK: - Haptic
     let successFeedback = UINotificationFeedbackGenerator()
@@ -149,25 +149,25 @@ class SelectPlayerViewController: UIViewController {
         }
     }
     
-    @IBAction func player2ButtonTapped(_ sender: Any) {
-        successFeedback.notificationOccurred(.success)
-        playSuccessSound()
-        if let player2 = player2 {
-            transitionToHome(withPlayer: player2)
-        } else {
-            createPlayerTransistion()
-        }
-    }
-    
-    @IBAction func player3ButtonTapped(_ sender: Any) {
-        successFeedback.notificationOccurred(.success)
-        playSuccessSound()
-        if let player3 = player3 {
-            transitionToHome(withPlayer: player3)
-        } else {
-            createPlayerTransistion()
-        }
-    }
+//    @IBAction func player2ButtonTapped(_ sender: Any) {
+//        successFeedback.notificationOccurred(.success)
+//        playSuccessSound()
+//        if let player2 = player2 {
+//            transitionToHome(withPlayer: player2)
+//        } else {
+//            createPlayerTransistion()
+//        }
+//    }
+//    
+//    @IBAction func player3ButtonTapped(_ sender: Any) {
+//        successFeedback.notificationOccurred(.success)
+//        playSuccessSound()
+//        if let player3 = player3 {
+//            transitionToHome(withPlayer: player3)
+//        } else {
+//            createPlayerTransistion()
+//        }
+//    }
     
     
     func createPlayerTransistion(){
