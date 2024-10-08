@@ -189,9 +189,9 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     
         override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
             super.viewWillTransition(to: size, with: coordinator)
-            coordinator.animate(alongsideTransition: { _ in
-                self.updateVideoRotationAngle()
-            })
+//            coordinator.animate(alongsideTransition: { _ in
+//                self.updateVideoRotationAngle()
+//            })
         }
     
         override func viewDidAppear(_ animated: Bool) {
@@ -205,23 +205,23 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         return true
     }
 
-    private func updateVideoRotationAngle() {
-          guard let connection = videoPreviewLayer.connection else { return }
-          switch UIDevice.current.orientation {
-          case .portrait:
-              connection.videoRotationAngle = 90
-          case .landscapeRight:
-              connection.videoRotationAngle = 180
-          case .landscapeLeft:
-              connection.videoRotationAngle = 0
-          case .portraitUpsideDown:
-              connection.videoRotationAngle = 270
-          default:
-              connection.videoRotationAngle = 90
-          }
-          videoPreviewLayer.frame = view.bounds
-      }
-    
+//    private func updateVideoRotationAngle() {
+//          guard let connection = videoPreviewLayer.connection else { return }
+//          switch UIDevice.current.orientation {
+//          case .portrait:
+//              connection.videoRotationAngle = 90
+//          case .landscapeRight:
+//              connection.videoRotationAngle = 180
+//          case .landscapeLeft:
+//              connection.videoRotationAngle = 0
+//          case .portraitUpsideDown:
+//              connection.videoRotationAngle = 270
+//          default:
+//              connection.videoRotationAngle = 90
+//          }
+//          videoPreviewLayer.frame = view.bounds
+//      }
+//    
     //MARK: - Tap Gestures
     
     private func addGesture() {
