@@ -61,9 +61,8 @@ struct WordStackController {
             milkWord,
             orangeWord,
             pizzaWord,
-            //riceWord
         ]               //  order of Array important
-        wordListsArray = [planets,animals,foods]
+        wordListsArray = [animals,planets,foods]
     }
     
     //MARK: - Freesyle
@@ -90,7 +89,6 @@ struct WordStackController {
     var horseWord = Word(name: "Horse")
     var pigWord = Word(name: "Pig")
     var rabbitWord = Word(name: "Rabbit")
-   // var roosterWord = Word(name: "Rooster")
     var sharkWord = Word(name: "Shark")
     var sheepWord = Word(name: "Sheep")
     var squirrelWord = Word(name: "Squirrel")
