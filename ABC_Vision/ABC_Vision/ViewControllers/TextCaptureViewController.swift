@@ -205,6 +205,9 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         return true
     }
 
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
 //    private func updateVideoRotationAngle() {
 //          guard let connection = videoPreviewLayer.connection else { return }
 //          switch UIDevice.current.orientation {
@@ -453,6 +456,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
              //  startGreenBoxTimer() // Start the timer when the correct word is detected
            } else {
                box.strokeColor = UIColor.abcRed.cgColor
+              // MusicPlayerManager.shared.playSoundFileNamed(name: "IncorrectSound")
              //  resetGreenBoxTimer() // Reset the timer if it's not correct
            }
            
@@ -508,6 +512,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
                 sender: self
             )
         } else {
+            MusicPlayerManager.shared.playSoundWithWavFile(name: "IncorrectSound")
            let feedback = UINotificationFeedbackGenerator()
             feedback.notificationOccurred(.error)
         }
