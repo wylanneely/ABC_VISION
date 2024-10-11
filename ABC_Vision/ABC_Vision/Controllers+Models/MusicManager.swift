@@ -70,4 +70,25 @@ class MusicPlayerManager {
             print("Error: Sound file not found.")
         }
     }
+    
+    
+    func playSoundWithWavFile(name: String) {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("Failed to set audio session category:", error)
+        }
+        if let soundURL = Bundle.main.url(forResource: name, withExtension: "wav") {
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+                audioPlayer?.prepareToPlay()
+                audioPlayer?.play()
+            } catch {
+                print("Error: Could not load sound file.")
+            }
+        } else {
+            print("Error: Sound file not found.")
+        }
+    }
 }
