@@ -516,10 +516,6 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
            let feedback = UINotificationFeedbackGenerator()
             feedback.notificationOccurred(.error)
         }
-//        self.performSegue(
-//            withIdentifier: "toWordProcessedVC",
-//            sender: self
-//        )
     }
         
     //MARK: Navigation
