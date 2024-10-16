@@ -82,9 +82,9 @@ struct WordCheckController {
         "Watch",
         "Whale"
     ]
-    
     func checkWordisCorrect(_ word:String?)->Bool{
         guard let word = word else {return false}
+        
         for w in CorrectWords {
             if word.lowercased() == w.lowercased() {
                 return true
