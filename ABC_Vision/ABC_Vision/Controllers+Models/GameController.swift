@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 class GameController {
     
     static var shared = GameController()
@@ -46,25 +47,24 @@ class GameController {
     func addPlayer(_ player: Player) {
         var newPlayer = Player(nickname: player.nickname, wordStacks: wordStacks)
         players.append(newPlayer)
-        userDefaultsController.savePlayer(newPlayer) // Save the single player
+        userDefaultsController.savePlayer(newPlayer)
     }
 
     func removePlayer(withNickname nickname: String) {
         players.removeAll { $0.nickname == nickname }
-        savePlayers() // Save the updated players list
+        savePlayers()
     }
     
     func getWords(forPlayer playerNickname: String, inStack stackName: String) -> [Word]? {
-          // Find the player by nickname
           guard let player = players.first(where: { $0.nickname == playerNickname }) else {
-              return nil // Return nil if player is not found
+              return nil
           }
           
           // Find the word stack by name within the player's word stacks
           if let wordStack = player.wordStacks.first(where: { $0.name == stackName }) {
-              return wordStack.words // Return the list of words if found
+              return wordStack.words
           } else {
-              return nil // Return nil if the word stack is not found
+              return nil
           }
       }
 }
