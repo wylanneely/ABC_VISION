@@ -26,7 +26,7 @@
                                 <rect key="frame" x="0.0" y="59" width="120" height="120"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cartoonSpaceDuck" translatesAutoresizingMaskIntoConstraints="NO" id="KZJ-ez-izZ">
-                                <rect key="frame" x="0.0" y="698" width="120" height="120"/>
+                                <rect key="frame" x="0.0" y="708" width="120" height="120"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cartoonSpaceCat" translatesAutoresizingMaskIntoConstraints="NO" id="FvP-XK-rmv">
                                 <rect key="frame" x="273" y="165" width="120" height="120"/>
@@ -60,7 +60,7 @@
                             <constraint firstAttribute="trailing" secondItem="LSI-bD-617" secondAttribute="trailing" id="6Ms-WO-3jh"/>
                             <constraint firstItem="rDo-w7-ijm" firstAttribute="leading" secondItem="OkJ-fI-AZT" secondAttribute="leading" id="Dzm-nH-LdL"/>
                             <constraint firstItem="rDo-w7-ijm" firstAttribute="top" secondItem="4WB-3Z-k7g" secondAttribute="top" id="E1i-Tp-wvA"/>
-                            <constraint firstItem="KZJ-ez-izZ" firstAttribute="bottom" secondItem="4WB-3Z-k7g" secondAttribute="bottom" id="F2q-JV-ZdW"/>
+                            <constraint firstItem="KZJ-ez-izZ" firstAttribute="bottom" secondItem="4WB-3Z-k7g" secondAttribute="bottom" constant="10" id="F2q-JV-ZdW"/>
                             <constraint firstItem="Mlc-P3-ZZ1" firstAttribute="height" secondItem="LSI-bD-617" secondAttribute="height" multiplier="0.4107" id="IhG-Ll-lWN"/>
                             <constraint firstItem="fM3-8A-tU8" firstAttribute="centerY" secondItem="OkJ-fI-AZT" secondAttribute="centerY" constant="100" id="M0Q-Pj-hCJ"/>
                             <constraint firstItem="4WB-3Z-k7g" firstAttribute="trailing" secondItem="FvP-XK-rmv" secondAttribute="trailing" id="MXy-sX-o3r"/>
