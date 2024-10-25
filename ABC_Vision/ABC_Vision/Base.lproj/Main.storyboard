@@ -29,10 +29,10 @@
                                 <rect key="frame" x="0.0" y="708" width="120" height="120"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cartoonSpaceCat" translatesAutoresizingMaskIntoConstraints="NO" id="FvP-XK-rmv">
-                                <rect key="frame" x="273" y="165" width="120" height="120"/>
+                                <rect key="frame" x="273" y="185" width="120" height="120"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ABSeeLogoOnly" translatesAutoresizingMaskIntoConstraints="NO" id="Mlc-P3-ZZ1">
-                                <rect key="frame" x="16" y="40" width="361" height="350"/>
+                                <rect key="frame" x="16" y="60" width="361" height="350"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fM3-8A-tU8">
                                 <rect key="frame" x="46.666666666666657" y="450" width="300" height="152"/>
@@ -70,7 +70,7 @@
                             <constraint firstItem="Mlc-P3-ZZ1" firstAttribute="leading" secondItem="4WB-3Z-k7g" secondAttribute="leading" constant="16" id="Tzk-ff-JsU"/>
                             <constraint firstItem="fM3-8A-tU8" firstAttribute="centerX" secondItem="OkJ-fI-AZT" secondAttribute="centerX" id="WmM-E6-sva"/>
                             <constraint firstItem="Mlc-P3-ZZ1" firstAttribute="trailing" secondItem="4WB-3Z-k7g" secondAttribute="trailing" constant="-16" id="aSt-cL-G0R"/>
-                            <constraint firstItem="Mlc-P3-ZZ1" firstAttribute="top" secondItem="OkJ-fI-AZT" secondAttribute="top" constant="40" id="l1p-Eb-A77"/>
+                            <constraint firstItem="Mlc-P3-ZZ1" firstAttribute="top" secondItem="OkJ-fI-AZT" secondAttribute="top" constant="60" id="l1p-Eb-A77"/>
                             <constraint firstItem="KZJ-ez-izZ" firstAttribute="leading" secondItem="OkJ-fI-AZT" secondAttribute="leading" id="lWw-bv-zt3"/>
                             <constraint firstItem="FvP-XK-rmv" firstAttribute="centerY" secondItem="Mlc-P3-ZZ1" secondAttribute="centerY" constant="10" id="vBl-Ko-SPM"/>
                         </constraints>
