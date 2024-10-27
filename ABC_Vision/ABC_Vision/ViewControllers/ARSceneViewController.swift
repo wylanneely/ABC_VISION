@@ -13,17 +13,15 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     
-    var writtenWord = ""
-    var fileName = ""
+    var writtenWord: String = ""
+    var fileName: String = ""
     let wordConverter = WrittenWordConverter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set the view's delegate
         sceneView.delegate = self
         
-        // Show statistics such as fps and timing information
         sceneView.showsStatistics = false
         sceneView.autoenablesDefaultLighting = true
         fileName = wordConverter.getFileNameFrom(writtenWord)
@@ -63,13 +61,15 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     @IBAction func launchButton(_ sender: Any) {
         MusicPlayerManager.shared.playSoundFileNamed(name: "Whoosh")
         startSceneWith(word: self.writtenWord)
-        
     }
     
 
     // MARK: - ARSCNViewDelegate
     
-
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
     // Override to create and configure nodes for anchors added to the view's session.
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         let node = SCNNode()
@@ -80,11 +80,9 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
-        
     }
     
     func sessionWasInterrupted(_ session: ARSession) {
-        // Inform the user that the session has been interrupted, for example, by presenting an overlay
         
     }
     
