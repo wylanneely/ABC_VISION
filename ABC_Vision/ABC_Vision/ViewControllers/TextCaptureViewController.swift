@@ -189,9 +189,9 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     
         override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
             super.viewWillTransition(to: size, with: coordinator)
-//            coordinator.animate(alongsideTransition: { _ in
-//                self.updateVideoRotationAngle()
-//            })
+            coordinator.animate(alongsideTransition: { _ in
+                self.updateVideoRotationAngle()
+            })
         }
     
         override func viewDidAppear(_ animated: Bool) {
@@ -201,30 +201,33 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             openCloseWordHintTableView(self)
         }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+        override var prefersStatusBarHidden: Bool {
+            return true
+        }
 
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
-//    private func updateVideoRotationAngle() {
-//          guard let connection = videoPreviewLayer.connection else { return }
-//          switch UIDevice.current.orientation {
-//          case .portrait:
-//              connection.videoRotationAngle = 90
-//          case .landscapeRight:
-//              connection.videoRotationAngle = 180
-//          case .landscapeLeft:
-//              connection.videoRotationAngle = 0
-//          case .portraitUpsideDown:
-//              connection.videoRotationAngle = 270
-//          default:
-//              connection.videoRotationAngle = 90
-//          }
-//          videoPreviewLayer.frame = view.bounds
-//      }
-//    
+        override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+            return .allButUpsideDown
+        }
+    
+        // Enable the commented-out updateVideoRotationAngle method
+        private func updateVideoRotationAngle() {
+            guard let connection = videoPreviewLayer.connection else {
+                return
+            }
+            switch UIDevice.current.orientation {
+            case .portrait:
+                connection.videoOrientation = .portrait
+            case .landscapeRight:
+                connection.videoOrientation = .landscapeLeft
+            case .landscapeLeft:
+                connection.videoOrientation = .landscapeRight
+            case .portraitUpsideDown:
+                connection.videoOrientation = .portraitUpsideDown
+            default:
+                connection.videoOrientation = .portrait
+            }
+        }
+    
     //MARK: - Tap Gestures
     
     private func addGesture() {
@@ -327,47 +330,42 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     private func setupCamera() {
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .high
-        
+
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
             return
         }
+
         let videoInput: AVCaptureDeviceInput
-        
         do {
-            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)}
-        catch {
+            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+        } catch {
             return
         }
-        
-        if (captureSession.canAddInput(videoInput)) {
+
+        if captureSession.canAddInput(videoInput) {
             captureSession.addInput(videoInput)
         } else {
             return
         }
-        
+
         let videoOutput = AVCaptureVideoDataOutput()
-        videoOutput.setSampleBufferDelegate(self,
-            queue: DispatchQueue(label: "videoQueue")
-        )
-        
-        if (captureSession.canAddOutput(videoOutput)) {
+        videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "videoQueue"))
+
+        if captureSession.canAddOutput(videoOutput) {
             captureSession.addOutput(videoOutput)
         } else {
             return
         }
-        
-        videoPreviewLayer = AVCaptureVideoPreviewLayer(
-            session: captureSession
-        )
+
+        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         videoPreviewLayer.frame = view.layer.bounds
         videoPreviewLayer.videoGravity = .resizeAspectFill
-        view.layer.addSublayer(
-            videoPreviewLayer
-        )
-        /* starting capture session */
-        DispatchQueue.global(
-            qos: .background
-        ).async {
+        view.layer.addSublayer(videoPreviewLayer)
+        
+        // Update the video preview layer orientation based on device orientation
+        updateVideoRotationAngle()
+        
+        DispatchQueue.global(qos: .background).async {
             self.captureSession.startRunning()
         }
     }
