@@ -14,6 +14,10 @@ class CreatePlayerViewController: UIViewController {
            // Do any additional setup after loading the view.
        }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
     private let userDefaultsController = PlayerUserDefaultsController()
     
     @IBOutlet weak var textLabel: UILabel!
@@ -190,7 +194,7 @@ class CreatePlayerViewController: UIViewController {
                 return
         }
     }
-    
+
     var isReady: Bool = false
     
     @IBAction func startButtonTapped(_ sender: Any) {

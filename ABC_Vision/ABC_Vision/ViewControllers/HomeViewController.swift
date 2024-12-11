@@ -78,7 +78,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
       }
     
     //MARK: Lifecycle
-    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpCollectionView()

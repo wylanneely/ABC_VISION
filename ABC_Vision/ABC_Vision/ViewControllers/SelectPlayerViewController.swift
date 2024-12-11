@@ -32,6 +32,10 @@ class SelectPlayerViewController: UIViewController {
         animateCartoonDog()
     }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
     var player1: Player?
     var player2: Player?
     var player3: Player?
@@ -72,7 +76,7 @@ class SelectPlayerViewController: UIViewController {
             
             button?.imageView?.contentMode = .scaleToFill
             button?.setImage(UIImage(named: "SignInPencil"), for: .normal)
-            button?.backgroundColor = UIColor.opaqueABCBlue
+            button?.backgroundColor = UIColor.abcPinkOpaque
             button?.translatesAutoresizingMaskIntoConstraints = false
             button?.heightAnchor.constraint(equalToConstant: 120).isActive = true
         }
