@@ -9,7 +9,7 @@ import UIKit
 import AVFoundation
 import Vision
 
-class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
+class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate {
     
     
     var testWords: [Word]? {
@@ -20,39 +20,25 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     var currentPlayer: Player?
     
     
-    func setUpWord() {
-        switch testWordCategory {
-        case "Animals":wordHintTableView.isHidden = false
-            openCloseButton.isHidden = false
-        case "Foods": wordHintTableView.isHidden = false
-            openCloseButton.isHidden = false
-        case "Planets": wordHintTableView.isHidden = false
-            openCloseButton.isHidden = false
-        default : wordHintTableView.isHidden = true
-            openCloseButton.isHidden = true
-        }
-    }
-    
-    
     //MARK: - TableView
     
-    @IBOutlet weak var wordHintTableView: UITableView!
+    @IBOutlet weak var wordHintCollectionView: UICollectionView!
     @IBOutlet weak var openCloseButton: UIButton!
     @IBOutlet weak var wordAssistLabel: UILabel!
     
     var isTableViewOpen: Bool = true
     
-    func setUpTableView() {
-        wordHintTableView.dataSource = self
-        wordHintTableView.delegate = self
-        wordHintTableView.allowsSelection = true
+    func setUpCollectionView() {
+        wordHintCollectionView.dataSource = self
+        wordHintCollectionView.delegate = self
+        wordHintCollectionView.allowsSelection = true
         
-        let nib = UINib(nibName: "ARWordHintViewCell", bundle: nil)
-        self.wordHintTableView.register(nib, forCellReuseIdentifier: "ARWordHintViewCell")
+        let nib = UINib(nibName: "ARWordHintCell", bundle: nil)
+        self.wordHintCollectionView.register(nib, forCellWithReuseIdentifier: "ARWordHintCell")
         
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let testWords = testWords {
             return testWords.count
         } else {
@@ -60,9 +46,10 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = wordHintTableView.dequeueReusableCell(withIdentifier: "ARWordHintViewCell", for: indexPath) as? ARWordHintViewCell else {
-            return UITableViewCell()
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = wordHintCollectionView.dequeueReusableCell(withReuseIdentifier: "ARWordHintCell", for: indexPath) as? ARWordHintCell else {
+            return UICollectionViewCell()
         }
         if let testWords = testWords {
             let word = testWords[indexPath.row]
@@ -73,9 +60,9 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         
         return cell
     }
-      
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+   
+   
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let testWords = testWords else { return }
         
         let selectedWord = testWords[indexPath.row]
@@ -84,6 +71,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         openCloseWordHintTableView(self)
     }
     
+   
     func setWordAssistLabel(word: String, isComplete: Bool){
         wordAssistLabel.text = word
         if isComplete {
@@ -99,13 +87,13 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     
     @IBAction func openCloseWordHintTableView(_ sender: Any) {
 
-        let tableViewHeight = wordHintTableView.frame.height
+        let tableViewHeight = wordHintCollectionView.frame.height
         let newTableViewYPosition: CGFloat = isTableViewOpen ? -tableViewHeight : 0
 
         wordHintTableViewTopConstraint.constant = isTableViewOpen ? -tableViewHeight : 0
 
         UIView.animate(withDuration: 0.4, animations: {
-            self.wordHintTableView.transform = CGAffineTransform(translationX: 0, y: newTableViewYPosition)
+            self.wordHintCollectionView.transform = CGAffineTransform(translationX: 0, y: newTableViewYPosition)
             self.view.layoutIfNeeded()
         }) { _ in
             self.isTableViewOpen.toggle()
@@ -113,11 +101,10 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             self.openCloseButton.setImage(buttonImage, for: .normal)
         }
     }
-    
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
-    }
+//        
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 70
+//    }
     
     //MARK: AVCapture Video Sessions
     
@@ -146,14 +133,14 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         override func viewDidLoad() {
             super.viewDidLoad()
         //testing
-            setUpWord()
+         //   setUpWord()
         // Set up the camera
             setupCamera()
         // Set up Vision text recognition request
             setupVision()
         // Add tap gesture recognizer
             addGesture()
-            setUpTableView()
+            setUpCollectionView()
         //bringtableview to front
             bringSubviewsToFront()
         }
@@ -161,7 +148,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     func bringSubviewsToFront(){
         view.bringSubviewToFront(wordAssistLabel)
         view.bringSubviewToFront(magnifyingGlassImageView)
-        view.bringSubviewToFront(wordHintTableView)
+        view.bringSubviewToFront(wordHintCollectionView)
         view.bringSubviewToFront(backButton)
         view.bringSubviewToFront(openCloseButton)
 
@@ -388,7 +375,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     //2
     
     var lastProcessedTime: TimeInterval = 0
-    let frameProcessingInterval: TimeInterval = 0.3 // 0.1 = every 200 ms
+    let frameProcessingInterval: TimeInterval = 0.4// 0.1 = every 200 ms
     
     func captureOutput(
         _ output: AVCaptureOutput,
@@ -549,7 +536,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         for segue: UIStoryboardSegue,
         sender: Any?
     ) {
-        wordHintTableView.reloadData()
+        wordHintCollectionView.reloadData()
         wordAssistLabel.textColor = UIColor.abcGreen
         if segue.identifier == "toWordProcessedVC",
            let destinationVC = segue.destination as? ARSceneViewController {
@@ -572,6 +559,8 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         }
     }
     
+    //MARK: Rewards
     
+
         
 }
