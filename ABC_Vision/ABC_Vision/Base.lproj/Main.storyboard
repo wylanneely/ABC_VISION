@@ -31,7 +31,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cartoonSpaceCat" translatesAutoresizingMaskIntoConstraints="NO" id="FvP-XK-rmv">
                                 <rect key="frame" x="912" y="292.5" width="120" height="120"/>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ABSeeLogoOnly" translatesAutoresizingMaskIntoConstraints="NO" id="Mlc-P3-ZZ1">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ABSeeLogo2024Transparent" translatesAutoresizingMaskIntoConstraints="NO" id="Mlc-P3-ZZ1">
                                 <rect key="frame" x="16" y="60" width="1000" height="565"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fM3-8A-tU8">
@@ -102,6 +102,15 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aNe-cX-6YO">
                                 <rect key="frame" x="0.0" y="0.0" width="1032" height="1376"/>
                             </arscnView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="32u-zI-Q6n">
+                                <rect key="frame" x="10" y="10" width="75" height="65"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="backHomeButton"/>
+                                <connections>
+                                    <action selector="backButtonTapped:" destination="BV1-FR-VrT" eventType="touchUpInside" id="o8V-ZS-sG0"/>
+                                    <action selector="backButtonTapped:" destination="GlI-3q-pT8" eventType="touchUpInside" id="x56-1K-WaF"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Img-Cd-fog">
                                 <rect key="frame" x="456" y="1216" width="120" height="120"/>
                                 <constraints>
@@ -123,9 +132,11 @@
                         <constraints>
                             <constraint firstItem="aNe-cX-6YO" firstAttribute="bottom" secondItem="U0K-SW-4ec" secondAttribute="bottom" id="HjE-sl-Ans"/>
                             <constraint firstItem="Img-Cd-fog" firstAttribute="centerX" secondItem="U0K-SW-4ec" secondAttribute="centerX" id="NfY-c7-pMr"/>
+                            <constraint firstItem="32u-zI-Q6n" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" constant="10" id="d3g-gl-An1"/>
+                            <constraint firstItem="32u-zI-Q6n" firstAttribute="leading" secondItem="fQZ-KI-GVf" secondAttribute="leading" constant="10" id="gqo-E9-YMi"/>
                             <constraint firstItem="aNe-cX-6YO" firstAttribute="trailing" secondItem="U0K-SW-4ec" secondAttribute="trailing" id="mFv-zn-T7j"/>
                             <constraint firstItem="fQZ-KI-GVf" firstAttribute="bottom" secondItem="Img-Cd-fog" secondAttribute="bottom" constant="40" id="nil-ZG-s6G"/>
-                            <constraint firstItem="aNe-cX-6YO" firstAttribute="top" secondItem="fQZ-KI-GVf" secondAttribute="top" id="ovF-Uw-7Mb"/>
+                            <constraint firstItem="aNe-cX-6YO" firstAttribute="top" secondItem="U0K-SW-4ec" secondAttribute="top" id="ovF-Uw-7Mb"/>
                             <constraint firstItem="aNe-cX-6YO" firstAttribute="leading" secondItem="U0K-SW-4ec" secondAttribute="leading" id="zES-s2-eLv"/>
                         </constraints>
                     </view>
@@ -170,9 +181,8 @@
                                 <color key="textColor" name="ABCBlue"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JIT-76-UFf">
-                                <rect key="frame" x="18" y="769" width="73" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JIT-76-UFf">
+                                <rect key="frame" x="20" y="1291" width="75" height="65"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="backHomeButton"/>
                                 <connections>
@@ -188,11 +198,13 @@
                             <constraint firstItem="ocS-fg-5q9" firstAttribute="centerX" secondItem="EPr-2a-hO4" secondAttribute="centerX" id="FWM-sm-dgr"/>
                             <constraint firstItem="qM3-pz-zJJ" firstAttribute="centerX" secondItem="EPr-2a-hO4" secondAttribute="centerX" constant="8" id="M5f-7l-Lx0"/>
                             <constraint firstItem="qM3-pz-zJJ" firstAttribute="top" secondItem="s5z-wZ-XNB" secondAttribute="bottom" constant="25" id="MpT-DW-iP1"/>
+                            <constraint firstItem="JIT-76-UFf" firstAttribute="leading" secondItem="hUD-LL-QYk" secondAttribute="leading" constant="20" id="VWO-R8-v4q"/>
                             <constraint firstItem="s5z-wZ-XNB" firstAttribute="height" secondItem="EPr-2a-hO4" secondAttribute="height" multiplier="0.27" id="bhK-LR-gWV"/>
                             <constraint firstItem="s5z-wZ-XNB" firstAttribute="trailing" secondItem="hUD-LL-QYk" secondAttribute="trailing" id="fV7-E5-kEl"/>
                             <constraint firstItem="pDI-dH-hYD" firstAttribute="centerX" secondItem="EPr-2a-hO4" secondAttribute="centerX" id="gSu-kI-Mbv"/>
                             <constraint firstItem="ocS-fg-5q9" firstAttribute="centerY" secondItem="EPr-2a-hO4" secondAttribute="centerY" constant="70" id="lmS-Dc-axv"/>
                             <constraint firstItem="hUD-LL-QYk" firstAttribute="bottom" secondItem="pDI-dH-hYD" secondAttribute="bottom" id="ubm-0o-p70"/>
+                            <constraint firstItem="JIT-76-UFf" firstAttribute="bottom" secondItem="hUD-LL-QYk" secondAttribute="bottom" id="x57-ST-z8A"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GoN-sW-ykS"/>
@@ -203,7 +215,7 @@
                         <outlet property="wordAssistLabel" destination="pDI-dH-hYD" id="nr3-5O-Xfa"/>
                         <outlet property="wordHintTableView" destination="s5z-wZ-XNB" id="Jgb-Ne-Scv"/>
                         <outlet property="wordHintTableViewTopConstraint" destination="MpT-DW-iP1" id="iEr-Sx-3u1"/>
-                        <segue destination="BV1-FR-VrT" kind="show" identifier="toWordProcessedVC" id="au2-je-mlU"/>
+                        <segue destination="BV1-FR-VrT" kind="presentation" identifier="toWordProcessedVC" id="au2-je-mlU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LkT-Y2-arb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -772,7 +784,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ABSeeLogoOnly" width="512" height="440.5"/>
+        <image name="ABSeeLogo2024Transparent" width="960" height="540"/>
         <image name="AButton" width="148" height="155.5"/>
         <image name="AddButton" width="296" height="123"/>
         <image name="BButton" width="148" height="155.5"/>
@@ -805,21 +817,21 @@
         <image name="XButton" width="148" height="155.5"/>
         <image name="YButton" width="148" height="155.5"/>
         <image name="ZButton" width="148" height="155.5"/>
-        <image name="backHomeButton" width="49" height="50"/>
+        <image name="backHomeButton" width="51" height="51"/>
         <image name="cartoonSpaceCat" width="120" height="120"/>
         <image name="cartoonSpaceDog" width="120" height="120"/>
         <image name="cartoonSpaceDuck" width="120" height="120"/>
-        <image name="cometBackground" width="320.5" height="568.5"/>
+        <image name="cometBackground" width="320.5" height="570"/>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <image name="magnifyingglass1" width="380" height="380"/>
         <image name="paperplane" catalog="system" width="128" height="119"/>
         <image name="purpleGalacy" width="252" height="512"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="ABCBlue">
-            <color red="0.0" green="0.65600001811981201" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.63899999856948853" blue="0.88099998235702515" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ABCGreen">
-            <color red="0.0" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.43500000238418579" green="0.86000001430511475" blue="0.34000000357627869" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="ABCWhiteIce">
             <color red="0.8970000147819519" green="0.9179999828338623" blue="0.98000001907348633" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
