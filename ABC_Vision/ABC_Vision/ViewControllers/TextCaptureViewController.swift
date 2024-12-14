@@ -9,7 +9,7 @@ import UIKit
 import AVFoundation
 import Vision
 
-class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate {
+class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
     
     
     var testWords: [Word]? {
@@ -20,7 +20,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     var currentPlayer: Player?
     
     
-    //MARK: - TableView
+    //MARK: - CollectionView
     
     @IBOutlet weak var wordHintCollectionView: UICollectionView!
     @IBOutlet weak var openCloseButton: UIButton!
@@ -70,8 +70,36 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         setWordAssistLabel(word: selectedWord.name,isComplete: selectedWord.isComplete)
         openCloseWordHintTableView(self)
     }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let isIPhone = UIDevice.current.userInterfaceIdiom == .phone
+        
+        if isIPhone {
+            let width = (collectionView.frame.width - 40) 
+            let height = collectionView.frame.height
+            return CGSize(width: width, height: height)
+        } else {
+            let width = (collectionView.frame.width - 12) / 3 // Example: 3 cells per row with 10 pt spacing
+            let height = collectionView.frame.height // Example: 4 rows
+            return CGSize(width: width, height: height)
+        }
+      }
     
+    func setUpControlFlowLayout(){
+        if let layout = wordHintCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+               let snappingLayout = CenterSnappingFlowLayout()
+               snappingLayout.scrollDirection = .horizontal // Ensure horizontal scrolling
+               snappingLayout.itemSize = layout.itemSize
+               snappingLayout.minimumLineSpacing = layout.minimumLineSpacing
+            wordHintCollectionView.collectionViewLayout = snappingLayout
+           }
+           
+        wordHintCollectionView.decelerationRate = .fast // Ensures snapping feels natural
+       }
    
+    //MARK: Word Assist
+    
     func setWordAssistLabel(word: String, isComplete: Bool){
         wordAssistLabel.text = word
         if isComplete {
@@ -141,6 +169,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         // Add tap gesture recognizer
             addGesture()
             setUpCollectionView()
+            setUpControlFlowLayout()
         //bringtableview to front
             bringSubviewsToFront()
         }
