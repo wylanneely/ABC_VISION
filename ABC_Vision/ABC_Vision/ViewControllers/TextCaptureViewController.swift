@@ -26,9 +26,11 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     @IBOutlet weak var openCloseButton: UIButton!
     @IBOutlet weak var wordAssistLabel: UILabel!
     
-    var isTableViewOpen: Bool = true
+    var isTableViewOpen: Bool = false
     
     func setUpCollectionView() {
+        addBottomBorderLine()
+        
         wordHintCollectionView.dataSource = self
         wordHintCollectionView.delegate = self
         wordHintCollectionView.allowsSelection = true
@@ -76,12 +78,12 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         let isIPhone = UIDevice.current.userInterfaceIdiom == .phone
         
         if isIPhone {
-            let width = (collectionView.frame.width - 40) 
+            let width = (collectionView.frame.width - 40)
             let height = collectionView.frame.height
             return CGSize(width: width, height: height)
         } else {
-            let width = (collectionView.frame.width - 12) / 3 // Example: 3 cells per row with 10 pt spacing
-            let height = collectionView.frame.height // Example: 4 rows
+            let width = (collectionView.frame.width) / 2.6
+            let height = collectionView.frame.height
             return CGSize(width: width, height: height)
         }
       }
@@ -97,6 +99,17 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
            
         wordHintCollectionView.decelerationRate = .fast // Ensures snapping feels natural
        }
+    
+    private func addBottomBorderLine() {
+            let borderThickness: CGFloat = 1.0
+            let border = CALayer()
+            border.backgroundColor = UIColor.abcGreen.cgColor // Set the border color
+            border.frame = CGRect(x: 0,
+                                  y: wordHintCollectionView.frame.height - borderThickness,
+                                  width: wordHintCollectionView.frame.width,
+                                  height: borderThickness)
+            wordHintCollectionView.layer.addSublayer(border)
+        }
    
     //MARK: Word Assist
     
@@ -133,6 +146,32 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return 70
 //    }
+    
+    //MARK: ProgressBar
+    
+    private let gradientProgressBar = GradientProgressBar()
+    
+    func setUpProgressBar(){
+        // Configure progress bar
+        gradientProgressBar.colors = [.blue, .purple, .green]
+        gradientProgressBar.progress = 0.1 // Start at
+                
+                // Add to view
+        gradientProgressBar.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(gradientProgressBar)
+                
+                // Add constraints
+        NSLayoutConstraint.activate([
+            gradientProgressBar.leadingAnchor.constraint(equalTo: self.backButton.trailingAnchor, constant: 20),
+            gradientProgressBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            gradientProgressBar.centerYAnchor.constraint(equalTo: self.backButton.centerYAnchor),
+            gradientProgressBar.heightAnchor.constraint(equalToConstant: 20) // Set height
+        ])
+    }
+    
+    func runProgressBar(){
+        gradientProgressBar.progress = 1.0
+    }
     
     //MARK: AVCapture Video Sessions
     
@@ -171,6 +210,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             setUpCollectionView()
             setUpControlFlowLayout()
         //bringtableview to front
+            setUpProgressBar()
             bringSubviewsToFront()
         }
     
@@ -180,6 +220,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         view.bringSubviewToFront(wordHintCollectionView)
         view.bringSubviewToFront(backButton)
         view.bringSubviewToFront(openCloseButton)
+        view.bringSubviewToFront(gradientProgressBar)
 
     }
     
@@ -211,7 +252,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         }
     
         override func viewDidAppear(_ animated: Bool) {
-            super.viewDidAppear(false)
+            super.viewDidAppear(true)
             view.bringSubviewToFront(magnifyingGlassImageView)
             magnifyingGlassImageView.isHidden = false
             openCloseWordHintTableView(self)
