@@ -19,6 +19,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     var testWordCategory: String? 
     var currentPlayer: Player?
     
+    var selectedWordToLearn: String?
     
     //MARK: - CollectionView
     
@@ -70,6 +71,9 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         let selectedWord = testWords[indexPath.row]
         MusicPlayerManager.shared.playSoundFileNamed(name: selectedWord.name)
         setWordAssistLabel(word: selectedWord.name,isComplete: selectedWord.isComplete)
+        self.selectedWordToLearn = selectedWord.name
+        gradientProgressBar.resetProgress()
+        resetCorrectlyObservedWords()
         openCloseWordHintTableView(self)
     }
 
@@ -154,7 +158,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     func setUpProgressBar(){
         // Configure progress bar
         gradientProgressBar.colors = [.blue, .purple, .green]
-        gradientProgressBar.progress = 0.1 // Start at
+        gradientProgressBar.resetProgress() // Start at 0
                 
                 // Add to view
         gradientProgressBar.translatesAutoresizingMaskIntoConstraints = false
@@ -169,8 +173,32 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         ])
     }
     
-    func runProgressBar(){
-        gradientProgressBar.progress = 1.0
+    //To help with the loading of the view, 3 times to fill it up for now. Edit the progress animation in the gradient class
+    //make sure to reset when new word is selected
+    private var correctlyObserveredWords: Int = 0 {
+        didSet {
+            gradientProgressBar.addToProgress(timesCorrect: correctlyObserveredWords)
+        }
+    }
+    
+    private func resetCorrectlyObservedWords(){
+        correctlyObserveredWords = 0
+    }
+    
+    func addToCorrectWordCount(){
+        switch correctlyObserveredWords {
+        case 0: correctlyObserveredWords = 1
+        case 1: correctlyObserveredWords = 2
+        case 2: correctlyObserveredWords = 3
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                self.performSegue(
+                    withIdentifier: "toWordProcessedVC",
+                    sender: self
+                )
+            }
+        default:
+            return
+        }
     }
     
     //MARK: AVCapture Video Sessions
@@ -303,15 +331,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         return true
     }
     
-//    private func addGesture(){
-//        let tapGestureRecognizer = UITapGestureRecognizer(
-//            target: self,
-//            action: #selector(handleTap(_: )
-//            )
-//        )
-//        view.addGestureRecognizer(tapGestureRecognizer)
-//    }
-    
+
     @objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
         let location = gestureRecognizer.location(in: view)
         for (index,box) in textBoxes.enumerated() {
@@ -505,8 +525,16 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
            let box = CAShapeLayer()
            box.lineWidth = 2.5
            box.fillColor = UIColor.clear.cgColor
-           
-           if CheckerController.checkWordisCorrect(writtenText) {
+        if let wordToLearn = selectedWordToLearn {
+            //change in future stable releases
+            if writtenText?.lowercased() == wordToLearn.lowercased() {
+                addToCorrectWordCount()
+                box.strokeColor = UIColor.abcGreen.cgColor
+            } else {
+                box.strokeColor = UIColor.abcRed.cgColor
+            }
+            
+        } else if CheckerController.checkWordisCorrect(writtenText) {
                box.strokeColor = UIColor.abcGreen.cgColor
              //  startGreenBoxTimer() // Start the timer when the correct word is detected
            } else {
@@ -612,8 +640,14 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
            let destinationVC = segue.destination as? ARSceneViewController {
                unlockWrittenWord(written: writtenText)
             MusicPlayerManager.shared.playSoundFileNamed(name: "GoodJob")
-               destinationVC.writtenWord = writtenText
-         }
+            
+            //did this because when a user selects that word to learn then freestyle is off and they want to see the word they selected.
+            if let wordToLearn = selectedWordToLearn {
+                destinationVC.writtenWord = wordToLearn
+            } else {
+                destinationVC.writtenWord = writtenText
+            }
+        }
     }
     
     func unlockWrittenWord(written: String) {
