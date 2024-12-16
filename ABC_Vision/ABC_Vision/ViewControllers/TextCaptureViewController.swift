@@ -264,8 +264,17 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
 
         override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
+            resetWordLearningProcess()
             isPaused = false
         }
+    
+    func resetWordLearningProcess(){
+        //reset setatu bar and learning word
+        wordAssistLabel.text = nil
+        selectedWordToLearn = nil
+        gradientProgressBar.resetProgress()
+        resetCorrectlyObservedWords()
+    }
     
         override func viewWillLayoutSubviews() {
             super.viewWillLayoutSubviews()
