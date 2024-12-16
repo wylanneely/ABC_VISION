@@ -161,7 +161,7 @@
                                 <rect key="frame" x="326" y="568" width="380" height="380"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qM3-pz-zJJ">
-                                <rect key="frame" x="488" y="317.5" width="72" height="67"/>
+                                <rect key="frame" x="488" y="275" width="72" height="67"/>
                                 <color key="tintColor" name="ABCBlue"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain">
@@ -172,7 +172,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pDI-dH-hYD">
-                                <rect key="frame" x="516" y="1356" width="0.0" height="0.0"/>
+                                <rect key="frame" x="516" y="1311" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="62"/>
                                 <color key="textColor" name="ABCBlue"/>
                                 <nil key="highlightedColor"/>
@@ -201,8 +201,9 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="0Si-q1-1qM" firstAttribute="top" secondItem="EPr-2a-hO4" secondAttribute="top" id="2L8-Ks-gSG"/>
-                            <constraint firstItem="qM3-pz-zJJ" firstAttribute="top" secondItem="0Si-q1-1qM" secondAttribute="bottom" constant="42.5" id="E8H-uL-lvb"/>
+                            <constraint firstItem="qM3-pz-zJJ" firstAttribute="top" secondItem="0Si-q1-1qM" secondAttribute="bottom" id="E8H-uL-lvb"/>
                             <constraint firstItem="ocS-fg-5q9" firstAttribute="centerX" secondItem="EPr-2a-hO4" secondAttribute="centerX" id="FWM-sm-dgr"/>
+                            <constraint firstItem="pDI-dH-hYD" firstAttribute="centerY" secondItem="JIT-76-UFf" secondAttribute="top" constant="20" id="Ht0-uW-rhT"/>
                             <constraint firstItem="qM3-pz-zJJ" firstAttribute="centerX" secondItem="EPr-2a-hO4" secondAttribute="centerX" constant="8" id="M5f-7l-Lx0"/>
                             <constraint firstItem="JIT-76-UFf" firstAttribute="leading" secondItem="hUD-LL-QYk" secondAttribute="leading" constant="20" id="VWO-R8-v4q"/>
                             <constraint firstItem="0Si-q1-1qM" firstAttribute="leading" secondItem="hUD-LL-QYk" secondAttribute="leading" id="bih-MB-Mo6"/>
@@ -210,7 +211,6 @@
                             <constraint firstItem="ocS-fg-5q9" firstAttribute="centerY" secondItem="EPr-2a-hO4" secondAttribute="centerY" constant="70" id="lmS-Dc-axv"/>
                             <constraint firstItem="0Si-q1-1qM" firstAttribute="height" secondItem="EPr-2a-hO4" secondAttribute="height" multiplier="0.2" id="ncB-41-Caw"/>
                             <constraint firstItem="0Si-q1-1qM" firstAttribute="trailing" secondItem="hUD-LL-QYk" secondAttribute="trailing" id="pHb-h5-jkY"/>
-                            <constraint firstItem="hUD-LL-QYk" firstAttribute="bottom" secondItem="pDI-dH-hYD" secondAttribute="bottom" id="ubm-0o-p70"/>
                             <constraint firstItem="JIT-76-UFf" firstAttribute="bottom" secondItem="hUD-LL-QYk" secondAttribute="bottom" id="x57-ST-z8A"/>
                         </constraints>
                     </view>
