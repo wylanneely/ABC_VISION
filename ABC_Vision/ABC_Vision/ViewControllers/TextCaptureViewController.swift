@@ -647,12 +647,13 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         wordAssistLabel.textColor = UIColor.abcGreen
         if segue.identifier == "toWordProcessedVC",
            let destinationVC = segue.destination as? ARSceneViewController {
-               unlockWrittenWord(written: writtenText)
+           // unlockWrittenWord(written: writtenText)
             MusicPlayerManager.shared.playSoundFileNamed(name: "GoodJob")
             
             //did this because when a user selects that word to learn then freestyle is off and they want to see the word they selected.
             if let wordToLearn = selectedWordToLearn {
                 destinationVC.writtenWord = wordToLearn
+                unlockWrittenWord(written: wordToLearn)
             } else {
                 destinationVC.writtenWord = writtenText
             }
