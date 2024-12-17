@@ -7,13 +7,13 @@
 
 import AVFoundation
 
-class MusicPlayerManager {
+class MusicPlayerManager: NSObject, AVAudioPlayerDelegate {
     
     static let shared = MusicPlayerManager()
     
     var audioPlayer: AVAudioPlayer?
     
-    private init() {}
+    override private init() {}
     
     func startBackgroundMusic() {
         let audioSession = AVAudioSession.sharedInstance()
@@ -90,5 +90,37 @@ class MusicPlayerManager {
         } else {
             print("Error: Sound file not found.")
         }
+    }
+    
+    //Completion Area
+    
+
+   func playSoundWithCompletion(name: String, completion: @escaping () -> Void) {
+            do {
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+                try AVAudioSession.sharedInstance().setActive(true)
+            } catch {
+                print("Failed to set audio session category:", error)
+            }
+            if let soundURL = Bundle.main.url(forResource: name, withExtension: "mp3") {
+                do {
+                    audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+                    audioPlayer?.prepareToPlay()
+                    audioPlayer?.play()
+                    completion()
+                } catch {
+                    print("Error: Could not load sound file.")
+                }
+            } else {
+                print("Error: Sound file not found.")
+            }
+        }
+
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+            // Only call the completion handler if it's set
+         //   self.completionHandler?()
+            
+            // After the completion is called, clear the handler to avoid retain cycles
+        
     }
 }
