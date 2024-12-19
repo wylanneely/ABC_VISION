@@ -158,7 +158,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass1" translatesAutoresizingMaskIntoConstraints="NO" id="ocS-fg-5q9">
-                                <rect key="frame" x="326" y="568" width="380" height="380"/>
+                                <rect key="frame" x="326" y="498" width="380" height="380"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qM3-pz-zJJ">
                                 <rect key="frame" x="488" y="275" width="72" height="67"/>
@@ -172,7 +172,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pDI-dH-hYD">
-                                <rect key="frame" x="516" y="1271" width="0.0" height="0.0"/>
+                                <rect key="frame" x="536" y="1271" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="83"/>
                                 <color key="textColor" name="ABCBlue"/>
                                 <nil key="highlightedColor"/>
@@ -207,8 +207,8 @@
                             <constraint firstItem="qM3-pz-zJJ" firstAttribute="centerX" secondItem="EPr-2a-hO4" secondAttribute="centerX" constant="8" id="M5f-7l-Lx0"/>
                             <constraint firstItem="JIT-76-UFf" firstAttribute="leading" secondItem="hUD-LL-QYk" secondAttribute="leading" constant="20" id="VWO-R8-v4q"/>
                             <constraint firstItem="0Si-q1-1qM" firstAttribute="leading" secondItem="hUD-LL-QYk" secondAttribute="leading" id="bih-MB-Mo6"/>
-                            <constraint firstItem="pDI-dH-hYD" firstAttribute="centerX" secondItem="EPr-2a-hO4" secondAttribute="centerX" id="gSu-kI-Mbv"/>
-                            <constraint firstItem="ocS-fg-5q9" firstAttribute="centerY" secondItem="EPr-2a-hO4" secondAttribute="centerY" constant="70" id="lmS-Dc-axv"/>
+                            <constraint firstItem="pDI-dH-hYD" firstAttribute="centerX" secondItem="EPr-2a-hO4" secondAttribute="centerX" constant="20" id="gSu-kI-Mbv"/>
+                            <constraint firstItem="ocS-fg-5q9" firstAttribute="centerY" secondItem="EPr-2a-hO4" secondAttribute="centerY" id="lmS-Dc-axv"/>
                             <constraint firstItem="0Si-q1-1qM" firstAttribute="height" secondItem="EPr-2a-hO4" secondAttribute="height" multiplier="0.2" id="ncB-41-Caw"/>
                             <constraint firstItem="0Si-q1-1qM" firstAttribute="trailing" secondItem="hUD-LL-QYk" secondAttribute="trailing" id="pHb-h5-jkY"/>
                             <constraint firstItem="JIT-76-UFf" firstAttribute="bottom" secondItem="hUD-LL-QYk" secondAttribute="bottom" id="x57-ST-z8A"/>
