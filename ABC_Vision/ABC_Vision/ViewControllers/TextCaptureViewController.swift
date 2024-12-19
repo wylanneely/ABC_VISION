@@ -74,6 +74,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
 //        }
         setWordAssistLabel(word: selectedWord, isComplete: selectedWord.isComplete)
         self.selectedWordToLearn = selectedWord.name
+        loopOfWordINAssistInt = 0
         gradientProgressBar.resetProgress()
         resetCorrectlyObservedWords()
         openCloseWordHintTableView(self)
@@ -145,14 +146,11 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
                 }
                 return
             }
-
             let letter = letters[i]
-
             // Update label before playing sound
             DispatchQueue.main.async {
                 self.wordAssistLabel.text = String(letter)
             }
-
             // Play sound and proceed to next letter after a delay
             MusicPlayerManager.shared.playSoundWithCompletion(name: String(letter).capitalized) {
                 i += 1
@@ -161,7 +159,6 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
                 }
             }
         }
-
         playNextLetter()
     }
     
@@ -173,11 +170,37 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     
     @objc func wordAssistLabelTapped(_ sender: UITapGestureRecognizer) {
         if let word = selectedWordToLearn {
-            wordAssistAudioAndAssistantLayout(word: word)
+            singleLoopWordAssistAudioAndAssistantLayout(word: word)
         }
     }
     
+    private var loopOfWordINAssistInt: Int = 0
     
+    func singleLoopWordAssistAudioAndAssistantLayout(word:String) {
+        let i = loopOfWordINAssistInt
+        let letters = Array(word)
+        let total = letters.count
+
+            guard i < total else {
+                // All letters have been played, play the full word sound
+                DispatchQueue.main.async {
+                    self.wordAssistLabel.text = word
+                    MusicPlayerManager.shared.playSoundFileNamed(name: word)
+                    self.loopOfWordINAssistInt = 0
+                }
+                return
+            }
+            let letter = letters[i]
+            // Update label before playing sound
+            DispatchQueue.main.async {
+                self.wordAssistLabel.text = String(letter)
+            }
+            // Play sound and proceed to next letter after a delay
+            MusicPlayerManager.shared.playSoundWithCompletion(name: String(letter).capitalized) {
+                self.loopOfWordINAssistInt += 1
+                
+            }
+    }
     
     
     @IBOutlet weak var wordHintTableViewTopConstraint: NSLayoutConstraint!
