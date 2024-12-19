@@ -12,11 +12,11 @@ import Vision
 class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
     
     
-    var testWords: [Word]? {
-      return GameController.shared.getWords(forPlayer: currentPlayer?.nickname ?? "", inStack: testWordCategory ?? "")
+    private var wordsToLearn: [Word]? {
+      return GameController.shared.getWords(forPlayer: currentPlayer?.nickname ?? "", inStack: wordCategory ?? "")
     }
     
-    var testWordCategory: String? 
+    var wordCategory: String? 
     var currentPlayer: Player?
     
     var selectedWordToLearn: String?
@@ -42,7 +42,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let testWords = testWords {
+        if let testWords = wordsToLearn {
             return testWords.count
         } else {
             return 1
@@ -54,8 +54,8 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         guard let cell = wordHintCollectionView.dequeueReusableCell(withReuseIdentifier: "ARWordHintCell", for: indexPath) as? ARWordHintCell else {
             return UICollectionViewCell()
         }
-        if let testWords = testWords {
-            let word = testWords[indexPath.row]
+        if let words = wordsToLearn {
+            let word = words[indexPath.row]
           //  cell.WordHintLabelDelegate = self
             cell.setUIStates(word: word)
             return cell
@@ -66,9 +66,9 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
    
    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let testWords = testWords else { return }
+        guard let words = wordsToLearn else { return }
         
-        let selectedWord = testWords[indexPath.row]
+        let selectedWord = words[indexPath.row]
 //        DispatchQueue.main.async {
 //            MusicPlayerManager.shared.playSoundFileNamed(name: selectedWord.name)
 //        }
@@ -131,7 +131,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     
     func wordAssistAudioAndAssistantLayout(word: Word) {
         var i = 0
-        let letters = Array(word.name) // Convert word.name to an array of characters
+        let letters = Array(word.name)
         let total = letters.count
 
         func playNextLetter() {
@@ -709,13 +709,13 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     }
     
     func unlockWrittenWord(written: String) {
-        if (testWords != nil) {
-            for word in testWords! {
+        if (wordsToLearn != nil) {
+            for word in wordsToLearn! {
                 let name = word.name
                 if written.lowercased() == name.lowercased() {
                     
                     word.unlockComplete()
-                    GameController.shared.markWordComplete(forPlayer: currentPlayer?.nickname ?? "", inStack: testWordCategory ?? "" , wordName: word.name)
+                    GameController.shared.markWordComplete(forPlayer: currentPlayer?.nickname ?? "", inStack: wordCategory ?? "" , wordName: word.name)
                 }
             }
         }
