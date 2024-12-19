@@ -119,6 +119,8 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
    
     //MARK: Word Assist
     
+    
+    
     func setWordAssistLabel(word: Word, isComplete: Bool){
         if isComplete {
             wordAssistLabel.textColor = UIColor.abcGreen
@@ -126,20 +128,20 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             wordAssistLabel.textColor = UIColor.abcRed
         }
         
-        wordAssistAudioAndAssistantLayout(word: word)
+        wordAssistAudioAndAssistantLayout(word: word.name)
     }
     
-    func wordAssistAudioAndAssistantLayout(word: Word) {
+    func wordAssistAudioAndAssistantLayout(word: String) {
         var i = 0
-        let letters = Array(word.name)
+        let letters = Array(word)
         let total = letters.count
 
         func playNextLetter() {
             guard i < total else {
                 // All letters have been played, play the full word sound
                 DispatchQueue.main.async {
-                    self.wordAssistLabel.text = word.name
-                    MusicPlayerManager.shared.playSoundFileNamed(name: word.name)
+                    self.wordAssistLabel.text = word
+                    MusicPlayerManager.shared.playSoundFileNamed(name: word)
                 }
                 return
             }
@@ -162,16 +164,19 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
 
         playNextLetter()
     }
-
-//        let totalDelay = Double(word.name.count + 1) // Total time = 1.0s per letter + initial delay
-//        DispatchQueue.main.asyncAfter(deadline: .now() + totalDelay) {
-//            // Code you want to run after the loop completes
-//            print("All sounds have been played!")
-//            // Example: Play a final sound or trigger another action
-//            MusicPlayerManager.shared.playSoundFileNamed(name: word.name)
-//        }
-//        
-        
+    
+    private func setTapGestureForWordAssistLabel(){
+        let labelTap = UITapGestureRecognizer(target: self, action: #selector(self.wordAssistLabelTapped(_:)))
+        self.wordAssistLabel.isUserInteractionEnabled = true
+        self.wordAssistLabel.addGestureRecognizer(labelTap)
+    }
+    
+    @objc func wordAssistLabelTapped(_ sender: UITapGestureRecognizer) {
+        if let word = selectedWordToLearn {
+            wordAssistAudioAndAssistantLayout(word: word)
+        }
+    }
+    
     
     
     
@@ -281,8 +286,9 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             setupCamera()
         // Set up Vision text recognition request
             setupVision()
-        // Add tap gesture recognizer
+        // Add tap gesture recognizers
             addGesture()
+            setTapGestureForWordAssistLabel()
             setUpCollectionView()
             setUpControlFlowLayout()
         //bringtableview to front
