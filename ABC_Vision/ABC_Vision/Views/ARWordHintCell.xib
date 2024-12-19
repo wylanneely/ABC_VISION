@@ -19,13 +19,15 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Okn-3E-Exx">
-                        <rect key="frame" x="0.0" y="0.0" width="384" height="136"/>
+                        <rect key="frame" x="0.0" y="0.0" width="510" height="136"/>
                         <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="84"/>
                         <color key="textColor" name="ABCRed"/>
                         <nil key="highlightedColor"/>
+                        <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <size key="shadowOffset" width="1" height="-1"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkmark.seal.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="aqY-34-9ed">
-                        <rect key="frame" x="404" y="14.333333333333336" width="106" height="107.33333333333331"/>
+                        <rect key="frame" x="465" y="14.333333333333336" width="45" height="107.33333333333331"/>
                         <color key="tintColor" name="ABCRed"/>
                     </imageView>
                 </subviews>
@@ -33,9 +35,9 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="aqY-34-9ed" secondAttribute="trailing" symbolic="YES" id="81S-tB-jv6"/>
-                <constraint firstItem="aqY-34-9ed" firstAttribute="leading" secondItem="Okn-3E-Exx" secondAttribute="trailing" constant="20" id="AUR-Bu-YUh"/>
-                <constraint firstItem="aqY-34-9ed" firstAttribute="width" secondItem="aqY-34-9ed" secondAttribute="height" multiplier="1:1" id="MD4-zW-twn"/>
+                <constraint firstAttribute="trailing" secondItem="Okn-3E-Exx" secondAttribute="trailing" id="IcL-uZ-o5E"/>
                 <constraint firstAttribute="bottom" secondItem="Okn-3E-Exx" secondAttribute="bottom" id="YBe-FM-2Zk"/>
+                <constraint firstItem="aqY-34-9ed" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.0882353" id="cgI-uI-zDC"/>
                 <constraint firstItem="Okn-3E-Exx" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="gUD-co-HoU"/>
                 <constraint firstItem="aqY-34-9ed" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="jhk-lf-CJN"/>
                 <constraint firstItem="aqY-34-9ed" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="15" id="tUc-QO-2Yd"/>
