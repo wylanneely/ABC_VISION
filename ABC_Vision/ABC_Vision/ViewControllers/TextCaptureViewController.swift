@@ -30,8 +30,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     var isTableViewOpen: Bool = false
     
     func setUpCollectionView() {
-        addBottomBorderLine()
-        
+        setScrollIndicatorColor(color: .abcBlue )
         wordHintCollectionView.dataSource = self
         wordHintCollectionView.delegate = self
         wordHintCollectionView.allowsSelection = true
@@ -40,6 +39,21 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         self.wordHintCollectionView.register(nib, forCellWithReuseIdentifier: "ARWordHintCell")
         
     }
+    
+    func setScrollIndicatorColor(color: UIColor) {
+            
+        for view in self.wordHintCollectionView.subviews {
+            if view.isKind(of: UIImageView.self),
+                    let imageView = view as? UIImageView,
+                    let image = imageView.image  {
+                    
+                    imageView.tintColor = color
+                    imageView.image = image.withRenderingMode(.alwaysTemplate)
+                }
+            }
+            
+        self.wordHintCollectionView.flashScrollIndicators()
+        }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let testWords = wordsToLearn {
@@ -107,17 +121,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         wordHintCollectionView.decelerationRate = .fast // Ensures snapping feels natural
        }
     
-    private func addBottomBorderLine() {
-            let borderThickness: CGFloat = 1.0
-            let border = CALayer()
-            border.backgroundColor = UIColor.abcGreen.cgColor // Set the border color
-            border.frame = CGRect(x: 0,
-                                  y: wordHintCollectionView.frame.height - borderThickness,
-                                  width: wordHintCollectionView.frame.width,
-                                  height: borderThickness)
-            wordHintCollectionView.layer.addSublayer(border)
-        }
-   
+
     //MARK: Word Assist
     
     
@@ -233,7 +237,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     
     func setUpProgressBar(){
         // Configure progress bar
-        gradientProgressBar.colors = [.blue, .purple, .green]
+        gradientProgressBar.colors = [.abcBlue, .abcPurple, .abcGreen]
         gradientProgressBar.resetProgress() // Start at 0
                 
                 // Add to view
@@ -303,8 +307,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     
         override func viewDidLoad() {
             super.viewDidLoad()
-        //testing
-         //   setUpWord()
+            setIpadFeatures()
         // Set up the camera
             setupCamera()
         // Set up Vision text recognition request
@@ -318,6 +321,14 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             setUpProgressBar()
             bringSubviewsToFront()
         }
+    
+    func setIpadFeatures(){
+        let deviceType = UIDevice.current.userInterfaceIdiom
+        
+        if deviceType == .pad {
+            wordAssistLabel.font = UIFont(name: "Chalkboard SE Bold", size: 156)
+        }
+    }
     
     func bringSubviewsToFront(){
         view.bringSubviewToFront(wordAssistLabel)
