@@ -140,10 +140,12 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         var i = 0
         let letters = Array(word)
         let total = letters.count
-
+        self.isTextRecognitionRequestPaused = true
+        
         func playNextLetter() {
             guard i < total else {
                 // All letters have been played, play the full word sound
+                self.isTextRecognitionRequestPaused = false
                 DispatchQueue.main.async {
                     self.wordAssistLabel.text = word
                     MusicPlayerManager.shared.playSoundFileNamed(name: word)
@@ -451,6 +453,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     private var recognizedTexts: [String] = []
 //3
     private func processTextRecognitionResults(_ results: [Any]?) {
+
         guard let results = results as? [VNRecognizedTextObservation] else {
             return
         }
@@ -564,11 +567,14 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     var lastProcessedTime: TimeInterval = 0
     let frameProcessingInterval: TimeInterval = 0.4// 0.1 = every 200 ms
     
+    var isTextRecognitionRequestPaused = false
+    
     func captureOutput(
         _ output: AVCaptureOutput,
         didOutput sampleBuffer: CMSampleBuffer,
         from connection: AVCaptureConnection
     ) {
+        if isTextRecognitionRequestPaused { return }
         // Get current time
         let currentTime = CACurrentMediaTime()
         
@@ -616,8 +622,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     var textBoxes: [CAShapeLayer] = []
     var writtenText = ""
 
-    private func createBox(for observation: VNRecognizedTextObservation) -> CAShapeLayer {
-           
+    private func createBox(for observation: VNRecognizedTextObservation) -> CAShapeLayer? {
            let writtenText = observation.topCandidates(1).first?.string
            let box = CAShapeLayer()
            box.lineWidth = 2.5
@@ -633,12 +638,14 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             
         } else if CheckerController.checkWordisCorrect(writtenText) {
                box.strokeColor = UIColor.abcGreen.cgColor
-             //  startGreenBoxTimer() // Start the timer when the correct word is detected
            } else {
                box.strokeColor = UIColor.abcRed.cgColor
-              // MusicPlayerManager.shared.playSoundFileNamed(name: "IncorrectSound")
-             //  resetGreenBoxTimer() // Reset the timer if it's not correct
            }
+        
+        if isTextRecognitionRequestPaused {
+            box.strokeColor = UIColor.clear.cgColor
+        }
+
            
            let boundingBox = observation.boundingBox
            let boxWidth = (boundingBox.width + 0.05) * view.bounds.width
@@ -657,28 +664,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
            box.path = path.cgPath
            return box
        }
-       
-    //This will be implemented in future for
-//       // Timer Logic for Green Box Detection
-//       func startGreenBoxTimer() {
-//           resetGreenBoxTimer() // Ensure the timer is reset before starting a new one
-//           greenBoxTimer = Timer.scheduledTimer(withTimeInterval: detectionDuration, repeats: false) { [weak self] _ in
-//               self?.triggerSegueForCorrectWord()
-//           }
-//       }
-//       
-//       func resetGreenBoxTimer() {
-//           greenBoxTimer?.invalidate()
-//           greenBoxTimer = nil
-//       }
-//       
-//       // This method will be called when the green box is detected for 1.4 seconds
-//       func triggerSegueForCorrectWord() {
-//           if let currentText = recognizedTexts.first, CheckerController.checkWordisCorrect(currentText) {
-//               self.performSegue(withIdentifier: "toWordProcessedVC", sender: self)
-//           }
-//       }
-    
+   
     private func updateRecognizedText(
         _ text: String
     ) {
