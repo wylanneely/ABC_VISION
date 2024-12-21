@@ -228,10 +228,7 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             self.openCloseButton.setImage(buttonImage, for: .normal)
         }
     }
-//        
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 70
-//    }
+
     
     //MARK: ProgressBar
     
@@ -725,12 +722,9 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             MusicPlayerManager.shared.playSoundFileNamed(name: "GoodJob")
             
             //did this because when a user selects that word to learn then freestyle is off and they want to see the word they selected.
-            if let wordToLearn = selectedWordToLearn {
-                destinationVC.writtenWord = wordToLearn
-                unlockWrittenWord(written: wordToLearn)
-            } else {
-                destinationVC.writtenWord = writtenText
-            }
+            destinationVC.writtenWord = writtenText
+            unlockWrittenWord(written: writtenText)
+            
         }
     }
     
