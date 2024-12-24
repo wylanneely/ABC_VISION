@@ -17,27 +17,28 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var wordsCatagory: String? = "Animals"
     
     var isPlanetsUnlocked: Bool {
-        if checkIfWordPackIsComplete(wordStackName: "Animals") {
-            return true
-        } else {
-            return false
-        }
+//        if checkIfWordPackIsComplete(wordStackName: "Animals") {
+//            return true
+//        } else {
+//            return false
+//        }
+        //FIX: amend in future release
+        return true
     }
     
     var isFoodsUnlocked: Bool {
-        if checkIfWordPackIsComplete(wordStackName: "Planets") {
-            return true
-        } else {
-            return false
-        }
+//        if checkIfWordPackIsComplete(wordStackName: "Planets") {
+//            return true
+//        } else {
+//            return false
+//        }
+        //FIX: amend in future release
+
+        return true
     }
     
     var isFreestyleUnlocked: Bool {
-        if checkIfWordPackIsComplete(wordStackName: "Foods") {
-            return true
-        } else {
-            return false
-        }
+        return checkIfAllStacksComplete()
     }
 
     //haptics
@@ -47,35 +48,35 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     //MARK: Video
     
-    func launchHowTOVideo(){
-        
-        
-        let hasSeenVideo = UserDefaults.standard.bool(forKey: "hasSeenIntroVideo")
-        
-        if hasSeenVideo != true {
-            // Play the video
-            playIntroVideo()
-            
-            // Mark the video as seen
-            UserDefaults.standard.set(true, forKey: "hasSeenIntroVideo")
-        }
-    }
+//    func launchHowTOVideo(){
+//        
+//        
+//        let hasSeenVideo = UserDefaults.standard.bool(forKey: "hasSeenIntroVideo")
+//        
+//        if hasSeenVideo != true {
+//            // Play the video
+//            playIntroVideo()
+//            
+//            // Mark the video as seen
+//            UserDefaults.standard.set(true, forKey: "hasSeenIntroVideo")
+//        }
+//    }
     
-    func playIntroVideo() {
-          // Get the video file URL from the app bundle
-          if let videoPath = Bundle.main.path(forResource: "ABSeeHowTo", ofType: "mp4") {
-              let videoURL = URL(fileURLWithPath: videoPath)
-              
-              let player = AVPlayer(url: videoURL)
-              let playerViewController = AVPlayerViewController()
-              playerViewController.player = player
-              playerViewController.videoGravity = .resizeAspectFill
-              // Present the video player
-              self.present(playerViewController, animated: true) {
-                  playerViewController.player?.play()
-              }
-          }
-      }
+//    func playIntroVideo() {
+//          // Get the video file URL from the app bundle
+//          if let videoPath = Bundle.main.path(forResource: "ABSeeHowTo", ofType: "mp4") {
+//              let videoURL = URL(fileURLWithPath: videoPath)
+//              
+//              let player = AVPlayer(url: videoURL)
+//              let playerViewController = AVPlayerViewController()
+//              playerViewController.player = player
+//              playerViewController.videoGravity = .resizeAspectFill
+//              // Present the video player
+//              self.present(playerViewController, animated: true) {
+//                  playerViewController.player?.play()
+//              }
+//          }
+//      }
     
     //MARK: Lifecycle
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -92,7 +93,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        launchHowTOVideo()
+       // launchHowTOVideo()
         animateAnimalImages()
         MusicPlayerManager.shared.startBackgroundMusic()
     }
@@ -261,7 +262,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
     }
     
-    func checkIfWordCategorySelected(fromTitle:String)->Bool{
+    private func checkIfWordCategorySelected(fromTitle:String)->Bool{
         if wordsCatagory == fromTitle {
             return true
         } else {
@@ -269,7 +270,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
-    func checkIfWordPackIsComplete(wordStackName: String)-> Bool {
+    private func checkIfWordPackIsComplete(wordStackName: String)-> Bool {
         if let player = currentPlayer {
             if GameController.shared.areAllWordsComplete(forPlayer: player, inStack: wordStackName) ?? false {
                 return true
@@ -277,6 +278,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 return false
             }
         }
+        return false
+    }
+    private func checkIfAllStacksComplete()-> Bool {
+        if let player = currentPlayer {
+            return GameController.shared.areAllStacksComplete(forPlayer: player) }
         return false
     }
     
@@ -667,7 +673,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let textCaptureController = storyboard.instantiateViewController(withIdentifier: "TextCaptureVC") as? TextCaptureViewController {
              textCaptureController.currentPlayer = currentPlayer
-            textCaptureController.testWordCategory = wordsCatagory
+            textCaptureController.wordCategory = wordsCatagory
             window.rootViewController = textCaptureController
             UIView.transition(with: window,
                               duration: 0.5,
@@ -722,7 +728,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toTextRead" {
                if let destinationVC = segue.destination as? TextCaptureViewController {
-                   destinationVC.testWordCategory = wordsCatagory // Replace with your actual string variable
+                   destinationVC.wordCategory = wordsCatagory // Replace with your actual string variable
                    destinationVC.currentPlayer = currentPlayer
                }
            }
