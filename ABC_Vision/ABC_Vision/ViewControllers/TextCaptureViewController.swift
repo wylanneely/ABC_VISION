@@ -99,11 +99,11 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
         let isIPhone = UIDevice.current.userInterfaceIdiom == .phone
         
         if isIPhone {
-            let width = (collectionView.frame.width - 40)
+            let width = (collectionView.frame.width - 8)
             let height = collectionView.frame.height
             return CGSize(width: width, height: height)
         } else {
-            let width = (collectionView.frame.width) / 2.6
+            let width = (collectionView.frame.width) / 2
             let height = collectionView.frame.height
             return CGSize(width: width, height: height)
         }
