@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSMotionUsageDescription</key>
+	<string>Motion sensors are used to provide a more accurate AR experience.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>The camera is used for augmented reality and the Live Writing expirience.</string>
+</dict>
+</plist>
