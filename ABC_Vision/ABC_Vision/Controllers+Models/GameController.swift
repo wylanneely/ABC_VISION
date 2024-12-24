@@ -139,6 +139,20 @@ extension GameController {
         }
     }
     
+    func areAllStacksComplete(forPlayer player: Player) -> Bool {
+        // Find the specific word stack within the player's word stacks
+        for stack in player.wordStacks {
+            // Check if all words in the word stack are complete
+            for word in stack.words {
+                if !word.isComplete {
+                    return false // If any word is incomplete, return false
+                }
+            }
+            return true // All words are complete
+        }
+        return false
+    }
+    
     func isWordComplete(forPlayer playerNickname: String, inStack stackName: String, wordName: String) -> Bool? {
            guard let player = players.first(where: { $0.nickname == playerNickname }),
                  let wordStack = player.wordStacks.first(where: { $0.name == stackName }),
