@@ -1,7 +1,7 @@
 # ABC_VISION
 newest ABC Vision
 
-Stop Brainrot, Encourage Writing
+Live Writing
 
 Make Writing Great Again
-Teach 4 year olds to write like 8 year olds
+Teaching 4 year olds to write like 8 year olds since 2024
