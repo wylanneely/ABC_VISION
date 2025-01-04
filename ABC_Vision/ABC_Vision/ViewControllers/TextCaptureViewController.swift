@@ -546,6 +546,9 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
     
     //1
     private func setupVision() {
+        
+        let appLanguage = LanguageChecker().language
+        
         textRecognitionRequest = VNRecognizeTextRequest { [weak self] (request, error) in
             if let error = error {
                 print("Error recognizing text: \(error.localizedDescription)")
@@ -554,9 +557,17 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             self?.processTextRecognitionResults(request.results)
         }
         
+        
         textRecognitionRequest.recognitionLevel = .accurate
         textRecognitionRequest.usesLanguageCorrection = true
-        textRecognitionRequest.recognitionLanguages = ["en-US"] // Set to recognize only English text
+        switch appLanguage {
+        case "English":
+            textRecognitionRequest.recognitionLanguages = ["en-US"]
+        case "Russian":
+            textRecognitionRequest.recognitionLanguages = ["ru-RU"]
+        default:
+            textRecognitionRequest.recognitionLanguages = ["en-US"]
+        }
     }
 
     //2
@@ -722,8 +733,14 @@ class TextCaptureViewController: UIViewController, AVCaptureVideoDataOutputSampl
             MusicPlayerManager.shared.playSoundFileNamed(name: "GoodJob")
             
             //did this because when a user selects that word to learn then freestyle is off and they want to see the word they selected.
-            destinationVC.writtenWord = writtenText
-            unlockWrittenWord(written: writtenText)
+            //fix: set the written word to the word learning
+            if let selectedWordToLearn = selectedWordToLearn {
+                destinationVC.writtenWord = selectedWordToLearn
+                unlockWrittenWord(written: selectedWordToLearn)
+            } else {
+                destinationVC.writtenWord = writtenText
+                unlockWrittenWord(written: writtenText)
+            }
             
         }
     }
