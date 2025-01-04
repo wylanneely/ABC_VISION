@@ -20,6 +20,7 @@ struct WordStack: Codable {
     }
 }
 
+
 class Word: Codable {
     let name: String
     var isComplete: Bool

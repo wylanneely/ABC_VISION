@@ -9,6 +9,8 @@ import Foundation
 
 struct WrittenWordConverter {
     
+    private let language = LanguageChecker().language
+    
     //MARK: - FileNames
     
     private let WordToFileDictionary: [String: String] = [
@@ -83,12 +85,80 @@ struct WrittenWordConverter {
         "Whale":"Whale"
     ]
     
+    private let russianWordToFileDictionary: [String: String] =  [
+        "Яблоко": "Apple",
+        "Банан": "Banana",
+        "Медведь": "Bear",
+        "Птица": "Bird",
+        "Книга": "Book",
+        "Кролик": "Rabbit",
+        "Морковь": "Carrot",
+        "Морковки": "Carrots",
+        "Кошка": "Cat",
+        "Курица": "Chicken",
+        "Сыр": "Cheese",
+        "Часы": "Watch",
+        "Кукуруза": "Corn",
+        "Корова": "Cow",
+        "Собака": "Dog",
+        "Дельфин": "Dolphin",
+        "Пончик": "Donut",
+        "Утка": "Duck",
+        "Земля": "Earth",
+        "Яйцо": "Egg",
+        "Рыба": "Fish",
+        "Цветок": "Flower",
+        "Бог": "God",
+        "Оружие": "Gun",
+        "Лошадь": "Horse",
+        "Иисус": "Jesus",
+        "Реактивный самолет": "Jet",
+        "Юпитер": "Jupiter",
+        "Марс": "Mars",
+        "Меркурий": "Mercury",
+        "Молоко": "Milk",
+        "Луна": "Moon",
+        "Нептун": "Neptune",
+        "Апельсин": "Orange",
+        "Плутон": "Pluto",
+        "Свинья": "Pig",
+        "Пицца": "Pizza",
+        "Президент": "President",
+        "Сатурн": "Saturn",
+        "Акула": "Shark",
+        "Овца": "Sheep",
+        "Корабль": "Ship",
+        "Белка": "Squirrel",
+        "Солнце": "Sun",
+        "Дерево": "Tree",
+        "Трамп": "Trump",
+        "Уран": "Uranus",
+        "Венера": "Venus",
+        "Кит": "Whale"
+    ]
+    
     func getFileNameFrom(_ word: String) -> String {
-        if let filename = WordToFileDictionary[word.capitalized] {
-            return filename
-       } else {
-           return ""
-       }
+        
+        switch language {
+        case "English":
+            if let filename = WordToFileDictionary[word.capitalized] {
+                return filename
+           } else {
+               return ""
+           }
+        case "Russian":
+            if let filename = russianWordToFileDictionary[word.capitalized] {
+                return filename
+           } else {
+               return ""
+           }
+        default:
+            if let filename = WordToFileDictionary[word.capitalized] {
+                return filename
+           } else {
+               return ""
+           }
+        }
     }
     
     //MARK: - "Pluto",Creators
