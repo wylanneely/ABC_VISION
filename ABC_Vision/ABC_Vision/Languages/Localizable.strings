@@ -1,0 +1,49 @@
+/* 
+  Localizable.strings
+  ABC_Vision
+
+  Created by Wylan L Neely on 1/4/25.
+  
+*/
+"AppLanguage" = "English";
+
+"bearWN" = "Bear";
+"birdWN" = "Bird";
+"catWN" = "Cat";
+"chickenWN" = "Chicken";
+"cowWN" = "Cow";
+"dogWN" = "Dog";
+"dolphinWN" = "Dolphin";
+"duckWN" = "Duck";
+"fishWN" = "Fish";
+"horseWN" = "Horse";
+"pigWN" = "Pig";
+"rabbitWN" = "Rabbit";
+"sharkWN" = "Shark";
+"sheepWN" = "Sheep";
+"squirrelWN" = "Squirrel";
+"whaleWN" = "Whale";
+
+"appleWN" = "Apple";
+"bannanaWN" = "Bannana";
+"carrotWN" = "Carrot";
+"cornWN" = "Corn";
+"donutWN" = "Donut";
+"eggWN" = "Egg";
+"milkWN" = "Milk";
+"orangeWN" = "Orange";
+"cheeseWN" = "Cheese";
+"pizzaWN" = "Pizza";
+
+"sunWN" = "Sun";
+"moonWN" = "Moon";
+"earthWN" = "Earth";
+"jupiterWN" = "Jupiter";
+"marsWN" = "Mars";
+"mercuryWN" = "Mercury";
+"neptuneWN" = "Neptune";
+"uranusWN" = "Uranus";
+"venusWN" = "Venus";
+"plutoWN" = "Pluto";
+"saturnWN" = "Saturn";
+
