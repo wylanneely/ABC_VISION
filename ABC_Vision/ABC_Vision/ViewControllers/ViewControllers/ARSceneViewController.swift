@@ -28,6 +28,14 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
          // Make sure the scene view fills the screen when view loads
          sceneView.frame = view.bounds
      }
+    
+    func loadingDelayForButton(){
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 1.2, delay: 0.6) {
+                self.launchAirplaneButton.tintColor = UIColor.green
+            }
+        }
+    }
      
      func startSceneWith(word: String) {
          let fileLocation = createSceneFileName(fileName)
@@ -47,6 +55,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
          
          let configuration = ARWorldTrackingConfiguration()
          sceneView.session.run(configuration)
+         loadingDelayForButton()
      }
      
      override func viewWillDisappear(_ animated: Bool) {
@@ -56,7 +65,8 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
      }
      
      //MARK: - Outlets
-     
+    @IBOutlet weak var launchAirplaneButton: UIButton!
+    
      @IBAction func launchButton(_ sender: Any) {
          MusicPlayerManager.shared.playSoundFileNamed(name: "Whoosh")
          startSceneWith(word: self.writtenWord)
