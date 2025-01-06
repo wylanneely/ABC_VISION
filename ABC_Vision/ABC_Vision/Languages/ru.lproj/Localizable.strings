@@ -6,3 +6,48 @@
   
 */
 "AppLanguage" = "Russian";
+
+"planetsWN" = "Планеты";
+"foodsWN" = "Еда";
+"animalsWN" = "животные";
+"freestyleWN" = "Фристайл";
+
+"bearWN" = "Медведь";
+"birdWN" = "Птица";
+"catWN" = "Кошка";
+"chickenWN" = "Курица";
+"cowWN" = "Корова";
+"dogWN" = "Собака";
+"dolphinWN" = "Дельфин";
+"duckWN" = "Утка";
+"fishWN" = "Рыба";
+"horseWN" = "Лошадь";
+"pigWN" = "Свинья";
+"rabbitWN" = "Кролик";
+"sharkWN" = "Акула";
+"sheepWN" = "Овца";
+"squirrelWN" = "Белка";
+"whaleWN" = "Кит";
+
+"appleWN" = "Яблоко";
+"bannanaWN" = "Банан";
+"carrotWN" = "Морковь";
+"cornWN" = "Кукуруза";
+"donutWN" = "Пончик";
+"eggWN" = "Яйцо";
+"milkWN" = "Молоко";
+"orangeWN" = "Апельсин";
+"cheeseWN" = "Сыр";
+"pizzaWN" = "Пицца";
+
+"sunWN" = "Солнце";
+"moonWN" = "Луна";
+"earthWN" = "Земля";
+"jupiterWN" = "Юпитер";
+"marsWN" = "Марс";
+"mercuryWN" = "Меркурий";
+"neptuneWN" = "Нептун";
+"uranusWN" = "Уран";
+"venusWN" = "Венера";
+"plutoWN" = "Плутон";
+"saturnWN" = "Сатурн";
