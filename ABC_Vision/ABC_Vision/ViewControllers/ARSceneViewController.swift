@@ -45,15 +45,22 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
          }
          sceneView.scene = scene
          
-         if let node = scene.rootNode.childNodes.first {
-                 let rotation = CABasicAnimation(keyPath: "rotation")
-                 rotation.fromValue = SCNVector4(0, 1, 0, 0)
-                 rotation.toValue = SCNVector4(0, 1, 0, Float.pi * 2)
-                 rotation.duration = 15
-                 rotation.repeatCount = .infinity
-                 node.addAnimation(rotation, forKey: "rotate")
-             }
+         animateNodeInScene(scene.rootNode.childNodes.first, sceneFileName: word)
+        
      }
+    
+    //TODO: make an object that animates the object depending on the name of the file
+    
+    func animateNodeInScene(_ node: SCNNode?, sceneFileName: String) {
+        if let node = node {
+                let rotation = CABasicAnimation(keyPath: "rotation")
+                rotation.fromValue = SCNVector4(0, 1, 0, 0)
+                rotation.toValue = SCNVector4(0, 1, 0, Float.pi * 2)
+                rotation.duration = 15
+                rotation.repeatCount = .infinity
+                node.addAnimation(rotation, forKey: "rotate")
+            }
+    }
      
      func createSceneFileName(_ word: String) -> String {
          return "art.scnassets/\(word.capitalized).scn"
