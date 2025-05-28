@@ -13,25 +13,73 @@ struct AnimationController {
     //TODO: make an object that animates the object depending on the name of the file
     
     func animateNodeInScene(_ node: SCNNode, sceneFileName: String) {
-        
         switch sceneFileName {
-        case "Earth":
-            earthRotation(node)
-        case "sun":
-            rotate(node)
-            default:
-            rotate(node)
-        }
+           // Planets
+           case "Sun":
+               rotate(node)
+           case "Moon":
+               rotate(node)
+           case "Earth":
+               earthRotation(node)
+           case "Jupiter":
+               rotate(node)
+           case "Mars":
+               rotate(node)
+           case "Mercury":
+               rotate(node)
+           case "Neptune":
+               rotate(node)
+           case "Uranus":
+               rotate(node)
+           case "Venus":
+               rotate(node)
+           case "Pluto":
+               rotate(node)
+           case "Saturn":
+               rotate(node)
+           // Foods
+           case "Apple":
+               foodDefaults(node)
+           case "Banana":
+               foodDefaults(node)
+           case "Carrot":
+               foodDefaults(node)
+           // case "Carrots": // optional, depends if you add this to your list
+           //     foodDefaults(node)
+           case "Cheese":
+               foodDefaults(node)
+           case "Corn":
+               foodDefaults(node)
+           case "Donut":
+               foodDefaults(node)
+           case "Egg":
+               foodDefaults(node)
+           case "Milk":
+               foodDefaults(node)
+           case "Orange":
+               foodDefaults(node)
+           case "Pizza":
+               foodDefaults(node)
+           default:
+               rotate(node)
+           }
     }
     
-    //MARK: Default planets
+    //MARK: Defaults
     func rotate(_ node: SCNNode ) {
-        let rotation = CABasicAnimation(keyPath: "rotation")
-        rotation.fromValue = SCNVector4(0, 1, 0, 0)
-        rotation.toValue = SCNVector4(0, 1, 0, Float.pi * 2)
-        rotation.duration = 15
-        rotation.repeatCount = .infinity
+        let rotation = CArotation(20)
         node.addAnimation(rotation, forKey: "rotate")
+        let scale = CAScale()
+        node.addAnimation(scale, forKey: "scale")
+        let zigzag = CAZigZag(position: node.position)
+        node.addAnimation(zigzag, forKey: "zigzag")
+    }
+        
+    func foodDefaults(_ node: SCNNode ) {
+        let upDown = CAUpDown(position: node.position)
+        node.addAnimation(upDown, forKey: "upDown")
+        let scale = CAScale()
+        node.addAnimation(scale, forKey: "scale")
     }
     
     //MARK: Planets
@@ -46,6 +94,8 @@ struct AnimationController {
         let zigzag = CAZigZag(position: node.position)
         node.addAnimation(zigzag, forKey: "zigzag")
     }
+    
+    
     
     //MARK: Helpers
     
@@ -85,4 +135,24 @@ struct AnimationController {
         zigzag.repeatCount = .infinity
         return zigzag
     }
+    
+    func CAUpDown(position: SCNVector3, offset: Float = 0.3, duration: TimeInterval = 5.0) -> CAKeyframeAnimation {
+        let upDown = CAKeyframeAnimation(keyPath: "position")
+
+        let currentPosition = position
+        let up = SCNVector3(currentPosition.x, currentPosition.y + offset, currentPosition.z)
+        let down = SCNVector3(currentPosition.x, currentPosition.y - offset, currentPosition.z)
+
+        upDown.values = [
+            NSValue(scnVector3: currentPosition),
+            NSValue(scnVector3: up),
+            NSValue(scnVector3: currentPosition)
+        ]
+        upDown.duration = duration
+        upDown.repeatCount = .infinity
+        upDown.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+
+        return upDown
+    }
+        
 }
