@@ -83,8 +83,7 @@ struct AnimationController {
     }
     
     func animalDefaults(_ node: SCNNode ) {
-        let circle = CACircular(position: node.position)
-        node.addAnimation(circle, forKey: "circle")
+        runCircularMotion(on: node, center: node.position)
     }
     
     //MARK: Planets
@@ -182,6 +181,54 @@ struct AnimationController {
         circularPath.timingFunction = CAMediaTimingFunction(name: .linear)
 
         return circularPath
+    }
+    
+    //MARK: SCNAction
+    
+    func runCircularMotion(on node: SCNNode, center: SCNVector3, diameter: Float = 1.0, duration: TimeInterval = 10.0) {
+        let radius = diameter / 2
+        let steps = 100
+        let angleStep = (2 * Float.pi) / Float(steps)
+
+        var actions: [SCNAction] = []
+
+        for i in 0..<steps {
+            let angle = Float(i) * angleStep
+            let nextAngle = Float(i + 1) * angleStep
+
+            // Current and next position
+            let x = center.x + radius * cos(angle)
+            let z = center.z + radius * sin(angle)
+            let y = center.y
+
+            let nextX = center.x + radius * cos(nextAngle)
+            let nextZ = center.z + radius * sin(nextAngle)
+
+            let position = SCNVector3(x, y, z)
+            let nextPosition = SCNVector3(nextX, y, nextZ)
+
+            // Movement
+            let move = SCNAction.move(to: position, duration: duration / Double(steps))
+
+            // Orientation — look at next point
+            let lookAtConstraint = SCNLookAtConstraint(target: {
+                let dummy = SCNNode()
+                dummy.position = nextPosition
+                return dummy
+            }())
+            lookAtConstraint.isGimbalLockEnabled = true
+
+            let orient = SCNAction.run { node in
+                node.constraints = [lookAtConstraint]
+            }
+
+            let group = SCNAction.group([move, orient])
+            actions.append(group)
+        }
+
+        let fullLoop = SCNAction.sequence(actions)
+        let forever = SCNAction.repeatForever(fullLoop)
+        node.runAction(forever)
     }
         
 }
