@@ -44,7 +44,7 @@ struct AnimationController {
                foodDefaults(node)
            case "Carrot":
                foodDefaults(node)
-           // case "Carrots": // optional, depends if you add this to your list
+           // case "Carrots":
            //     foodDefaults(node)
            case "Cheese":
                foodDefaults(node)
@@ -61,7 +61,7 @@ struct AnimationController {
            case "Pizza":
                foodDefaults(node)
            default:
-               rotate(node)
+               animalDefaults(node)
            }
     }
     
@@ -82,9 +82,12 @@ struct AnimationController {
         node.addAnimation(scale, forKey: "scale")
     }
     
-    //MARK: Planets
+    func animalDefaults(_ node: SCNNode ) {
+        let circle = CACircular(position: node.position)
+        node.addAnimation(circle, forKey: "circle")
+    }
     
-   
+    //MARK: Planets
     
     func earthRotation(_ node: SCNNode ) {
         let rotation = CArotation(20)
@@ -94,8 +97,6 @@ struct AnimationController {
         let zigzag = CAZigZag(position: node.position)
         node.addAnimation(zigzag, forKey: "zigzag")
     }
-    
-    
     
     //MARK: Helpers
     
@@ -153,6 +154,34 @@ struct AnimationController {
         upDown.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
 
         return upDown
+    }
+    
+    func CACircular(position: SCNVector3, diameter: Float = 1.0, duration: TimeInterval = 5.0) -> CAKeyframeAnimation {
+        
+        let circularPath = CAKeyframeAnimation(keyPath: "position")
+
+        let radius = diameter / 2
+        let center = position
+
+        let steps = 60  // Higher = smoother circle
+        var values: [NSValue] = []
+
+        for i in 0...steps {
+            let angle = Float(i) * (2 * Float.pi / Float(steps))
+            let x = center.x + radius * cos(angle)
+            let z = center.z + radius * sin(angle)
+            let y = center.y // stays flat on the table
+            let point = SCNVector3(x, y, z)
+            values.append(NSValue(scnVector3: point))
+        }
+
+        circularPath.values = values
+        circularPath.duration = duration
+        circularPath.repeatCount = .infinity
+        circularPath.calculationMode = .linear
+        circularPath.timingFunction = CAMediaTimingFunction(name: .linear)
+
+        return circularPath
     }
         
 }
