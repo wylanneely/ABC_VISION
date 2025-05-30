@@ -192,7 +192,7 @@ struct AnimationController {
 
         var actions: [SCNAction] = []
 
-        for i in 0..<steps {
+        for i in (0..<steps).reversed() {
             let angle = Float(i) * angleStep
             let nextAngle = Float(i + 1) * angleStep
 
