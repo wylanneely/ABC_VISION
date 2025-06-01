@@ -185,7 +185,7 @@ struct AnimationController {
     
     //MARK: SCNAction
     
-    func runCircularMotion(on node: SCNNode, center: SCNVector3, diameter: Float = 1.0, duration: TimeInterval = 10.0) {
+    func runCircularMotion(on node: SCNNode, center: SCNVector3, diameter: Float = 1.0, duration: TimeInterval = 12.0) {
         let radius = diameter / 2
         let steps = 100
         let angleStep = (2 * Float.pi) / Float(steps)
