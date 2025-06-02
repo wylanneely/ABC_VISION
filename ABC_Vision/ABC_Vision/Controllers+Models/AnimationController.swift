@@ -10,7 +10,6 @@ import SceneKit
 
 struct AnimationController {
     
-    //TODO: make an object that animates the object depending on the name of the file
     
     func animateNodeInScene(_ node: SCNNode, sceneFileName: String) {
         switch sceneFileName {
@@ -142,7 +141,6 @@ struct AnimationController {
         let currentPosition = position
         let up = SCNVector3(currentPosition.x, currentPosition.y + offset, currentPosition.z)
         let down = SCNVector3(currentPosition.x, currentPosition.y - offset, currentPosition.z)
-
         upDown.values = [
             NSValue(scnVector3: currentPosition),
             NSValue(scnVector3: up),
@@ -206,7 +204,6 @@ struct AnimationController {
 
             let position = SCNVector3(x, y, z)
             let nextPosition = SCNVector3(nextX, y, nextZ)
-
             // Movement
             let move = SCNAction.move(to: position, duration: duration / Double(steps))
 
@@ -221,11 +218,9 @@ struct AnimationController {
             let orient = SCNAction.run { node in
                 node.constraints = [lookAtConstraint]
             }
-
             let group = SCNAction.group([move, orient])
             actions.append(group)
         }
-
         let fullLoop = SCNAction.sequence(actions)
         let forever = SCNAction.repeatForever(fullLoop)
         node.runAction(forever)
