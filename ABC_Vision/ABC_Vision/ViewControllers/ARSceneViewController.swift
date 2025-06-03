@@ -17,6 +17,8 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
     var fileName: String = ""
     let wordConverter = WrittenWordConverter()
     
+    let animationController = AnimationController()
+    
      override func viewDidLoad() {
          super.viewDidLoad()
          
@@ -28,6 +30,15 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
          // Make sure the scene view fills the screen when view loads
          sceneView.frame = view.bounds
      }
+    
+    //This funcitons adds a parent node so we can do jump animations to the animal/food nodes
+    func setupAnimatedNode(_ node: SCNNode) -> SCNNode {
+        let parent = SCNNode()
+        parent.position = node.position
+        node.position = SCNVector3Zero
+        parent.addChildNode(node)
+        return parent
+    }
     
     func loadingDelayForButton(){
         DispatchQueue.main.async {
@@ -45,22 +56,22 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
          }
          sceneView.scene = scene
          
-         animateNodeInScene(scene.rootNode.childNodes.first, sceneFileName: word)
+         
+         //FIX: allow only the food and animal nodes to do this as of now.
+         if let node = scene.rootNode.childNodes.first {
+             let wrappedNode = setupAnimatedNode(node)
+             sceneView.scene.rootNode.addChildNode(wrappedNode)
+
+             // Animate the original child node (not the parent)
+             animationController.animateNodeInScene(node, sceneFileName: word)
+         }
+         //This will be the else for the fix. just trying to get it working rn
+//         if let node = scene.rootNode.childNodes.first {
+//             animationController.animateNodeInScene(node, sceneFileName: word)
+//         }
         
      }
-    
-    //TODO: make an object that animates the object depending on the name of the file
-    
-    func animateNodeInScene(_ node: SCNNode?, sceneFileName: String) {
-        if let node = node {
-                let rotation = CABasicAnimation(keyPath: "rotation")
-                rotation.fromValue = SCNVector4(0, 1, 0, 0)
-                rotation.toValue = SCNVector4(0, 1, 0, Float.pi * 2)
-                rotation.duration = 15
-                rotation.repeatCount = .infinity
-                node.addAnimation(rotation, forKey: "rotate")
-            }
-    }
+
      
      func createSceneFileName(_ word: String) -> String {
          return "art.scnassets/\(word.capitalized).scn"
@@ -95,6 +106,7 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
      override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
          return .all // Allows both portrait and landscape
      }
+    
      
      // Override to create and configure nodes for anchors added to the view's session.
      func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
@@ -132,6 +144,16 @@ class ARSceneViewController: UIViewController, ARSCNViewDelegate {
          })
      }
     //MARK: Actions
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let sceneView = self.sceneView,
+              let touchLocation = touches.first?.location(in: sceneView),
+              let hitNode = sceneView.hitTest(touchLocation, options: nil).first?.node else { return }
+
+        if let parent = hitNode.parent {
+            animationController.triggerJump(on: parent)
+        }
+    }
     
     @IBAction func backButtonTapped(_ sender: Any) {
         
