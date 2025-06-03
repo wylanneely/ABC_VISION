@@ -190,7 +190,7 @@ struct AnimationController {
 
         var pathPoints: [SCNVector3] = []
 
-        for i in 0...steps {
+        for i in (0...steps).reversed() {
             let angle = Float(i) * angleStep
             let x = center.x + radius * cos(angle)
             let z = center.z + radius * sin(angle)
@@ -207,7 +207,6 @@ struct AnimationController {
 
         node.addAnimation(circularPath, forKey: "smoothCircularMotion")
 
-        // Optional: make node face along tangent to the path
         let dummyTarget = SCNNode()
         node.parent?.addChildNode(dummyTarget)
 
