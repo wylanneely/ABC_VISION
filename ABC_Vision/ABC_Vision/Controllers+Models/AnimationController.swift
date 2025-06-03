@@ -188,42 +188,43 @@ struct AnimationController {
         let steps = 100
         let angleStep = (2 * Float.pi) / Float(steps)
 
-        var actions: [SCNAction] = []
+        var pathPoints: [SCNVector3] = []
 
-        for i in (0..<steps).reversed() {
+        for i in 0...steps {
             let angle = Float(i) * angleStep
-            let nextAngle = Float(i + 1) * angleStep
-
-            // Current and next position
             let x = center.x + radius * cos(angle)
             let z = center.z + radius * sin(angle)
             let y = center.y
-
-            let nextX = center.x + radius * cos(nextAngle)
-            let nextZ = center.z + radius * sin(nextAngle)
-
-            let position = SCNVector3(x, y, z)
-            let nextPosition = SCNVector3(nextX, y, nextZ)
-            // Movement
-            let move = SCNAction.move(to: position, duration: duration / Double(steps))
-
-            // Orientation — look at next point
-            let lookAtConstraint = SCNLookAtConstraint(target: {
-                let dummy = SCNNode()
-                dummy.position = nextPosition
-                return dummy
-            }())
-            lookAtConstraint.isGimbalLockEnabled = true
-
-            let orient = SCNAction.run { node in
-                node.constraints = [lookAtConstraint]
-            }
-            let group = SCNAction.group([move, orient])
-            actions.append(group)
+            pathPoints.append(SCNVector3(x, y, z))
         }
-        let fullLoop = SCNAction.sequence(actions)
-        let forever = SCNAction.repeatForever(fullLoop)
-        node.runAction(forever)
+
+        let circularPath = CAKeyframeAnimation(keyPath: "position")
+        circularPath.values = pathPoints.map { NSValue(scnVector3: $0) }
+        circularPath.duration = duration
+        circularPath.repeatCount = .infinity
+        circularPath.calculationMode = .linear
+        circularPath.timingFunction = CAMediaTimingFunction(name: .linear)
+
+        node.addAnimation(circularPath, forKey: "smoothCircularMotion")
+
+        // Optional: make node face along tangent to the path
+        let dummyTarget = SCNNode()
+        node.parent?.addChildNode(dummyTarget)
+
+        let lookConstraint = SCNLookAtConstraint(target: dummyTarget)
+        lookConstraint.isGimbalLockEnabled = true
+        node.constraints = [lookConstraint]
+
+        // Animate dummy target to stay slightly ahead of the node
+        let aheadOffset: Float = 0.01 // small offset forward
+        let updateTarget = SCNAction.repeatForever(SCNAction.customAction(duration: 0.1) { _, _ in
+            let currentPos = node.presentation.position
+            let angle = atan2(currentPos.z - center.z, currentPos.x - center.x) + .pi / 180
+            let targetX = center.x + radius * cos(angle + aheadOffset)
+            let targetZ = center.z + radius * sin(angle + aheadOffset)
+            dummyTarget.position = SCNVector3(targetX, currentPos.y, targetZ)
+        })
+        dummyTarget.runAction(updateTarget)
     }
         
 }
