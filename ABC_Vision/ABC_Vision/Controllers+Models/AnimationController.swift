@@ -225,5 +225,24 @@ struct AnimationController {
         })
         dummyTarget.runAction(updateTarget)
     }
+    
+    //MARK: User Interactive
+    
+    func triggerJump(on node: SCNNode, height: CGFloat = 0.2, duration: TimeInterval = 0.6) {
+        
+        if node.action(forKey: "jump") != nil { return } // no spam jumps
+        
+        // Get world up vector (positive Y in world space)
+        let worldUp = SCNVector3(0, height, 0)
+
+        let jumpUp = SCNAction.moveBy(x: CGFloat(worldUp.x), y: CGFloat(worldUp.y), z: CGFloat(worldUp.z), duration: duration / 2)
+        jumpUp.timingMode = .easeOut
+
+        let jumpDown = SCNAction.moveBy(x: -CGFloat(worldUp.x), y: -CGFloat(worldUp.y), z: -CGFloat(worldUp.z), duration: duration / 2)
+        jumpDown.timingMode = .easeIn
+
+        let jump = SCNAction.sequence([jumpUp, jumpDown])
+        node.runAction(jump, forKey: "jump")
+    }
         
 }
