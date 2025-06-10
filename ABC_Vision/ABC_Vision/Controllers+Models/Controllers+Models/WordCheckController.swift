@@ -10,6 +10,9 @@ import Foundation
 
 struct WordCheckController {
     
+    private let language = LanguageChecker().language
+
+    
     private let CorrectWords: [String] = [
         "Apple",
        // "Ball",
@@ -83,16 +86,35 @@ struct WordCheckController {
         "Whale"
     ]
     
+    private let russianCorrectWords: [String] = ["Яблоко", "Банан", "Медведь", "Птица", "Книга", "Кролик", "Морковь", "Морковки", "Кошка", "Курица", "Сыр", "Часы", "Кукуруза", "Корова", "Собака", "Дельфин", "Пончик", "Утка", "Земля", "Яйцо", "Рыба", "Цветок", "Бог", "Оружие", "Лошадь", "Иисус", "Реактивный самолет", "Юпитер", "Марс", "Меркурий", "Молоко", "Луна", "Нептун", "Апельсин", "Плутон", "Свинья", "Пицца", "Президент", "Кролик", "Сатурн", "Акула", "Овца", "Корабль", "Белка", "Солнце", "Дерево", "Трамп", "Уран", "Венера", "Часы", "Кит"
+    ]
     
     
     func checkWordisCorrect(_ word:String?)->Bool{
         guard let word = word else {return false}
-        for w in CorrectWords {
-            if word.lowercased() == w.lowercased() {
-                return true
+        switch language {
+        case "English":
+            for w in CorrectWords {
+                if word.lowercased() == w.lowercased() {
+                    return true
+                }
             }
+            return false
+        case "Russian":
+            for w in russianCorrectWords {
+                if word.lowercased() == w.lowercased() {
+                    return true
+                }
+            }
+            return false
+        default :
+            for w in CorrectWords {
+                if word.lowercased() == w.lowercased() {
+                    return true
+                }
+            }
+            return false
         }
-        return false
     }
     
     func checkIfWordIsSentence(_ word:String?)->Bool {
@@ -103,7 +125,7 @@ struct WordCheckController {
                 return true
             }
         }
-        print("False Sentexe")
+        print("False Sentence")
         return false
     }
     
