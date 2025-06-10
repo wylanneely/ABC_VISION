@@ -9,7 +9,7 @@
 
 "planetsWN" = "Планеты";
 "foodsWN" = "Еда";
-"animalsWN" = "животные";
+"animalsWN" = "Животные";
 "freestyleWN" = "Фристайл";
 
 "bearWN" = "Медведь";
@@ -30,7 +30,7 @@
 "whaleWN" = "Кит";
 
 "appleWN" = "Яблоко";
-"bannanaWN" = "Банан";
+"bananaWN" = "Банан";
 "carrotWN" = "Морковь";
 "cornWN" = "Кукуруза";
 "donutWN" = "Пончик";
