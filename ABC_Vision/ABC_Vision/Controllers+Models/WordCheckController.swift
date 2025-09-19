@@ -43,6 +43,7 @@ struct WordCheckController {
         "Duck",
         "Earth",
         "Egg",
+        "Elephant",
         "Fish",
         "Flower",
       //  "Girl",

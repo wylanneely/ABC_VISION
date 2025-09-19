@@ -43,6 +43,7 @@ struct WrittenWordConverter {
         "Duck": "Duck",
         "Earth": "Earth",
         "Egg": "Egg",
+        "Elephant":"Elephant",
         //"Farm": "Farm",
         "Fish": "Fish",
         "Flower": "Flower",
