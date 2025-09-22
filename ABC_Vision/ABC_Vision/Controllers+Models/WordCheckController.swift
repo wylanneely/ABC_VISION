@@ -53,6 +53,7 @@ struct WordCheckController {
         "Jesus",
         "Jet",
         "Jupiter",
+        "Kangaroo",
         "Mars",
         "Mercury",
         "Milk",

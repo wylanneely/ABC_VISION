@@ -53,6 +53,7 @@ struct WrittenWordConverter {
         "Jesus": "Jesus",
         "Jet": "Jet",
         "Jupiter":"Jupiter",
+        "Kangaroo":"Kangaroo",
         "Mars":"Mars",
         "Mercury":"Mercury",
         "Milk": "Milk",
