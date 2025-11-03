@@ -7,6 +7,11 @@
 */
 "AppLanguage" = "English";
 
+"planetsWN" = "Planets";
+"foodsWN" = "Foods";
+"animalsWN" = "Animals";
+"freestyleWN" = "Freestyle";
+
 "bearWN" = "Bear";
 "birdWN" = "Bird";
 "catWN" = "Cat";
@@ -15,8 +20,10 @@
 "dogWN" = "Dog";
 "dolphinWN" = "Dolphin";
 "duckWN" = "Duck";
+"elephantWN" = "Elephant";
 "fishWN" = "Fish";
 "horseWN" = "Horse";
+"kangarooWN" ="kangaroo";
 "pigWN" = "Pig";
 "rabbitWN" = "Rabbit";
 "sharkWN" = "Shark";
@@ -25,7 +32,7 @@
 "whaleWN" = "Whale";
 
 "appleWN" = "Apple";
-"bannanaWN" = "Bannana";
+"bananaWN" = "Banana";
 "carrotWN" = "Carrot";
 "cornWN" = "Corn";
 "donutWN" = "Donut";
